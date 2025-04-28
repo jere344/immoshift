@@ -6,5 +6,4 @@ game_environments/
 media/
 .env
 db.sqlite3
-passenger_wsgi.py
 backups/
