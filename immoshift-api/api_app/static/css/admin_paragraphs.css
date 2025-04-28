@@ -1,0 +1,9 @@
+/* Improve spacing between paragraph items when stacked */
+.inline-related {
+    margin-bottom: 50px !important;
+    padding: 10px;
+    background-color: #363434;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+

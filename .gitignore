@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+node_modules/
+profile_pictures/
+game_environments/
+media/
+.env
+db.sqlite3
+passenger_wsgi.py
+backups/

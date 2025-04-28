@@ -1,0 +1,29 @@
+---
+deployment:
+  tasks:
+    - echo "starting deployment"
+    - export DJANGO_VENV_PATH=$HOME/virtualenv/immoshift_api/3.12/bin/activate
+    - export DJANGO_PATH=$HOME/immoshift_api
+    - export REP_DJANGO_PATH=$HOME/repositories/immoshift/immoshift-api
+    - export REACT_PATH=$HOME/immoshift_app
+    - export REP_REACT_PATH=$HOME/repositories/immoshift/immoshift-frontend
+
+    # copy from the repository to the deployment folder
+    - rsync -av $REP_DJANGO_PATH/ $DJANGO_PATH
+    - rsync -av $REP_REACT_PATH/ $REACT_PATH
+
+    # setup python environment
+    - source $DJANGO_VENV_PATH
+    - pip install -r $DJANGO_PATH/requirements.txt
+    - python3 $DJANGO_PATH/manage.py migrate
+    - python3 $DJANGO_PATH/manage.py collectstatic --noinput
+
+    # setup react environment
+    # we build in local and push the build folder to the server
+    # so we just move the build folder to the public folder
+    - rsync -av --delete $REP_REACT_PATH/dist/ $HOME/immoshift.fr
+    - chmod -R 755 $REACT_PATH
+    - cp $REP_REACT_PATH/.htaccess $HOME/immoshift.fr/.htaccess
+
+
+    

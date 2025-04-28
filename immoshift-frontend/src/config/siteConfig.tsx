@@ -1,0 +1,59 @@
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import logo from "@assets/logo.jpg";
+
+export const logoUrl = logo;
+
+// Company information
+export const companyInfo = {
+  name: "ImmoShift",
+  description: "Formations professionnelles en immobilier d'entreprise pour développer vos compétences et maximiser vos investissements.",
+  email: "contact@immoshift.fr",
+  phone: "01 23 45 67 89",
+  address: "Palavas-les-Flots, 34250, France",
+  city: "Palavas-les-Flots"
+};
+
+// Social media links
+export const socialMedia = [
+  { icon: <FacebookIcon />, color: "#3b5998", url: "https://www.facebook.com/immoshift" },
+  { icon: <TwitterIcon />, color: "#1DA1F2", url: "https://twitter.com/immoshift" },
+  { icon: <InstagramIcon />, color: "#C13584", url: "https://instagram.com/immoshift" },
+  { icon: <LinkedInIcon />, color: "#0e76a8", url: "https://www.linkedin.com/in/audrey-a-26baa3205" },
+];
+
+// Navigation links
+export const navigationLinks = [
+  { name: "Accueil", path: "/", home: true },
+  { name: "Presentation", path: "/home/#presentation" },
+  { name: "Formations", path: "/home/#trainings" },
+  { name: "Articles", path: "/home/#articles" },
+  { name: "Ebooks", path: "/home/#ebooks" },
+  { name: "Témoignages", path: "/home/#testimonials" },
+  { name: "Réserver un appel découverte", path: "https://calendly.com/audreyantonini13/45-minutes-pour-faire-le-point", external: true },
+];
+
+// Add Calendly information
+export const calendlyInfo = {
+  url: "https://calendly.com/audreyantonini13/45-minutes-pour-faire-le-point",
+  title: "Réserver un appel découverte de 45 minutes",
+  description: `Cet appel 45 minutes est un rendez-vous professionnel de découverte et d'échange.
+Il s'adresse aux agents immobiliers qui veulent prendre de la hauteur sur leur activité — que ce soit pour corriger ce qui coince, structurer ce qui grandit trop vite, ou optimiser ce qui fonctionne déjà.
+On parle de ton fonctionnement, de tes priorités, de tes points de friction ou de progression.
+Je t'écoute, je t'oriente.
+Et si je peux t'apporter de la valeur, je t'explique comment je peux t'accompagner.
+Ce n'est pas une séance de coaching offerte, mais un premier contact cadré, pour poser les bases d'un accompagnement sur mesure.`
+};
+
+// Contact information with icons
+export const contactInfo = [
+  { icon: <EmailIcon />, text: companyInfo.email },
+  { icon: <PhoneIcon />, text: companyInfo.phone },
+  { icon: <LocationOnIcon />, text: companyInfo.address },
+];
+

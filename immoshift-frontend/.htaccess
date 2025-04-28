@@ -1,0 +1,23 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  
+  # Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Force non-www (boattradeconsulting.fr)
+  RewriteCond %{HTTP_HOST} ^www\.boattradeconsulting\.fr [NC]
+  RewriteRule ^(.*)$ https://boattradeconsulting.fr/$1 [L,R=301]
+
+  # Hide server software version
+  ServerSignature Off
+  Header unset Server
+  
+  # Original SPA routing rules
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  RewriteRule . /index.html [L]
+</IfModule>

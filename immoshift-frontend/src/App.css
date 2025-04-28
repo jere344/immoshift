@@ -1,0 +1,76 @@
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #8a6547 #f8f3ea;
+}
+
+/* Real estate specific scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8f3ea;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8a6547;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #724f33;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #724f33aa);
+}
+.logo.real-estate:hover {
+  filter: drop-shadow(0 0 2em #8a6547aa);
+}
+
+/* Real estate property card styling */
+.property-card {
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ffffff;
+  border: 1px solid #f3ebdc;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(114, 79, 51, 0.15);
+}
+
+/* Course section styling */
+.course-section {
+  padding: 4rem 0;
+  background-color: #faf7f2;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fade-in 0.8s ease-out forwards;
+}
