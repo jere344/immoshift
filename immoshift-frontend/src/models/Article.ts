@@ -14,7 +14,7 @@ export interface Article {
     slug: string;
     excerpt: string;
     content?: string;
-    image: string;
+    image: string | undefined;
     author?: Author;
     source_url?: string;
     is_published: boolean;
@@ -30,7 +30,7 @@ export interface ArticleSummary {
     title: string;
     slug: string;
     excerpt: string;
-    image: string;
+    image: string | undefined;
     published_at: string;
     author_name?: string;
     author_picture?: string;
@@ -40,7 +40,7 @@ export interface ArticleSummary {
 // Process article with full data
 export const processArticle = (article: Article): Article => ({
     ...article,
-    image: getImageUrl(article.image),
+    image: article.image ? getImageUrl(article.image) : undefined,
     author: article.author ? {
         ...article.author,
         picture: article.author.picture ? getImageUrl(article.author.picture) : undefined
@@ -51,6 +51,6 @@ export const processArticle = (article: Article): Article => ({
 // Process article summary
 export const processArticleSummary = (article: ArticleSummary): ArticleSummary => ({
     ...article,
-    image: getImageUrl(article.image),
+    image: article.image ? getImageUrl(article.image) : undefined,
     author_picture: article.author_picture ? getImageUrl(article.author_picture) : undefined
 });

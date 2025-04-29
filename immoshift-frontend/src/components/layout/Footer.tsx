@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
       sx={{
         backgroundColor: theme.palette.background.paper,
         pt: 6,
-        pb: 3,
+        pb: 12,
         borderTop: `1px solid ${theme.palette.divider}`,
       }}
     >
@@ -183,14 +183,30 @@ const Footer: React.FC = () => {
           <Typography variant="body2" color="text.secondary" sx={{ mb: { xs: 2, sm: 0 } }}>
             © {currentYear} {companyInfo.name}. Tous droits réservés.
           </Typography>
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-            <Link component={RouterLink} to="/privacy" color="text.secondary" underline="hover">
-              Politique de confidentialité
+          <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.75rem', opacity: 0.8 }}>
+            Développé par{" "}
+            <Link 
+              href="https://www.linkedin.com/in/j%C3%A9r%C3%A9my-guerin-b9019b255/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              underline="hover"
+              color="inherit"
+              sx={{ '&:hover': { color: theme.palette.primary.main } }}
+            >
+              Jérémy Guerin
             </Link>
-            <Link component={RouterLink} to="/terms" color="text.secondary" underline="hover">
-              Conditions d'utilisation
+            {" · "}
+            <Link 
+              href="https://github.com/jere344" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              underline="hover"
+              color="inherit"
+              sx={{ '&:hover': { color: theme.palette.primary.main } }}
+            >
+              GitHub
             </Link>
-          </Stack>
+          </Typography>
         </Box>
       </Container>
     </Box>

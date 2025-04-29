@@ -19,6 +19,7 @@ import { Ebook, EbookDownloadRequest } from '@models/Ebook';
 import api from '@services/api';
 import DownloadIcon from '@mui/icons-material/Download';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import { motion } from 'framer-motion'; // Import motion
 
 interface FormState {
   first_name: string;
@@ -27,6 +28,27 @@ interface FormState {
   phone: string;
   consent_mailing: boolean;
 }
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const scaleIn = {
+  initial: { opacity: 0, scale: 0.9 },
+  animate: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } }
+};
+
+const staggerContainer = {
+  initial: {},
+  animate: { transition: { staggerChildren: 0.1 } }
+};
+
+// Motion Components
+const MotionGrid = motion(Grid);
+const MotionBox = motion(Box);
+const MotionTypography = motion(Typography);
+const MotionPaper = motion(Paper);
 
 const EbookDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -167,36 +189,44 @@ const EbookDetail: React.FC = () => {
       />
       
       <Container maxWidth="lg" sx={{ py: 6 }}>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={6}>
-            <Box sx={{ mb: 4 }}>
-              <img 
+        <MotionGrid container spacing={4} variants={staggerContainer} initial="initial" animate="animate">
+          <MotionGrid item xs={12} md={6} variants={scaleIn}>
+            <MotionBox sx={{ mb: 4 }}>
+              <motion.img 
                 src={ebook.cover_image} 
                 alt={ebook.title} 
                 style={{ maxWidth: '100%', borderRadius: 8, boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }} 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6 }}
               />
-            </Box>
-          </Grid>
+            </MotionBox>
+          </MotionGrid>
           
-          <Grid item xs={12} md={6}>
-            <Typography variant="h3" component="h1" sx={{ mb: 2, fontWeight: 700 }}>
+          <MotionGrid item xs={12} md={6} variants={fadeInUp}>
+            <MotionTypography variant="h3" component="h1" sx={{ mb: 2, fontWeight: 700 }} variants={fadeInUp}>
               {ebook.title}
-            </Typography>
+            </MotionTypography>
             
-            <Typography variant="body1" sx={{ mb: 4 }}>
+            <MotionTypography variant="body1" sx={{ mb: 4 }} variants={fadeInUp}>
               {ebook.description}
-            </Typography>
+            </MotionTypography>
             
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+            <MotionBox sx={{ display: 'flex', alignItems: 'center', mb: 3 }} variants={fadeInUp}>
               <PictureAsPdfIcon sx={{ mr: 1, color: 'primary.main' }} />
               <Typography variant="body2" color="text.secondary">
                 E-book PDF gratuit
               </Typography>
-            </Box>
+            </MotionBox>
             
             <Divider sx={{ my: 4 }} />
             
-            <Paper elevation={3} sx={{ p: 3, borderRadius: 2 }}>
+            <MotionPaper 
+              elevation={3} 
+              sx={{ p: 3, borderRadius: 2 }}
+              variants={fadeInUp}
+              transition={{ delay: 0.2 }}
+            >
               <Typography variant="h5" component="h3" sx={{ mb: 3 }}>
                 Télécharger cet E-book
               </Typography>
@@ -286,9 +316,9 @@ const EbookDetail: React.FC = () => {
                   </Grid>
                 </Grid>
               </form>
-            </Paper>
-          </Grid>
-        </Grid>
+            </MotionPaper>
+          </MotionGrid>
+        </MotionGrid>
       </Container>
     </>
   );

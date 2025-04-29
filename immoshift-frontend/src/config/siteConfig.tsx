@@ -21,20 +21,20 @@ export const companyInfo = {
 
 // Social media links
 export const socialMedia = [
-  { icon: <FacebookIcon />, color: "#3b5998", url: "https://www.facebook.com/immoshift" },
-  { icon: <TwitterIcon />, color: "#1DA1F2", url: "https://twitter.com/immoshift" },
-  { icon: <InstagramIcon />, color: "#C13584", url: "https://instagram.com/immoshift" },
+  // { icon: <FacebookIcon />, color: "#3b5998", url: "https://www.facebook.com/immoshift" },
+  // { icon: <TwitterIcon />, color: "#1DA1F2", url: "https://twitter.com/immoshift" },
+  // { icon: <InstagramIcon />, color: "#C13584", url: "https://instagram.com/immoshift" },
   { icon: <LinkedInIcon />, color: "#0e76a8", url: "https://www.linkedin.com/in/audrey-a-26baa3205" },
 ];
 
 // Navigation links
 export const navigationLinks = [
   { name: "Accueil", path: "/", home: true },
-  { name: "Presentation", path: "/home/#presentation" },
-  { name: "Formations", path: "/home/#trainings" },
-  { name: "Articles", path: "/home/#articles" },
-  { name: "Ebooks", path: "/home/#ebooks" },
-  { name: "Témoignages", path: "/home/#testimonials" },
+  { name: "Presentation", path: "/#presentation" },
+  { name: "Formations", path: "/#trainings" },
+  { name: "Articles", path: "/#articles" },
+  { name: "Ebooks", path: "/#ebooks" },
+  { name: "Témoignages", path: "/#testimonials" },
   { name: "Réserver un appel découverte", path: "https://calendly.com/audreyantonini13/45-minutes-pour-faire-le-point", external: true },
 ];
 
@@ -47,13 +47,14 @@ Il s'adresse aux agents immobiliers qui veulent prendre de la hauteur sur leur a
 On parle de ton fonctionnement, de tes priorités, de tes points de friction ou de progression.
 Je t'écoute, je t'oriente.
 Et si je peux t'apporter de la valeur, je t'explique comment je peux t'accompagner.
-Ce n'est pas une séance de coaching offerte, mais un premier contact cadré, pour poser les bases d'un accompagnement sur mesure.`
+Ce n'est pas une séance de coaching offerte, mais un premier contact cadré, pour poser les bases d'un accompagnement sur mesure.`,
+  description_short: `Réserver un rendez-vous de 45 minutes pour discuter de vos besoins en formation immobilière.`,
 };
 
 // Contact information with icons
 export const contactInfo = [
   { icon: <EmailIcon />, text: companyInfo.email },
-  { icon: <PhoneIcon />, text: companyInfo.phone },
+  // { icon: <PhoneIcon />, text: companyInfo.phone },
   { icon: <LocationOnIcon />, text: companyInfo.address },
 ];
 

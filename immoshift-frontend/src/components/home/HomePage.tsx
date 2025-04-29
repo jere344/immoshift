@@ -60,12 +60,17 @@ const HomePage: React.FC = () => {
     
     const ref = sectionMap[hash];
     if (ref && ref.current) {
-      // Use a small delay to ensure DOM is fully rendered
-      ref.current?.scrollIntoView({ behavior: 'smooth' });
+      // Use setTimeout to ensure DOM is fully rendered
+      setTimeout(() => {
+        ref.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     }
 
-    // now clear the hash from the URL
-    window.history.pushState("", document.title, window.location.pathname + window.location.search);
+    // Keep the hash in the URL for better user experience
+    // Only update history if we're not already at the correct hash
+    if (location.hash !== `#${hash}`) {
+      window.history.replaceState(null, '', `#${hash}`);
+    }
   };
 
   // Handle hash navigation
@@ -103,38 +108,37 @@ const HomePage: React.FC = () => {
         background: "linear-gradient(180deg, #f7f9fc 0%, white 100%)",
         overflow: "hidden",
         scrollBehavior: "smooth",
-        position: "relative", // Added for floating button positioning
+        position: "relative",
       }}
     >
       {homeContent && (
         <>
-          <div ref={heroRef} id="hero" style={{ marginBottom: '3rem' }}>
+          <div ref={heroRef} id="hero">
             <HeroSection />
           </div>
-          <div ref={presentationRef} id="presentation" style={{ marginBottom: '4rem' }}>
+          <div ref={presentationRef} id="presentation">
             <PresentationSection />
           </div>
           
-          {/* Calendly Section placed after presentation */}
-          <div style={{ marginBottom: '4rem' }}>
+          <div>
             <CalendlySection />
           </div>
           
-          <div ref={trainingsRef} id="trainings" style={{ marginBottom: '4rem' }}>
+          <div ref={trainingsRef} id="trainings">
             <TrainingsSection trainings={homeContent.trainings} />
           </div>
-          <div ref={articlesRef} id="articles" style={{ marginBottom: '4rem' }}>
+          <div ref={articlesRef} id="articles" >
             <ArticlesSection articles={homeContent.articles} />
           </div>
-          <div ref={ebooksRef} id="ebooks" style={{ marginBottom: '4rem' }}>
+          <div ref={ebooksRef} id="ebooks" >
             <EbooksSection ebooks={homeContent.ebooks} />
           </div>
-          <div ref={testimonialsRef} id="testimonials" style={{ marginBottom: '3rem' }}>
+          <div ref={testimonialsRef} id="testimonials">
             <TestimonialsSection testimonials={homeContent.testimonials} />
           </div>
           
           {/* Floating CTA Button */}
-          <Tooltip title={calendlyInfo.description} placement="left" arrow>
+          <Tooltip title={calendlyInfo.description_short} placement="left" arrow>
             <Paper
               elevation={6}
               sx={{
@@ -143,7 +147,7 @@ const HomePage: React.FC = () => {
                 right: 30,
                 borderRadius: "50px",
                 zIndex: 1000,
-                display: { xs: 'none', md: 'block' } // Hide on mobile
+                display: { xs: 'none', md: 'block' } 
               }}
             >
               <Button

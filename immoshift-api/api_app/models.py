@@ -65,8 +65,7 @@ class Article(models.Model):
     title = models.CharField(max_length=200, verbose_name="Titre")
     slug = models.SlugField(unique=True, verbose_name="Slug URL")
     excerpt = models.TextField(verbose_name="Extrait")
-    content = models.TextField(verbose_name="Contenu", blank=True, null=True)  # Made optional for backward compatibility
-    image = models.ImageField(upload_to='articles/', verbose_name="Image principale")
+    image = models.ImageField(upload_to='articles/', verbose_name="Image principale", blank=True, null=True)
     author = models.ForeignKey(
         Author, 
         on_delete=models.SET_NULL, 

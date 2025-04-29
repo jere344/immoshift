@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Card, CardMedia } from '@mui/material';
+import { Box, Typography, Card, CardMedia, useTheme } from '@mui/material';
 import ReactPlayer from 'react-player';
 import { Paragraph } from '@models/Paragraph';
 
@@ -8,7 +8,9 @@ interface ParagraphRendererProps {
 }
 
 const ParagraphRenderer: React.FC<ParagraphRendererProps> = ({ paragraph }) => {
+  const theme = useTheme();
   console.log('Rendering paragraph:', paragraph); // Debugging line
+  
   const renderMedia = () => {
     switch(paragraph.media_type) {
       case 'image':
@@ -70,6 +72,63 @@ const ParagraphRenderer: React.FC<ParagraphRendererProps> = ({ paragraph }) => {
     }
   };
 
+  // Helper function to detect and format bullet points
+  const formatContent = (content: string) => {
+    if (!content) return null;
+    
+    const lines = content.split('\n');
+    const hasBulletPoints = lines.some(line => line.trim().startsWith('•'));
+    
+    if (!hasBulletPoints) {
+      // Regular text without bullet points
+      return lines.map((text, index) => (
+        <p key={index}>{text}</p>
+      ));
+    }
+    
+    // Process content with bullet points
+    return lines.map((line, index) => {
+      const trimmedLine = line.trim();
+      if (trimmedLine.startsWith('•')) {
+        // Extract text without the bullet point
+        const itemText = trimmedLine.substring(1).trim();
+        
+        // This is a bullet point item with custom styling
+        return (
+          <Box
+            key={index}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: theme.palette.secondary.light,
+              p: 2,
+              borderRadius: 1,
+              mb: 1, // Add margin bottom for spacing between items
+            }}
+          >
+            <Box
+              sx={{
+                width: "10px",
+                height: "10px",
+                flexShrink: 0,
+                borderRadius: "50%",
+                bgcolor: theme.palette.primary.main,
+                mr: 2,
+              }}
+            />
+            <Typography variant="body1" sx={{ color: theme.palette.text.secondary }}>
+              {itemText}
+            </Typography>
+          </Box>
+        );
+      } else if (trimmedLine) {
+        // This is a regular paragraph
+        return <p key={index}>{trimmedLine}</p>;
+      }
+      return <React.Fragment key={index}></React.Fragment>; // Empty line
+    });
+  };
+
   return (
     <Box sx={{ mb: 4, bgcolor: 'inherit' }}>
       {paragraph.title && (
@@ -82,9 +141,7 @@ const ParagraphRenderer: React.FC<ParagraphRendererProps> = ({ paragraph }) => {
       
       {paragraph.content && (
         <Typography variant="body1" component="div" sx={{ mb: 2 }}>
-          {paragraph.content.split('\n').map((text, index) => (
-            <p key={index}>{text}</p>
-          ))}
+          {formatContent(paragraph.content)}
         </Typography>
       )}
     </Box>

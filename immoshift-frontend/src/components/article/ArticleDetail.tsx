@@ -7,7 +7,31 @@ import api from '@services/api';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import LinkIcon from '@mui/icons-material/Link';
-import PersonIcon from '@mui/icons-material/Person';
+import { getArticleImage } from '../../utils/placeholderUtils';
+import { motion } from 'framer-motion'; // Import motion
+
+// Animation Variants (reuse or define as needed)
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const scaleIn = {
+  initial: { opacity: 0, scale: 0.9 },
+  animate: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } }
+};
+
+const staggerContainer = {
+  initial: {},
+  animate: { transition: { staggerChildren: 0.1 } }
+};
+
+// Motion Components
+const MotionGrid = motion(Grid);
+const MotionBox = motion(Box);
+const MotionTypography = motion(Typography);
+const MotionPaper = motion(Paper);
+const MotionChip = motion(Chip); // Added for Chip animation
 
 const ArticleDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -69,19 +93,19 @@ const ArticleDetail: React.FC = () => {
       />
       
       <Container maxWidth="lg" sx={{ py: 6, bgcolor: 'background.default' }}>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={8} sx={{ bgcolor: 'background.default' }}>
-            <Typography variant="h2" component="h1" sx={{ mb: 3, fontWeight: 700 }}>
+        <MotionGrid container spacing={4} variants={staggerContainer} initial="initial" animate="animate">
+          <MotionGrid item xs={12} md={8} sx={{ bgcolor: 'background.default' }} variants={fadeInUp}>
+            <MotionTypography variant="h2" component="h1" sx={{ mb: 3, fontWeight: 700 }} variants={fadeInUp}>
               {article.title}
-            </Typography>
+            </MotionTypography>
             
-            <Box sx={{ mb: 4, display: 'flex', flexWrap: 'wrap', gap: 2, alignItems: 'center' }}>
-              <Typography variant="subtitle1" color="text.secondary">
+            <MotionBox sx={{ mb: 4, display: 'flex', flexWrap: 'wrap', gap: 2, alignItems: 'center' }} variants={staggerContainer}>
+              <MotionTypography variant="subtitle1" color="text.secondary" variants={fadeInUp}>
                 Publié le {formattedDate}
-              </Typography>
+              </MotionTypography>
               
               {article.source_url && (
-                <Chip
+                <MotionChip
                   icon={<LinkIcon />}
                   label="Source externe"
                   variant="outlined"
@@ -91,44 +115,53 @@ const ArticleDetail: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   clickable
+                  variants={fadeInUp}
                 />
               )}
-            </Box>
+            </MotionBox>
             
-            {article.image && (
-              <Box 
-                component="img"
-                src={article.image}
-                alt={article.title}
-                sx={{
-                  width: '100%',
-                  height: 'auto',
-                  borderRadius: 2,
-                  mb: 4,
-                  maxHeight: '500px',
-                  objectFit: 'cover',
-                }}
-              />
-            )}
+            {/* Image section - now uses the getArticleImage utility */}
+            <MotionBox 
+              component={motion.img} // Use motion.img
+              src={getArticleImage(article.image, article.title)}
+              alt={article.title}
+              sx={{
+                width: '100%',
+                height: 'auto',
+                borderRadius: 2,
+                mb: 4,
+                maxHeight: '500px',
+                objectFit: 'cover',
+              }}
+              variants={scaleIn} // Apply scaleIn animation
+            />
             
-            <Typography variant="subtitle1" paragraph sx={{ fontWeight: 500, fontSize: '1.1rem' }}>
+            <MotionTypography variant="subtitle1" paragraph sx={{ fontWeight: 500, fontSize: '1.1rem' }} variants={fadeInUp}>
               {article.excerpt}
-            </Typography>
+            </MotionTypography>
             
             <Divider sx={{ my: 4 }} />
             
             {/* Render paragraphs if available */}
             {article.paragraphs && article.paragraphs.length > 0 && (
-              <Box>
+              <MotionBox variants={staggerContainer}>
                 {article.paragraphs.map(paragraph => (
-                  <ParagraphRenderer key={paragraph.id} paragraph={paragraph} />
+                  <motion.div key={paragraph.id} variants={fadeInUp}>
+                    <ParagraphRenderer paragraph={paragraph} />
+                  </motion.div>
                 ))}
-              </Box>
+              </MotionBox>
             )}
-          </Grid>
+          </MotionGrid>
           
-          <Grid item xs={12} md={4}>
-            <Paper elevation={3} sx={{ p: 3, borderRadius: 2, position: 'sticky', top: '100px' }}>
+          <MotionGrid item xs={12} md={4} variants={fadeInUp} transition={{ delay: 0.2 }}>
+            <MotionPaper 
+              elevation={3} 
+              sx={{ p: 3, borderRadius: 2, position: 'sticky', top: '100px' }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
               <Typography variant="h6" component="h3" sx={{ mb: 2 }}>
                 À propos de cet article
               </Typography>
@@ -194,9 +227,9 @@ const ArticleDetail: React.FC = () => {
                   Restez informé des dernières tendances et innovations dans l'immobilier grâce à nos articles et formations.
                 </Typography>
               )}
-            </Paper>
-          </Grid>
-        </Grid>
+            </MotionPaper>
+          </MotionGrid>
+        </MotionGrid>
       </Container>
     </Box>
   );

@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import "./App.css";
 import HomePage from "./components/home/HomePage";
 import Header from "./components/layout/Header";
@@ -13,51 +13,38 @@ import TrainingDetail from "./components/training/TrainingDetail";
 import EbookDetailPage from "./components/ebooks/EbookDetail";
 import ThankYouPage from "./components/ebooks/ThankYouPage";
 
-function ScrollToTop() {
-    const { pathname, search } = useLocation();
+const Wrapper = ({ children }: { children: React.ReactNode }) => {
+    const location = useLocation();
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         // Only scroll to top if there's no hash in the URL
         if (!window.location.hash) {
-            window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: "instant",
-            });
+            window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
         }
-    }, [pathname, search]);
+    }, [location.pathname, location.search]);
 
-    return null;
-}
-
-// Layout component
-const Layout = () => {
-    return (
-        <>
-            <CssBaseline />
-            <Header />
-            <Routes>
-                <Route path="/" element={<Navigate to="/home/" replace />} />
-                <Route path="/home/" element={<HomePage />} />
-                
-                <Route path="/articles/:slug" element={<ArticleDetail />} />
-                <Route path="/training/:slug" element={<TrainingDetail />} />
-                <Route path="/ebooks/:slug" element={<EbookDetailPage />} />
-                <Route path="/thank-you" element={<ThankYouPage />} />
-                
-                {/* Catch all route */}
-                <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-            <Footer />
-        </>
-    );
+    return <>{children}</>;
 };
 
 function App() {
     return (
         <ThemeProvider theme={getLightTheme()}>
-            <ScrollToTop />
-            <Layout />
+            <Wrapper>
+                <CssBaseline />
+                <Header />
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    
+                    <Route path="/articles/:slug" element={<ArticleDetail />} />
+                    <Route path="/training/:slug" element={<TrainingDetail />} />
+                    <Route path="/ebooks/:slug" element={<EbookDetailPage />} />
+                    <Route path="/thank-you" element={<ThankYouPage />} />
+                    
+                    {/* Catch all route */}
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+                <Footer />
+            </Wrapper>
         </ThemeProvider>
     );
 }

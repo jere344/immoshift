@@ -1,13 +1,55 @@
 import React from 'react';
 import { Box, Button, Container, Typography, useTheme } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import home from '@assets/audreyantonini.jpeg';
+import backgroundImage from '@assets/background.jpg';
+import { motion } from 'framer-motion';
+
+// Motion components
+const MotionBox = motion(Box);
+const MotionTypography = motion(Typography);
+const MotionButton = motion(Button);
 
 const HeroSection: React.FC = () => {
   const theme = useTheme();
-  
+
+  // Animation Variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const titleVariants = {
+    hidden: { opacity: 0, y: -30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  };
+
+  const subtitleVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, scale: 0.8, x: 50 },
+    visible: { opacity: 1, scale: 1, x: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } }, // Ease-out cubic
+  };
+
+
   return (
-    <Box 
+    <MotionBox
       sx={{
+        // ... existing sx ...
         position: 'relative',
         minHeight: '80vh',
         display: 'flex',
@@ -15,6 +57,11 @@ const HeroSection: React.FC = () => {
         background: `linear-gradient(135deg, ${theme.palette.primary.dark}20 0%, ${theme.palette.primary.main}10 50%, ${theme.palette.secondary.light}15 100%)`,
         overflow: 'hidden',
         py: 8,
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundBlendMode: 'overlay',
         '&::before': {
           content: '""',
           position: 'absolute',
@@ -22,13 +69,18 @@ const HeroSection: React.FC = () => {
           right: 0,
           width: '100%',
           height: '100%',
-          backgroundImage: 'radial-gradient(circle at 70% 30%, rgba(172, 190, 206, 0.3) 0%, transparent 70%)',
+          backgroundColor: theme.palette.background.default,
+          opacity: 0.75,
+          backgroundImage: 'radial-gradient(circle at 70% 30%, rgba(172, 190, 206, 0.2) 0%, transparent 70%)',
           zIndex: 0
         }
       }}
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants} // Apply container variants to stagger children
     >
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
-        <Box 
+        <Box
           sx={{
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
@@ -37,9 +89,9 @@ const HeroSection: React.FC = () => {
             gap: 4,
           }}
         >
-          <Box sx={{ maxWidth: 600 }}>
-            <Typography 
-              variant="h1" 
+          <MotionBox sx={{ maxWidth: 600 }} >
+            <MotionTypography
+              variant="h1"
               sx={{
                 fontWeight: 800,
                 fontSize: { xs: '2.5rem', sm: '3rem', md: '3.5rem', lg: '4rem' },
@@ -48,72 +100,98 @@ const HeroSection: React.FC = () => {
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
                 color: 'transparent',
-                lineHeight: 1.2
+                lineHeight: 1.2,
+                position: 'relative',
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  bottom: -5,
+                  left: 0,
+                  width: '60%',
+                  height: 3,
+                  background: theme.palette.primary.main,
+                  borderRadius: 2,
+                  transformOrigin: 'left',
+                }
               }}
+              variants={titleVariants}
+              transition={{ delay: 0.5, duration: 0.6 }}
             >
               Votre Expertise Immobilière
-            </Typography>
-            
-            <Typography 
-              variant="h4" 
-              sx={{ 
-                color: theme.palette.text.secondary,
+            </MotionTypography>
+
+            <MotionTypography
+              variant="h4"
+              sx={{
+                // ... existing sx ...
+                color: theme.palette.text.primary,
                 mb: 4,
-                fontWeight: 400,
-                lineHeight: 1.4
+                fontWeight: 500,
+                lineHeight: 1.4,
+                letterSpacing: 0.5,
               }}
+              variants={subtitleVariants}
             >
               Formations et conseils pour réussir dans l'investissement immobilier
-            </Typography>
-            
-            <Box 
-              sx={{ 
-                display: 'flex', 
-                flexDirection: { xs: 'column', sm: 'row' }, 
-                gap: 2 
+            </MotionTypography>
+
+            <MotionBox
+              sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', sm: 'row' },
+                gap: 2
               }}
+              variants={buttonVariants} // Apply variants to the container for simultaneous animation
             >
-              <Button 
-                variant="contained" 
-                color="primary" 
+              <MotionButton
+                variant="contained"
+                color="primary"
                 size="large"
                 endIcon={<ArrowForwardIcon />}
-                href="/home/#trainings"
-                sx={{ 
-                  py: 1.5, 
+                href="/#trainings"
+                sx={{
+                  py: 1.5,
                   px: 4,
                   fontWeight: 600,
                   borderRadius: 2,
                   textTransform: 'none',
                   fontSize: '1rem'
                 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Découvrir nos formations
-              </Button>
-              
-              <Button 
+              </MotionButton>
+
+              <MotionButton
                 variant="outlined"
                 color="primary"
                 size="large"
-                href="/home/#presentation"
-                sx={{ 
-                  py: 1.5, 
+                href="/#presentation"
+                sx={{
+                  py: 1.5,
                   px: 4,
-                  fontWeight: 600, 
+                  fontWeight: 600,
                   borderRadius: 2,
                   textTransform: 'none',
-                  fontSize: '1rem'
+                  fontSize: '1rem',
+                  backgroundColor: theme.palette.background.paper,
                 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 En savoir plus
-              </Button>
-            </Box>
-          </Box>
-          
-          <Box 
+              </MotionButton>
+            </MotionBox>
+          </MotionBox>
+
+          <MotionBox
             sx={{
-              width: { xs: '100%', md: '40%' },
+              // ... existing sx ...
+              width: { xs: '300px', md: '40%' },
               height: { xs: '300px', md: '400px' },
+              maxWidth: { xs: '100%', md: '40%' },
+              aspectRatio: '1/1',
               bgcolor: 'white',
               borderRadius: 4,
               boxShadow: 3,
@@ -121,13 +199,28 @@ const HeroSection: React.FC = () => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              margin: { xs: '0 auto', md: 0 },
+              alignSelf: { xs: 'flex-end', md: 'center' },
+              marginRight: { xs: 0, md: 'auto' },
             }}
+            variants={imageVariants}
           >
-            <Typography variant="body1" color="text.secondary">Image placeholder</Typography>
-          </Box>
+            <motion.img
+              src={home}
+              alt="Real estate expertise"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
+              initial={{ scale: 1.1 }} // Slight zoom-in effect initially
+              animate={{ scale: 1 }}
+              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }} // Slow zoom-out
+            />
+          </MotionBox>
         </Box>
       </Container>
-    </Box>
+    </MotionBox>
   );
 };
 
