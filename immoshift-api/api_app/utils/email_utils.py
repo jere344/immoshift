@@ -21,8 +21,7 @@ def send_ebook_confirmation_email(recipient_email, first_name, ebook_title):
         from_email = settings.DEFAULT_FROM_EMAIL
         to_email = [recipient_email]
 
-        # Define the path to your logo
-        logo_path = None
+        logo_path = f"{settings.SITE_URL}/static/logo.jpg"
         logo_cid = 'logo_immoshift'  # Content ID for the image
         
         if settings.STATICFILES_DIRS:
