@@ -3,16 +3,17 @@ from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
-from django.core.mail import send_mail
 from django.conf import settings
 from django.db.models import Q
 from django.http import FileResponse
+import os
 from .models import Testimonial, Article, Training, Paragraph, Ebook, EbookDownload
 from .serializers import (
     TestimonialSerializer, ArticleListSerializer, ArticleDetailSerializer,
     TrainingListSerializer, TrainingDetailSerializer, ParagraphSerializer,
     EbookSerializer, EbookDetailSerializer, EbookDownloadCreateSerializer
 )
+from .utils.email_utils import send_ebook_confirmation_email, send_admin_ebook_download_notification
 
 # ViewSets for models
 class TestimonialViewSet(viewsets.ReadOnlyModelViewSet):
@@ -124,6 +125,7 @@ def download_ebook(request):
     API endpoint for downloading an ebook.
     Requires form data with user information.
     Records download information and returns the file URL.
+    Sends a confirmation email to the user using a template.
     """
     serializer = EbookDownloadCreateSerializer(data=request.data, context={'request': request})
     
@@ -132,33 +134,17 @@ def download_ebook(request):
         ebook_download = serializer.save()
         ebook = ebook_download.ebook
         
-        # Check if there's a notification email configured
-        try:
-            admin_email = settings.ADMIN_EMAIL
-            if admin_email:
-                # Send notification email to admin
-                send_mail(
-                    f'Nouveau téléchargement de l\'ebook: {ebook.title}',
-                    f"""
-                    Un nouvel utilisateur a téléchargé l'ebook '{ebook.title}':
-                    
-                    Nom: {ebook_download.first_name} {ebook_download.last_name}
-                    Email: {ebook_download.email}
-                    Téléphone: {ebook_download.phone or 'Non fourni'}
-                    Consent email: {'Oui' if ebook_download.consent_mailing else 'Non'}
-                    Date: {ebook_download.download_date}
-                    IP: {ebook_download.ip_address or 'Inconnue'}
-                    """,
-                    settings.DEFAULT_FROM_EMAIL,
-                    [admin_email],
-                    fail_silently=True,
-                )
-        except (AttributeError, Exception) as e:
-            # Just continue if email sending fails
-            print(f"Email notification error: {str(e)}")
-            pass
+        # Send admin notification
+        send_admin_ebook_download_notification(ebook_download)
         
-        # Return the full absolute URL to the ebook file
+        # Send user confirmation email
+        send_ebook_confirmation_email(
+            ebook_download.email,
+            ebook_download.first_name,
+            ebook.title
+        )
+        
+        # Prepare download URL response
         download_url = request.build_absolute_uri(ebook.file.url)
         
         # Ensure the URL is valid and has the correct protocol
@@ -166,12 +152,13 @@ def download_ebook(request):
             if download_url.startswith('//'):
                 download_url = 'https:' + download_url
             else:
-                download_url = 'https://' + download_url.lstrip('/')
-        
+                # Assuming HTTPS if no protocol is present
+                download_url = 'https://' + request.get_host() + ebook.file.url
+
         # Return the success response with download URL
         return Response({
             'success': True,
-            'message': 'Téléchargement enregistré avec succès',
+            'message': 'Téléchargement enregistré avec succès. Un email de confirmation vous a été envoyé.',
             'download_url': download_url,
             'ebook_id': ebook.id,
             'ebook_title': ebook.title

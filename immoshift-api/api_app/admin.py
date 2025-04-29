@@ -2,6 +2,9 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.contrib import messages
 from django import forms
+from django.http import HttpResponse
+import csv
+from datetime import datetime
 from .models import (
     Testimonial, Article, Training, Paragraph, Ebook, EbookDownload, Author
 )
@@ -140,6 +143,42 @@ class EbookDownloadAdmin(admin.ModelAdmin):
     search_fields = ('email', 'first_name', 'last_name')
     date_hierarchy = 'download_date'
     readonly_fields = ('download_date', 'ip_address')
+    actions = ['export_all_emails', 'export_consented_emails']
+    
+    def export_all_emails(self, request, queryset):
+        return self.export_emails(request, queryset, include_only_consented=False)
+    export_all_emails.short_description = "Exporter tous les emails sélectionnés"
+    
+    def export_consented_emails(self, request, queryset):
+        return self.export_emails(request, queryset, include_only_consented=True)
+    export_consented_emails.short_description = "Exporter les emails avec consentement sélectionnés"
+    
+    def export_emails(self, request, queryset, include_only_consented=False):
+        if include_only_consented:
+            queryset = queryset.filter(consent_mailing=True)
+            
+        response = HttpResponse(content_type='text/csv')
+        timestamp = datetime.now().strftime('%Y%m%d-%H%M%S')
+        consent_status = 'consented' if include_only_consented else 'all'
+        response['Content-Disposition'] = f'attachment; filename="email_list_{consent_status}_{timestamp}.csv"'
+        
+        writer = csv.writer(response)
+        # CSV Header
+        writer.writerow(['Email', 'Prénom', 'Nom', 'Consentement', 'Date'])
+        
+        # CSV data
+        for obj in queryset:
+            writer.writerow([
+                obj.email,
+                obj.first_name,
+                obj.last_name,
+                'Oui' if obj.consent_mailing else 'Non',
+                obj.download_date.strftime('%Y-%m-%d %H:%M')
+            ])
+        
+        count = queryset.count()
+        messages.success(request, f'{count} email(s) exporté(s) avec succès.')
+        return response
 
 # Register all models with their admin classes
 admin.site.register(Author, AuthorAdmin)
