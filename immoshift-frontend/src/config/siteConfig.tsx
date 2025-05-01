@@ -1,20 +1,17 @@
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
-import PhoneIcon from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import logo from "@assets/logo.jpg";
+import transparentLogo from "@assets/logo_transparent.png";
 
 export const logoUrl = logo;
+export const transparentLogoUrl = transparentLogo;
 
 // Company information
 export const companyInfo = {
   name: "ImmoShift",
   description: "Formations professionnelles en immobilier d'entreprise pour développer vos compétences et maximiser vos investissements.",
-  email: "contact@immoshift.fr",
-  phone: "01 23 45 67 89",
+  email: "immoshift.business@gmail.com",
   address: "Palavas-les-Flots, 34250, France",
   city: "Palavas-les-Flots"
 };
@@ -35,7 +32,8 @@ export const navigationLinks = [
   { name: "Articles", path: "/#articles" },
   { name: "Ebooks", path: "/#ebooks" },
   { name: "Témoignages", path: "/#testimonials" },
-  { name: "Réserver un appel découverte", path: "https://calendly.com/audreyantonini13/45-minutes-pour-faire-le-point", external: true },
+  { name: "Contact", path: "https://calendly.com/audreyantonini13/45-minutes-pour-faire-le-point", external: true },
+  { name: "FAQ", path: "/#faq" },
 ];
 
 // Add Calendly information
@@ -49,6 +47,7 @@ Je t'écoute, je t'oriente.
 Et si je peux t'apporter de la valeur, je t'explique comment je peux t'accompagner.
 Ce n'est pas une séance de coaching offerte, mais un premier contact cadré, pour poser les bases d'un accompagnement sur mesure.`,
   description_short: `Réserver un rendez-vous de 45 minutes pour discuter de vos besoins en formation immobilière.`,
+  buttonText: "Réserver Maintenant",
 };
 
 // Contact information with icons

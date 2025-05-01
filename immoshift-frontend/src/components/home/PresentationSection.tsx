@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { Box, Container, Typography, Grid, useTheme, Divider, Paper, Stack } from "@mui/material";
 import professional from "@assets/professional.jpg";
-import restart from "@assets/restart.jpg";
+import working from "@assets/girl-2583442_1280.jpg";
 import { motion, useAnimation, useInView } from 'framer-motion';
 
 // Motion components
@@ -156,6 +156,8 @@ const PresentationSection = () => {
                 sx={{
                     width: "100%",
                     height: "auto",
+                    maxHeight: { xs: "300px", sm: "400px", md: "unset" },
+                    objectFit: { xs: "cover", md: "contain" },
                     borderRadius: 2,
                     boxShadow: 3,
                     transition: "transform 0.3s ease-in-out", // Keep CSS transitions for hover
@@ -193,7 +195,7 @@ const PresentationSection = () => {
                                         }}
                                         variants={textVariants}
                                     >
-                                        Je suis née sur le terrain.
+                                        Je suis sur le terrain.
                                         Depuis 2006, l'immobilier est devenu pour moi un métier d'exigence, de rigueur, d'endurance et de résultats.
                                     </MotionTypography>
                                     <MotionTypography // Animate this block
@@ -296,7 +298,7 @@ const PresentationSection = () => {
                         <Grid container spacing={6} alignItems="center">
                             <Grid item xs={12} md={6} sx={{ order: { xs: 2, md: 1 } }}>
                                 <Box sx={{ p: 2 }}>
-                                    <ImageDisplay src={restart} alt="ImmoShift approach" />
+                                    <ImageDisplay src={working} alt="ImmoShift approach" />
                                 </Box>
                             </Grid>
 

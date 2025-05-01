@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Button, Container, Typography, useTheme } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import home from '@assets/audreyantonini.jpeg';
 import backgroundImage from '@assets/background.jpg';
 import { motion } from 'framer-motion';
@@ -49,7 +50,6 @@ const HeroSection: React.FC = () => {
   return (
     <MotionBox
       sx={{
-        // ... existing sx ...
         position: 'relative',
         minHeight: '80vh',
         display: 'flex',
@@ -89,7 +89,17 @@ const HeroSection: React.FC = () => {
             gap: 4,
           }}
         >
-          <MotionBox sx={{ maxWidth: 600 }} >
+          <MotionBox 
+            sx={{ 
+              maxWidth: 600,
+              position: 'relative',
+              padding: 3,
+              borderRadius: 2,
+              background: 'rgba(255, 255, 255, 0.3)',
+              backdropFilter: 'blur(2px)',
+              zIndex: 2
+            }} 
+          >
             <MotionTypography
               variant="h1"
               sx={{
@@ -117,22 +127,50 @@ const HeroSection: React.FC = () => {
               variants={titleVariants}
               transition={{ delay: 0.5, duration: 0.6 }}
             >
-              Votre Expertise Immobilière
+              ImmoShift
             </MotionTypography>
 
             <MotionTypography
               variant="h4"
               sx={{
-                // ... existing sx ...
                 color: theme.palette.text.primary,
-                mb: 4,
+                mb: 2,
                 fontWeight: 500,
                 lineHeight: 1.4,
                 letterSpacing: 0.5,
               }}
               variants={subtitleVariants}
             >
-              Formations et conseils pour réussir dans l'investissement immobilier
+              Business - Vision - Posture
+            </MotionTypography>
+            
+            <MotionTypography
+              variant="body1"
+              sx={{
+                color: theme.palette.text.secondary,
+                mb: 2,
+                fontSize: '1.1rem',
+                lineHeight: 1.8,
+                maxWidth: '95%',
+              }}
+              variants={subtitleVariants}
+            >
+              Des formations déjà conçues ou sur mesure,
+              à distance ou en présentiel, pensées pour les agents
+              qui veulent reprendre le lead et faire décoller leur activité.
+            </MotionTypography>
+            
+            <MotionTypography
+              variant="h6"
+              sx={{
+                color: theme.palette.primary.main,
+                mb: 4,
+                fontWeight: 600,
+                letterSpacing: 1,
+              }}
+              variants={subtitleVariants}
+            >
+              Méthode. Discipline. Exécution.
             </MotionTypography>
 
             <MotionBox
@@ -183,11 +221,10 @@ const HeroSection: React.FC = () => {
                 En savoir plus
               </MotionButton>
             </MotionBox>
-          </MotionBox>
+                      </MotionBox>
 
           <MotionBox
             sx={{
-              // ... existing sx ...
               width: { xs: '300px', md: '40%' },
               height: { xs: '300px', md: '400px' },
               maxWidth: { xs: '100%', md: '40%' },

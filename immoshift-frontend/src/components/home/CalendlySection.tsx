@@ -60,7 +60,7 @@ const CalendlySection: React.FC = () => {
           gutterBottom
           variants={itemVariants} // Animate title
         >
-          Prêt à faire évoluer votre activité immobilière ?
+          {calendlyInfo.title}
         </MotionTypography>
         <MotionTypography
           variant="body1"
@@ -88,7 +88,7 @@ const CalendlySection: React.FC = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          {calendlyInfo.title}
+          {calendlyInfo.buttonText}
         </MotionButton>
       </Container>
     </MotionBox>

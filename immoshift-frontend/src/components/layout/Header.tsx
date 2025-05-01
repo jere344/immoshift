@@ -16,13 +16,22 @@ import {
   ListItemText,
   Fab,
   Zoom,
+  alpha,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { Link as RouterLink } from 'react-router-dom';
-import { navigationLinks, logoUrl, companyInfo } from '@config/siteConfig';
+import { navigationLinks, transparentLogoUrl, companyInfo } from '@config/siteConfig';
+import { motion } from 'framer-motion';
+
+// Motion components
+const MotionBox = motion(Box);
+const MotionButton = motion(Button);
+const MotionIconButton = motion(IconButton);
+const MotionFab = motion(Fab);
+const MotionListItem = motion(ListItem);
 
 interface HideOnScrollProps {
   children: React.ReactElement;
@@ -43,6 +52,7 @@ const Header: React.FC = () => {
   const theme = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   
   const handleOpenMobileMenu = () => {
     setMobileMenuOpen(true);
@@ -60,13 +70,15 @@ const Header: React.FC = () => {
     });
   };
   
-  // Track scroll position to show/hide the button
+  // Track scroll position to show/hide the button and change header appearance
   useEffect(() => {
     const handleScroll = () => {
       if (window.pageYOffset > 100) {
         setShowScrollTop(true);
+        setScrolled(true);
       } else {
         setShowScrollTop(false);
+        setScrolled(false);
       }
     };
     
@@ -77,6 +89,31 @@ const Header: React.FC = () => {
   // Filter navigation links to exclude home/accueil in both desktop and mobile views
   const visibleNavLinks = navigationLinks.filter(link => !link.home);
 
+  // Animation variants
+  const navItemVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  const logoVariants = {
+    initial: { opacity: 0, scale: 0.8 },
+    animate: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+    hover: { scale: 1.05, transition: { duration: 0.3 } }
+  };
+
+  const mobileMenuItemVariants = {
+    hidden: { opacity: 0, x: 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    })
+  };
+
   return (
     <>
       <HideOnScroll>
@@ -84,15 +121,29 @@ const Header: React.FC = () => {
           position="fixed" 
           elevation={0}
           sx={{
-            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            backgroundColor: scrolled 
+              ? 'rgba(255, 255, 255, 0.95)' 
+              : 'rgba(255, 255, 255, 0.8)',
             backdropFilter: 'blur(10px)',
-            borderBottom: `1px solid ${theme.palette.divider}`,
+            borderBottom: scrolled 
+              ? `1px solid ${alpha(theme.palette.primary.main, 0.2)}`
+              : '1px solid transparent',
+            transition: 'all 0.3s ease-in-out',
+            boxShadow: scrolled 
+              ? `0 4px 20px ${alpha(theme.palette.common.black, 0.05)}` 
+              : 'none',
           }}
         >
           <Container maxWidth="xl">
-            <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
+            <Toolbar disableGutters sx={{ justifyContent: 'space-between', height: scrolled ? 70 : 90, transition: 'height 0.3s ease' }}>
               {/* Logo and Company Name - Desktop */}
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <MotionBox 
+                sx={{ display: 'flex', alignItems: 'center' }}
+                initial="initial"
+                animate="animate"
+                whileHover="hover"
+                variants={logoVariants}
+              >
                 <Box 
                   component={RouterLink}
                   to="/"
@@ -103,48 +154,70 @@ const Header: React.FC = () => {
                     color: 'inherit'
                   }}
                 >
-                  <Typography
+                 <Typography
                     variant="h6"
                     noWrap
                     sx={{
                       fontWeight: 700,
-                      color: theme.palette.primary.main,
-                      display: { xs: 'none', sm: 'flex' },
+                      background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      letterSpacing: '0.5px',
+                      display: 'flex', // Changed to always display
                     }}
                   >
                     {companyInfo.name}
-                    <ShowChartIcon sx={{ ml: 1, height: "auto"}} />
+                    <ShowChartIcon sx={{ ml: 1, height: "auto", color: theme.palette.primary.main }} />
                   </Typography>
                 </Box>
-              </Box>
+              </MotionBox>
               
               {/* Desktop Navigation Links */}
-              <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                {visibleNavLinks.map((link) => (
-                  <Button
+              <Box sx={{ display: { xs: 'none', xl: 'flex' } }}>
+                {visibleNavLinks.map((link, index) => (
+                  <MotionButton
                     key={link.name}
                     component={link.external ? 'a' : RouterLink}
                     to={!link.external ? link.path : undefined}
                     href={link.external ? link.path : undefined}
                     target={link.external ? "_blank" : undefined}
                     rel={link.external ? "noopener noreferrer" : undefined}
+                    initial="hidden"
+                    animate="visible"
+                    variants={navItemVariants}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ scale: 1.05, color: theme.palette.primary.main }}
                     sx={{ 
-                      mx: 1, 
+                      mx: 1.5, 
                       color: theme.palette.text.primary,
                       '&:hover': {
-                        color: theme.palette.primary.main,
                         backgroundColor: 'transparent',
                       },
-                      fontWeight: 500
+                      fontWeight: 500,
+                      position: 'relative',
+                      '&::after': {
+                        content: '""',
+                        position: 'absolute',
+                        width: '0%',
+                        height: '2px',
+                        bottom: 0,
+                        left: '50%',
+                        backgroundColor: theme.palette.primary.main,
+                        transition: 'all 0.3s ease',
+                      },
+                      '&:hover::after': {
+                        width: '80%',
+                        left: '10%',
+                      }
                     }}
                   >
                     {link.name}
-                  </Button>
+                  </MotionButton>
                 ))}
               </Box>
 
               {/* Mobile Menu Button */}
-              <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+              <Box sx={{ display: { xs: 'flex', xl: 'none' } }}>
                 <IconButton
                   size="large"
                   aria-label="open mobile menu"
@@ -167,26 +240,42 @@ const Header: React.FC = () => {
                     boxSizing: 'border-box',
                     width: '70%',
                     maxWidth: '300px',
-                    padding: theme.spacing(2)
+                    padding: theme.spacing(2),
+                    background: `linear-gradient(135deg, ${alpha(theme.palette.background.paper, 0.95)} 0%, ${alpha(theme.palette.background.default, 0.95)} 100%)`,
+                    backdropFilter: 'blur(15px)',
                   },
                 }}
               >
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
-                  <IconButton onClick={handleCloseMobileMenu}>
+                  <IconButton 
+                    onClick={handleCloseMobileMenu}
+                  >
                     <CloseIcon />
                   </IconButton>
                 </Box>
-                <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+                <MotionBox 
+                  sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
                   <Box
-                    component="img"
-                    src={logoUrl}
-                    alt={companyInfo.name}
-                    sx={{ height: 60 }}
-                  />
-                </Box>
+                    component={RouterLink}
+                    to="/"
+                    onClick={handleCloseMobileMenu}
+                    sx={{ display: 'flex', justifyContent: 'center' }}
+                  >
+                    <Box
+                      component="img"
+                      src={transparentLogoUrl}
+                      alt={companyInfo.name}
+                      sx={{ height: 80 }}
+                    />
+                  </Box>
+                </MotionBox>
                 <List>
-                  {visibleNavLinks.map((link) => (
-                    <ListItem 
+                  {visibleNavLinks.map((link, index) => (
+                    <MotionListItem 
                       key={link.name} 
                       component={link.external ? 'a' : RouterLink}
                       to={!link.external ? link.path : undefined}
@@ -194,17 +283,34 @@ const Header: React.FC = () => {
                       target={link.external ? "_blank" : undefined}
                       rel={link.external ? "noopener noreferrer" : undefined}
                       onClick={handleCloseMobileMenu}
+                      custom={index}
+                      initial="hidden"
+                      animate="visible"
+                      variants={mobileMenuItemVariants}
+                      whileHover={{ 
+                        backgroundColor: alpha(theme.palette.primary.main, 0.1),
+                        x: 10,
+                      }}
                       sx={{
                         textAlign: 'center',
-                        py: 1,
-                        borderBottom: `1px solid ${theme.palette.divider}`,
-                        '&:hover': {
-                          backgroundColor: theme.palette.action.hover
-                        }
+                        py: 1.5,
+                        borderRadius: 1,
+                        mb: 1,
+                        borderBottom: `1px solid ${alpha(theme.palette.divider, 0.5)}`,
                       }}
                     >
-                      <ListItemText primary={link.name} />
-                    </ListItem>
+                      <ListItemText 
+                        primary={link.name} 
+                        primaryTypographyProps={{
+                          fontWeight: 500,
+                          sx: { 
+                            color: theme.palette.text.primary,
+                            transition: 'color 0.3s ease',
+                            '&:hover': { color: theme.palette.primary.main }
+                          }
+                        }}
+                      />
+                    </MotionListItem>
                   ))}
                 </List>
               </Drawer>
@@ -215,24 +321,33 @@ const Header: React.FC = () => {
       
       {/* Back to top button */}
       <Zoom in={showScrollTop}>
-        <Box
+        <MotionBox
           onClick={handleScrollToTop}
           role="presentation"
           sx={{
             position: 'fixed',
-            top: 50,
-            right: 20,
+            bottom: { xs: 80, md: 100 }, // Increased height from bottom to avoid overlap
+            right: { xs: 20, md: 40 },
             zIndex: 2000,
           }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
         >
-          <Fab 
+          <MotionFab 
             color="primary" 
             size="small" 
             aria-label="scroll back to top"
+            sx={{ 
+              boxShadow: `0 8px 16px ${alpha(theme.palette.primary.main, 0.3)}`,
+              background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+            }}
           >
             <ArrowUpwardIcon />
-          </Fab>
-        </Box>
+          </MotionFab>
+        </MotionBox>
       </Zoom>
     </>
   );

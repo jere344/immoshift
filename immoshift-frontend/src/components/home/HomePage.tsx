@@ -10,6 +10,8 @@ import TrainingsSection from './TrainingsSection';
 import ArticlesSection from './ArticlesSection';
 import EbooksSection from './EbooksSection';
 import CalendlySection from './CalendlySection';
+import FAQSection from './FAQSection';
+import ProfessionalTrainingSection from './ProfessionalTrainingSection';
 import { useLocation } from 'react-router-dom';
 import { calendlyInfo } from '@config/siteConfig';
 
@@ -26,6 +28,8 @@ const HomePage: React.FC = () => {
   const articlesRef = useRef<HTMLDivElement>(null);
   const ebooksRef = useRef<HTMLDivElement>(null);
   const testimonialsRef = useRef<HTMLDivElement>(null);
+  const faqRef = useRef<HTMLDivElement>(null);
+  const professionalTrainingRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchHomeContent = async () => {
@@ -55,7 +59,9 @@ const HomePage: React.FC = () => {
       trainings: trainingsRef,
       articles: articlesRef,
       ebooks: ebooksRef,
-      testimonials: testimonialsRef
+      testimonials: testimonialsRef,
+      faq: faqRef,
+      professionalTraining: professionalTrainingRef
     };
     
     const ref = sectionMap[hash];
@@ -127,6 +133,11 @@ const HomePage: React.FC = () => {
           <div ref={trainingsRef} id="trainings">
             <TrainingsSection trainings={homeContent.trainings} />
           </div>
+
+          <div ref={professionalTrainingRef} id="professionalTraining">
+            <ProfessionalTrainingSection />
+          </div>
+          
           <div ref={articlesRef} id="articles" >
             <ArticlesSection articles={homeContent.articles} />
           </div>
@@ -135,6 +146,9 @@ const HomePage: React.FC = () => {
           </div>
           <div ref={testimonialsRef} id="testimonials">
             <TestimonialsSection testimonials={homeContent.testimonials} />
+          </div>
+          <div ref={faqRef} id="faq">
+            <FAQSection />
           </div>
           
           {/* Floating CTA Button */}
