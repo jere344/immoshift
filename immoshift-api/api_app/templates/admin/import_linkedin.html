@@ -1,0 +1,49 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+    &rsaquo; <a href="{% url 'admin:app_list' app_label='api_app' %}">Api App</a>
+    &rsaquo; <a href="{% url 'admin:api_app_article_changelist' %}">Articles</a>
+    &rsaquo; Importer depuis LinkedIn
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <fieldset class="module aligned">
+                <h2>Importer un post LinkedIn</h2>
+                <div class="form-row">
+                    {{ form.linkedin_url.errors }}
+                    <label class="required" for="id_linkedin_url">{{ form.linkedin_url.label }}:</label>
+                    {{ form.linkedin_url }}
+                    <div class="help">{{ form.linkedin_url.help_text }}</div>
+                </div>
+            </fieldset>
+            <div class="submit-row">
+                <input type="submit" value="Importer" class="default" name="_import">
+            </div>
+        </div>
+    </form>
+    
+    <div class="help">
+        <h3>Instructions</h3>
+        <p>1. Collez l'URL d'un post LinkedIn (format: https://www.linkedin.com/posts/...)</p>
+        <p>2. Le système créera automatiquement un article avec:</p>
+        <ul>
+            <li>Titre: La première ligne du post</li>
+            <li>Extrait: La deuxième ligne du post</li>
+            <li>Image: La première image du post (si disponible)</li>
+            <li>Auteur: L'auteur du post, sa bio et son image de profil si disponible</li>
+            <li>Premier paragraphe: Le texte complet du post</li>
+            <li>Source: L'URL LinkedIn</li>
+            <li>Date: La date de publication du post</li>
+        </ul>
+        <p>3. Vous pourrez ensuite modifier l'article si nécessaire.</p>
+    </div>
+</div>
+{% endblock %}

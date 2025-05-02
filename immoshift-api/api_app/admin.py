@@ -5,9 +5,15 @@ from django import forms
 from django.http import HttpResponse
 import csv
 from datetime import datetime
+from django.shortcuts import render, redirect
+from django.urls import path
+from django.utils.text import slugify
+from django.db import transaction
 from .models import (
     Testimonial, Article, Training, Paragraph, Ebook, EbookDownload, Author
 )
+from .forms import LinkedInPostImportForm
+from .utils.linkedin_scraper import scrape_linkedin_post, download_image_from_url
 
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ('name', 'display_picture')
@@ -58,12 +64,122 @@ class ArticleAdmin(admin.ModelAdmin):
     date_hierarchy = 'published_at'
     inlines = [ParagraphInline]
     autocomplete_fields = ['author']
+    actions = ['import_from_linkedin']
     
     def display_image(self, obj):
         if obj.image:
             return format_html('<img src="{}" width="100" />', obj.image.url)
         return "Aucune image"
     display_image.short_description = "Image"
+    
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls = [
+            path('import-linkedin/', self.admin_site.admin_view(self.import_linkedin_view), name='article_import_linkedin'),
+        ]
+        return my_urls + urls
+    
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        extra_context['import_linkedin_url'] = 'admin:article_import_linkedin'
+        return super().changelist_view(request, extra_context=extra_context)
+    
+    def import_linkedin_view(self, request):
+        if request.method == 'POST':
+            form = LinkedInPostImportForm(request.POST)
+            if form.is_valid():
+                return self.process_linkedin_import(request, form.cleaned_data['linkedin_url'])
+        else:
+            form = LinkedInPostImportForm()
+        
+        return render(
+            request,
+            'admin/import_linkedin.html',
+            {'form': form, 'title': 'Importer depuis LinkedIn'}
+        )
+    
+    def import_from_linkedin(self, request, queryset):
+        return redirect('admin:article_import_linkedin')
+    import_from_linkedin.short_description = "Importer depuis LinkedIn"
+    
+    def process_linkedin_import(self, request, linkedin_url):
+        # Clean the URL by removing tracking parameters
+        clean_url = linkedin_url.split('?')[0] if '?' in linkedin_url else linkedin_url
+        
+        scraped_data = scrape_linkedin_post(clean_url)
+        
+        if 'error' in scraped_data:
+            messages.error(request, f"Erreur lors de l'importation: {scraped_data['error']}")
+            return redirect('admin:article_import_linkedin')
+        
+        try:
+            with transaction.atomic():
+                # Use the LinkedIn author information if available
+                author_name = scraped_data.get('author_name', 'Unknown Author')
+                if author_name == 'Unknown Author':
+                    # Fallback to ImmoShift if no author found
+                    try:
+                        author = Author.objects.get(name="ImmoShift")
+                    except Author.DoesNotExist:
+                        author = Author.objects.create(name="ImmoShift", bio="Contenu importé de LinkedIn")
+                else:
+                    # Try to find existing author by name
+                    try:
+                        author = Author.objects.get(name=author_name)
+                    except Author.DoesNotExist:
+                        # Create new author with LinkedIn data
+                        author = Author(
+                            name=author_name,
+                            bio=scraped_data.get('author_headline', f"Auteur importé depuis LinkedIn")
+                        )
+                        
+                        # Download and attach author image if available
+                        if scraped_data.get('author_image_url'):
+                            author_img = download_image_from_url(scraped_data['author_image_url'])
+                            if author_img:
+                                author.picture = author_img
+                        
+                        author.save()
+                
+                # Create slug and truncate to 50 characters
+                title_slug = slugify(scraped_data['title'])
+                if len(title_slug) > 50:
+                    title_slug = title_slug[:50].rstrip('-')
+                
+                # Create the article
+                article = Article(
+                    title=scraped_data['title'],
+                    slug=title_slug,
+                    excerpt=scraped_data['excerpt'],
+                    author=author,
+                    is_published=True,
+                    source_url=clean_url,
+                    published_at=scraped_data['published_at']
+                )
+                
+                # Download and attach image if available
+                if scraped_data.get('image_url'):
+                    image_file = download_image_from_url(scraped_data['image_url'])
+                    if image_file:
+                        article.image = image_file
+                
+                article.save()
+                
+                # Create paragraph with the full content
+                Paragraph.objects.create(
+                    article=article,
+                    position=1,
+                    title=None,  # No title for the first paragraph
+                    content=scraped_data['content'],
+                    media_type='none'  # No media in the paragraph as we already have the main image
+                )
+                
+                messages.success(request, f"Article '{article.title}' créé avec succès depuis le post LinkedIn de {author.name}.")
+                return redirect('admin:api_app_article_change', article.id)
+                
+        except Exception as e:
+            messages.error(request, f"Erreur lors de la création de l'article: {str(e)}")
+            return redirect('admin:article_import_linkedin')
 
 class TrainingAdmin(admin.ModelAdmin):
     list_display = ('title', 'is_active', 'price', 'show_price', 'position', 'display_image')
