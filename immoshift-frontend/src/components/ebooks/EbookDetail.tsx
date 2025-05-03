@@ -178,7 +178,7 @@ const EbookDetail: React.FC = () => {
   }
 
   return (
-    <>
+    <Box sx={{ bgcolor: 'background.default', minHeight: '100vh' }}>
       {/* Hero section to prevent header overlap */}
       <Box
         sx={{
@@ -188,9 +188,9 @@ const EbookDetail: React.FC = () => {
         }}
       />
       
-      <Container maxWidth="lg" sx={{ py: 6 }}>
+      <Container maxWidth="lg" sx={{ py: 6, bgcolor: 'background.default' }}>
         <MotionGrid container spacing={4} variants={staggerContainer} initial="initial" animate="animate">
-          <MotionGrid item xs={12} md={6} variants={scaleIn}>
+          <MotionGrid item xs={12} md={6} variants={scaleIn} sx={{ bgcolor: 'background.default' }}>
             <MotionBox sx={{ mb: 4 }}>
               <motion.img 
                 src={ebook.cover_image} 
@@ -203,7 +203,7 @@ const EbookDetail: React.FC = () => {
             </MotionBox>
           </MotionGrid>
           
-          <MotionGrid item xs={12} md={6} variants={fadeInUp}>
+          <MotionGrid item xs={12} md={6} variants={fadeInUp} sx={{ bgcolor: 'background.default' }}>
             <MotionTypography variant="h3" component="h1" sx={{ mb: 2, fontWeight: 700 }} variants={fadeInUp}>
               {ebook.title}
             </MotionTypography>
@@ -320,7 +320,7 @@ const EbookDetail: React.FC = () => {
           </MotionGrid>
         </MotionGrid>
       </Container>
-    </>
+    </Box>
   );
 };
 
