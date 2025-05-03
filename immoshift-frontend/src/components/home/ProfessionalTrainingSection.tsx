@@ -118,9 +118,6 @@ const ProfessionalTrainingSection: React.FC = () => {
                 Éligible à la formation professionnelle
               </Typography>
             </Box>
-            <Typography variant="body1" paragraph>
-              Toutes mes formations sont dispensées par un organisme de formation enregistré sous le numéro [ton numéro NDA]. 
-            </Typography>
             <Typography variant="body1">
               Elles peuvent être intégrées dans le cadre de la formation professionnelle continue, en fonction des modalités de ton entreprise ou de ton statut.
             </Typography>

@@ -13,7 +13,7 @@ import CalendlySection from './CalendlySection';
 import FAQSection from './FAQSection';
 import ProfessionalTrainingSection from './ProfessionalTrainingSection';
 import { useLocation } from 'react-router-dom';
-import { calendlyInfo } from '@config/siteConfig';
+import { calendlyInfo, companyInfo, logoUrl } from '@config/siteConfig';
 
 const HomePage: React.FC = () => {
   const [homeContent, setHomeContent] = useState<HomeContent | null>(null);
@@ -106,6 +106,11 @@ const HomePage: React.FC = () => {
     );
   }
 
+  const siteUrl = "https://www.immoshift.fr/";
+  const homePageTitle = "ImmoShift - Formation & Coaching Immobilier Stratégique";
+  const homePageDescription = "ImmoShift : Formation et coaching pour agents immobiliers. Structurez votre activité, maîtrisez vos méthodes et performez durablement. Approche terrain, PNL et hypnose ericksonienne.";
+  const fullLogoUrl = `${siteUrl}${logoUrl.startsWith('/') ? logoUrl.substring(1) : logoUrl}`; // Ensure absolute URL
+
   return (
     <Box
       sx={{
@@ -117,6 +122,27 @@ const HomePage: React.FC = () => {
         position: "relative",
       }}
     >
+      {/* Add native meta tags */}
+      <title>{homePageTitle}</title>
+      <meta name="description" content={homePageDescription} />
+      <link rel="canonical" href={siteUrl} />
+      {/* Open Graph */}
+      <meta property="og:title" content={homePageTitle} />
+      <meta property="og:description" content={homePageDescription} />
+      <meta property="og:url" content={siteUrl} />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content={fullLogoUrl} />
+      <meta property="og:image:alt" content="Logo ImmoShift" />
+      <meta property="og:site_name" content={companyInfo.name} />
+      <meta property="og:locale" content="fr_FR" />
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={homePageTitle} />
+      <meta name="twitter:description" content={homePageDescription} />
+      <meta name="twitter:image" content={fullLogoUrl} />
+      <meta name="twitter:image:alt" content="Logo ImmoShift" />
+      {/* <meta name="twitter:site" content="@YourTwitterHandle" /> */}
+
       {homeContent && (
         <>
           <div ref={heroRef} id="hero">

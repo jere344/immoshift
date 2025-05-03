@@ -5,8 +5,9 @@ import { Training } from '@models/Training';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ParagraphRenderer from '../shared/ParagraphRenderer';
 import api from '@services/api';
-import audreyPicture from '@assets/audreyantonini.jpeg';
+import audreyPicture from '@assets/audreyantonini.jpg';
 import { motion } from 'framer-motion'; // Import motion
+import { companyInfo, logoUrl } from '@config/siteConfig'; // Import companyInfo and logoUrl
 
 // Animation Variants
 const fadeInUp = {
@@ -78,8 +79,36 @@ const TrainingDetail: React.FC = () => {
     );
   }
 
+  // SEO Data
+  const pageTitle = `${training.title} - Formation ImmoShift`;
+  const pageDescription = training.short_description.split('\n')[0]; // Use first line as description
+  const canonicalUrl = `${window.location.origin}/trainings/${training.slug}`;
+  const baseImageUrl = training.image
+    ? (training.image.startsWith('http') ? training.image : `${window.location.origin}${training.image}`)
+    : `${window.location.origin}${logoUrl.startsWith('/') ? logoUrl.substring(1) : logoUrl}`;
+
   return (
     <Box sx={{ bgcolor: 'background.default', minHeight: '100vh' }}>
+      {/* Add native meta tags */}
+      <title>{pageTitle}</title>
+      <meta name="description" content={pageDescription} />
+      <link rel="canonical" href={canonicalUrl} />
+      {/* Open Graph */}
+      <meta property="og:title" content={pageTitle} />
+      <meta property="og:description" content={pageDescription} />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content={baseImageUrl} />
+      <meta property="og:image:alt" content={training.title} />
+      <meta property="og:site_name" content={companyInfo.name} />
+      <meta property="og:locale" content="fr_FR" />
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={pageTitle} />
+      <meta name="twitter:description" content={pageDescription} />
+      <meta name="twitter:image" content={baseImageUrl} />
+      <meta name="twitter:image:alt" content={training.title} />
+
       {/* Hero section to prevent header overlap */}
       <Box
         sx={{

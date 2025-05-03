@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Button, Container, Typography, useTheme } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import home from '@assets/audreyantonini.jpeg';
+import home from '@assets/audreyantonini.jpg';
 import backgroundImage from '@assets/background.jpg';
 import { motion } from 'framer-motion';
 

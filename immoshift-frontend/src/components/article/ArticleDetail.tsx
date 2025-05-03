@@ -9,6 +9,7 @@ import { fr } from 'date-fns/locale';
 import LinkIcon from '@mui/icons-material/Link';
 import { getArticleImage } from '../../utils/placeholderUtils';
 import { motion } from 'framer-motion'; // Import motion
+import { companyInfo, logoUrl } from '@config/siteConfig'; // Import companyInfo and logoUrl
 
 // Animation Variants (reuse or define as needed)
 const fadeInUp = {
@@ -80,9 +81,41 @@ const ArticleDetail: React.FC = () => {
   }
 
   const formattedDate = format(new Date(article.published_at), 'd MMMM yyyy', { locale: fr });
+  const publishedDateISO = new Date(article.published_at).toISOString();
+
+  // SEO Data
+  const pageTitle = `${article.title} - Article ImmoShift`;
+  const pageDescription = article.excerpt;
+  const canonicalUrl = `${window.location.origin}/articles/${article.slug}`;
+  const imageUrl = getArticleImage(article.image, article.title);
+  const fullImageUrl = imageUrl.startsWith('http') 
+    ? imageUrl 
+    : (imageUrl ? `${window.location.origin}${imageUrl}` : `${window.location.origin}${logoUrl.startsWith('/') ? logoUrl.substring(1) : logoUrl}`); // Fallback to logo
 
   return (
     <Box sx={{ bgcolor: 'background.default', minHeight: '100vh' }}>
+      {/* Add native meta tags */}
+      <title>{pageTitle}</title>
+      <meta name="description" content={pageDescription} />
+      <link rel="canonical" href={canonicalUrl} />
+      {/* Open Graph */}
+      <meta property="og:title" content={pageTitle} />
+      <meta property="og:description" content={pageDescription} />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:type" content="article" />
+      <meta property="og:image" content={fullImageUrl} />
+      <meta property="og:image:alt" content={article.title} />
+      <meta property="og:site_name" content={companyInfo.name} />
+      <meta property="og:locale" content="fr_FR" />
+      <meta property="article:published_time" content={publishedDateISO} />
+      {article.author && <meta property="article:author" content={article.author.name} />}
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={pageTitle} />
+      <meta name="twitter:description" content={pageDescription} />
+      <meta name="twitter:image" content={fullImageUrl} />
+      <meta name="twitter:image:alt" content={article.title} />
+
       {/* Hero section to prevent header overlap */}
       <Box
         sx={{
@@ -123,7 +156,7 @@ const ArticleDetail: React.FC = () => {
             {/* Image section - now uses the getArticleImage utility */}
             <MotionBox 
               component={motion.img} // Use motion.img
-              src={getArticleImage(article.image, article.title)}
+              src={imageUrl}
               alt={article.title}
               sx={{
                 width: '100%',

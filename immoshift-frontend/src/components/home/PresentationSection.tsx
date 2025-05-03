@@ -8,7 +8,6 @@ import { motion, useAnimation, useInView } from 'framer-motion';
 const MotionBox = motion(Box);
 const MotionTypography = motion(Typography);
 const MotionPaper = motion(Paper);
-const MotionGrid = motion(Grid);
 const MotionDivider = motion(Divider);
 const MotionStack = motion(Stack); // Added for list items if needed
 

@@ -1,6 +1,7 @@
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 from .models import Article, Training, Ebook
+from django.conf import settings # Ensure SITE_URL is defined in settings.py
 
 class ArticleSitemap(Sitemap):
     changefreq = "weekly"
@@ -13,8 +14,16 @@ class ArticleSitemap(Sitemap):
     def lastmod(self, obj):
         return obj.updated_at
     
-    def location(self, obj):
-        return f"/articles/{obj.slug}/"
+    def get_urls(self, site=None, **kwargs):
+        # Override get_urls to yield dictionaries with the full frontend URL
+        site_url = getattr(settings, 'SITE_URL', '') # Get frontend URL from settings
+        for item in self.items():
+            yield {
+                'location': f"{site_url}/articles/{item.slug}/",
+                'lastmod': self.lastmod(item),
+                'changefreq': self.changefreq,
+                'priority': self.priority,
+            }
 
 class TrainingSitemap(Sitemap):
     changefreq = "monthly"
@@ -27,8 +36,15 @@ class TrainingSitemap(Sitemap):
     def lastmod(self, obj):
         return obj.updated_at
     
-    def location(self, obj):
-        return f"/training/{obj.slug}/"
+    def get_urls(self, site=None, **kwargs):
+        site_url = getattr(settings, 'SITE_URL', '')
+        for item in self.items():
+            yield {
+                'location': f"{site_url}/trainings/{item.slug}/",
+                'lastmod': self.lastmod(item),
+                'changefreq': self.changefreq,
+                'priority': self.priority,
+            }
 
 class EbookSitemap(Sitemap):
     changefreq = "monthly"
@@ -41,8 +57,15 @@ class EbookSitemap(Sitemap):
     def lastmod(self, obj):
         return obj.updated_at
     
-    def location(self, obj):
-        return f"/ebooks/{obj.slug}/"
+    def get_urls(self, site=None, **kwargs):
+        site_url = getattr(settings, 'SITE_URL', '')
+        for item in self.items():
+            yield {
+                'location': f"{site_url}/ebooks/{item.slug}/",
+                'lastmod': self.lastmod(item),
+                'changefreq': self.changefreq,
+                'priority': self.priority,
+            }
 
 class StaticViewSitemap(Sitemap):
     priority = 0.5
@@ -51,7 +74,13 @@ class StaticViewSitemap(Sitemap):
     def items(self):
         return ['homepage']
     
-    def location(self, item):
-        if item == 'homepage':
-            return '/'
-        return '/'
+    def get_urls(self, site=None, **kwargs):
+        site_url = getattr(settings, 'SITE_URL', '')
+        for item in self.items():
+            loc = f"{site_url}/" if item == 'homepage' else f"{site_url}/" # Adjust if other static pages exist
+            yield {
+                'location': loc,
+                # 'lastmod': # Add lastmod if applicable for static pages
+                'changefreq': self.changefreq,
+                'priority': self.priority,
+            }

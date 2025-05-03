@@ -13,13 +13,13 @@ import {
   FormControlLabel,
   Divider,
   Alert,
-  Stack
 } from '@mui/material';
 import { Ebook, EbookDownloadRequest } from '@models/Ebook';
 import api from '@services/api';
 import DownloadIcon from '@mui/icons-material/Download';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { motion } from 'framer-motion'; // Import motion
+import { companyInfo, logoUrl } from '@config/siteConfig'; // Import companyInfo and logoUrl
 
 interface FormState {
   first_name: string;
@@ -177,8 +177,36 @@ const EbookDetail: React.FC = () => {
     );
   }
 
+  // SEO Data
+  const pageTitle = `${ebook.title} - Ebook Gratuit ImmoShift`;
+  const pageDescription = ebook.description;
+  const canonicalUrl = `${window.location.origin}/ebooks/${ebook.slug}`;
+  const imageUrl = ebook.cover_image 
+    ? (ebook.cover_image.startsWith('http') ? ebook.cover_image : `${window.location.origin}${ebook.cover_image}`)
+    : `${window.location.origin}${logoUrl.startsWith('/') ? logoUrl.substring(1) : logoUrl}`; // Fallback to logo
+
   return (
     <Box sx={{ bgcolor: 'background.default', minHeight: '100vh' }}>
+      {/* Add native meta tags */}
+      <title>{pageTitle}</title>
+      <meta name="description" content={pageDescription} />
+      <link rel="canonical" href={canonicalUrl} />
+      {/* Open Graph */}
+      <meta property="og:title" content={pageTitle} />
+      <meta property="og:description" content={pageDescription} />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:type" content="book" /> 
+      <meta property="og:image" content={imageUrl} />
+      <meta property="og:image:alt" content={ebook.title} />
+      <meta property="og:site_name" content={companyInfo.name} />
+      <meta property="og:locale" content="fr_FR" />
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={pageTitle} />
+      <meta name="twitter:description" content={pageDescription} />
+      <meta name="twitter:image" content={imageUrl} />
+      <meta name="twitter:image:alt" content={ebook.title} />
+
       {/* Hero section to prevent header overlap */}
       <Box
         sx={{
