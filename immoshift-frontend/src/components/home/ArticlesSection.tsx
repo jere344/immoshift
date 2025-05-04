@@ -351,9 +351,7 @@ const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
 
                   <Button
                     component={RouterLink}
-                    to={article.source_url || `/articles/${article.slug}`}
-                    target={article.source_url ? "_blank" : "_self"}
-                    rel={article.source_url ? "noopener noreferrer" : ""}
+                    to={`/articles/${article.slug}`}
                     variant="outlined"
                     color="primary"
                     size="small"
@@ -363,9 +361,8 @@ const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
                       fontWeight: 600,
                       mt: 'auto'
                     }}
-                    startIcon={article.source_url ? <LinkIcon /> : null}
                   >
-                    {article.source_url ? "Voir sur la source" : "Lire plus"}
+                    Lire plus
                   </Button>
                 </CardContent>
               </MotionCard>
