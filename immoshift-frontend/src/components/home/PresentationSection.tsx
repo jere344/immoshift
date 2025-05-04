@@ -107,6 +107,7 @@ const PresentationSection = () => {
                 mb: 3,
                 color: theme.palette.primary.main,
                 position: "relative",
+                wordBreak: 'break-word', // Add this line
                 "&:after": {
                     content: '""',
                     position: "absolute",
@@ -117,7 +118,7 @@ const PresentationSection = () => {
                     backgroundColor: theme.palette.primary.main,
                 },
             }}
-            variants={titleVariants} // Apply animation variants
+            variants={titleVariants}
         >
             {children}
         </MotionTypography>
@@ -128,14 +129,13 @@ const PresentationSection = () => {
             <MotionPaper
                 elevation={0}
                 sx={{
-                    p: 4,
+                    p: { xs: 2, sm: 4 },
                     height: "100%",
                     borderRadius: 2,
                     backgroundColor: theme.palette.background.paper,
-                    transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out", // Keep CSS transitions for hover
+                    transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
                     "&:hover": {
                         boxShadow: 3,
-                        // transform: "translateY(-5px)", // Motion handles this
                     },
                 }}
                 whileHover={{ y: -5 }}
@@ -185,7 +185,7 @@ const PresentationSection = () => {
                             <Grid item xs={12} md={6}>
                                 <ContentBox variants={textVariants}>
                                     <SectionTitle>Qui je suis</SectionTitle>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 4,
@@ -197,7 +197,7 @@ const PresentationSection = () => {
                                         Je suis sur le terrain.
                                         Depuis 2006, l'immobilier est devenu pour moi un métier d'exigence, de rigueur, d'endurance et de résultats.
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -230,7 +230,7 @@ const PresentationSection = () => {
                                             ))}
                                         </MotionStack>
                                     </motion.div>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -242,7 +242,7 @@ const PresentationSection = () => {
                                         Pendant une grande partie de ma carrière, j'ai occupé le rôle de directrice d'agence, où j'ai dirigé, formé, inspiré des équipes, tout en restant en lien avec la réalité du terrain.
                                         J'ai non seulement piloté des équipes mais aussi performé à titre individuel en générant des résultats solides.
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -254,7 +254,7 @@ const PresentationSection = () => {
                                         Je connais intimement la réalité de ce métier :
                                         l'adrénaline des signatures, la pression des objectifs, le doute après plusieurs rendez-vous infructueux, l'exigence mentale d'enchaîner les jours sans relâche.
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -265,7 +265,7 @@ const PresentationSection = () => {
                                     >
                                         Année après année, transaction après transaction, j'ai bâti une carrière rentable et structurée — non pas par hasard, mais par méthode, par rigueur et par discipline.
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             color: theme.palette.text.secondary,
@@ -304,7 +304,7 @@ const PresentationSection = () => {
                             <Grid item xs={12} md={6} sx={{ order: { xs: 1, md: 2 } }}>
                                 <ContentBox variants={textVariantsRight}>
                                     <SectionTitle>Ce que je fais aujourd'hui</SectionTitle>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -316,7 +316,7 @@ const PresentationSection = () => {
                                         Je ne suis pas une formatrice de vitrines.
                                         Je suis une stratège de terrain.
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -328,7 +328,7 @@ const PresentationSection = () => {
                                     >
                                         ImmoShift est né d'une conviction forte :
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -339,7 +339,7 @@ const PresentationSection = () => {
                                     >
                                         Quand on structure ses méthodes, ses rituels et son pilotage business, on ne subit plus ce métier. On le maîtrise.
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -353,7 +353,7 @@ const PresentationSection = () => {
                                         Pas de discours théoriques.
                                         Pas de promesses creuses.
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 2,
@@ -377,12 +377,12 @@ const PresentationSection = () => {
                                                         sx={{
                                                             display: "flex",
                                                             alignItems: "flex-start",
+                                                            mt: 0.7,
                                                         }}
                                                     >
                                                         <Box
                                                             sx={{
                                                                 minWidth: 15,
-                                                                mt: 0.7,
                                                             }}
                                                         >
                                                             •
@@ -395,7 +395,7 @@ const PresentationSection = () => {
                                             ))}
                                         </MotionStack>
                                     </motion.div>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             color: theme.palette.text.secondary,
@@ -420,16 +420,8 @@ const PresentationSection = () => {
                         <Grid container spacing={6}>
                             <Grid item xs={12} md={6}>
                                 <ContentBox variants={textVariants}>
-                                    <MotionTypography // Already animated, ensure it uses SectionTitle component if desired
-                                        variant="h3"
-                                        sx={{ mb: 3 }}
-                                        initial={{ opacity: 0, y: -10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.3, duration: 0.5 }}
-                                    >
-                                        Mon style d'accompagnement
-                                    </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <SectionTitle>Mon style d'accompagnement</SectionTitle>
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -451,7 +443,6 @@ const PresentationSection = () => {
                                                     <Box
                                                         sx={{
                                                             display: "flex",
-                                                            alignItems: "center",
                                                             backgroundColor: theme.palette.background.default,
                                                             p: 2,
                                                             borderRadius: 1,
@@ -465,6 +456,7 @@ const PresentationSection = () => {
                                                                 borderRadius: "50%",
                                                                 bgcolor: theme.palette.primary.main,
                                                                 mr: 2,
+                                                                mt: 1,
                                                             }}
                                                         />
                                                         <Typography variant="body1" sx={{ color: theme.palette.text.secondary }}>
@@ -475,7 +467,7 @@ const PresentationSection = () => {
                                             ))}
                                         </MotionStack>
                                     </motion.div>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -486,7 +478,7 @@ const PresentationSection = () => {
                                     >
                                         Mon accompagnement s'adresse à tous les agents, débutants comme confirmés.
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -498,7 +490,7 @@ const PresentationSection = () => {
                                     >
                                         Car l'expérience ne garantit pas toujours la bonne méthode :
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -509,7 +501,7 @@ const PresentationSection = () => {
                                     >
                                         Même les meilleurs peuvent tomber dans des routines inefficaces, perdre du focus ou décaler leur posture sans même s'en rendre compte.
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -520,7 +512,7 @@ const PresentationSection = () => {
                                     >
                                         Je t'aide à réaligner ton activité, quelle que soit ta phase de carrière.
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -532,7 +524,7 @@ const PresentationSection = () => {
                                         Et si tu ne trouves pas de programme qui correspond exactement à ton besoin sur mon site,
                                         je construis aussi des accompagnements sur-mesure, pour que tu bénéficies d'une trajectoire totalement adaptée à ton ambition.
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -544,7 +536,7 @@ const PresentationSection = () => {
                                         Je t'apprends à devenir stratège de ton propre business, pas à suivre une check-list.
                                         Je t'aide à ancrer des méthodes, bâtir des routines, tenir ton cap même quand les vents sont contraires.
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             color: theme.palette.text.secondary,
@@ -562,7 +554,7 @@ const PresentationSection = () => {
                             <Grid item xs={12} md={6}>
                                 <ContentBox variants={textVariantsRight}>
                                     <SectionTitle>Mon atout différenciant</SectionTitle>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -574,7 +566,7 @@ const PresentationSection = () => {
                                         Je ne me contente pas d'enseigner des techniques.
                                         Je construis des agents stratégiques, mentalement solides et humainement impactants.
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -586,7 +578,7 @@ const PresentationSection = () => {
                                         Diplômée en PNL (Programmation Neuro-Linguistique) et en hypnose ericksonienne,
                                         j'intègre à mes accompagnements des outils avancés de communication et de renforcement mental.
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 2,
@@ -598,7 +590,7 @@ const PresentationSection = () => {
                                     >
                                         Important :
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
@@ -611,7 +603,7 @@ const PresentationSection = () => {
                                         C'est un outil d'accompagnement respectueux, destiné à activer tes propres ressources,
                                         à renforcer ta confiance, ta stabilité émotionnelle et ton impact relationnel.
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 2,
@@ -623,7 +615,7 @@ const PresentationSection = () => {
                                     >
                                         Pourquoi est-ce fondamental en immobilier ?
                                     </MotionTypography>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 2,
@@ -646,12 +638,12 @@ const PresentationSection = () => {
                                                         sx={{
                                                             display: "flex",
                                                             alignItems: "flex-start",
+                                                            mt: 0.7,
                                                         }}
                                                     >
                                                         <Box
                                                             sx={{
                                                                 minWidth: 15,
-                                                                mt: 0.7,
                                                             }}
                                                         >
                                                             •
@@ -664,7 +656,7 @@ const PresentationSection = () => {
                                             ))}
                                         </MotionStack>
                                     </motion.div>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 2,
@@ -699,6 +691,7 @@ const PresentationSection = () => {
                                                                 flexShrink: 0,    // Prevent flexbox from shrinking this element
                                                                 borderRadius: "50%",
                                                                 bgcolor: theme.palette.primary.main,
+                                                                mt: 0.7,
                                                                 mr: 2,
                                                                 display: "block", // Ensure it's rendered as a block element
                                                             }}
@@ -711,7 +704,7 @@ const PresentationSection = () => {
                                             ))}
                                         </MotionStack>
                                     </motion.div>
-                                    <MotionTypography // Animate this block
+                                    <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 4,

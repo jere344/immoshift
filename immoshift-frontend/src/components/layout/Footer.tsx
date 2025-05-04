@@ -128,7 +128,7 @@ const Footer: React.FC = () => {
           {/* Contact Info */}
           <Grid item xs={12} sm={6} md={4}>
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
-              Contactez-nous
+              Contactez-moi
             </Typography>
             <Stack spacing={2}>
               {contactInfo.map((item, index) => (
@@ -171,7 +171,7 @@ const Footer: React.FC = () => {
                   '&:hover': { color: theme.palette.primary.dark },
                 }}
               >
-                Réserver un créneau →
+                Réserver un appel découverte →
               </Link>
             </Paper>
           </Grid>

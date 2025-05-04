@@ -111,7 +111,7 @@ const EbooksSection: React.FC<EbooksSectionProps> = ({ ebooks }) => {
                 color: theme.palette.text.secondary
               }}
             >
-              Téléchargez nos guides pratiques pour approfondir vos connaissances
+              Téléchargez mes guides pratiques pour approfondir vos connaissances
             </MotionTypography>
           </MotionBox>
 

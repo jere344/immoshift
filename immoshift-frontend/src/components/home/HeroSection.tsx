@@ -79,7 +79,7 @@ const HeroSection: React.FC = () => {
       animate="visible"
       variants={containerVariants} // Apply container variants to stagger children
     >
-      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }} disableGutters={true}>
         <Box
           sx={{
             display: 'flex',
@@ -87,13 +87,14 @@ const HeroSection: React.FC = () => {
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: 4,
+            paddingTop: 3,
           }}
         >
           <MotionBox 
             sx={{ 
               maxWidth: 600,
               position: 'relative',
-              padding: 3,
+              padding: { xs: 1.5, sm: 3 },
               borderRadius: 2,
               background: 'rgba(255, 255, 255, 0.3)',
               backdropFilter: 'blur(2px)',
@@ -198,7 +199,7 @@ const HeroSection: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Découvrir nos formations
+                Découvrir mes formations
               </MotionButton>
 
               <MotionButton
@@ -238,7 +239,7 @@ const HeroSection: React.FC = () => {
               alignItems: 'center',
               margin: { xs: '0 auto', md: 0 },
               alignSelf: { xs: 'flex-end', md: 'center' },
-              marginRight: { xs: 0, md: 'auto' },
+              marginRight: { xs: 1, md: 'auto' },
             }}
             variants={imageVariants}
           >

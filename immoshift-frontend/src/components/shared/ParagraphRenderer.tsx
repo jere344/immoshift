@@ -99,7 +99,6 @@ const ParagraphRenderer: React.FC<ParagraphRendererProps> = ({ paragraph }) => {
             key={index}
             sx={{
               display: "flex",
-              alignItems: "center",
               backgroundColor: theme.palette.secondary.light,
               p: 2,
               borderRadius: 1,
@@ -114,6 +113,7 @@ const ParagraphRenderer: React.FC<ParagraphRendererProps> = ({ paragraph }) => {
                 borderRadius: "50%",
                 bgcolor: theme.palette.primary.main,
                 mr: 2,
+                mt: 1,
               }}
             />
             <Typography variant="body1" sx={{ color: theme.palette.text.secondary }}>

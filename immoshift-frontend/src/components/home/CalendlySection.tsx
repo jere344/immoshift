@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Box, Container, Typography, Button } from '@mui/material';
-import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import PhoneIcon from '@mui/icons-material/Phone';
 import { calendlyInfo } from '@config/siteConfig';
 import { motion, useAnimation, useInView } from 'framer-motion';
 
@@ -77,7 +77,7 @@ const CalendlySection: React.FC = () => {
           href={calendlyInfo.url}
           target="_blank"
           rel="noopener noreferrer"
-          startIcon={<EventAvailableIcon />}
+          startIcon={<PhoneIcon />}
           sx={{
             py: 1.5,
             px: 4,

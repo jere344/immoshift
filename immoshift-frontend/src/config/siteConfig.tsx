@@ -10,7 +10,7 @@ export const transparentLogoUrl = transparentLogo;
 // Company information
 export const companyInfo = {
   name: "ImmoShift",
-  description: "Formations professionnelles en immobilier d'entreprise pour développer vos compétences et maximiser vos investissements.",
+  description: "Formation pour agents immobiliers. Structurez votre activité, maîtrisez vos méthodes et performez durablement.",
   email: "immoshift.business@gmail.com",
   address: "Palavas-les-Flots, 34250, France",
   city: "Palavas-les-Flots"

@@ -20,7 +20,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import ShowChartIcon from '@mui/icons-material/ShowChart';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { Link as RouterLink } from 'react-router-dom';
 import { navigationLinks, transparentLogoUrl, companyInfo } from '@config/siteConfig';
@@ -167,7 +167,7 @@ const Header: React.FC = () => {
                     }}
                   >
                     {companyInfo.name}
-                    <ShowChartIcon sx={{ ml: 1, height: "auto", color: theme.palette.primary.main }} />
+                    <TrendingUpIcon sx={{ ml: 1, height: "auto", color: theme.palette.primary.main }} />
                   </Typography>
                 </Box>
               </MotionBox>

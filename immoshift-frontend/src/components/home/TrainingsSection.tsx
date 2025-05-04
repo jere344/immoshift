@@ -84,7 +84,7 @@ const TrainingsSection: React.FC<TrainingsSectionProps> = ({ trainings }) => {
                             fontSize: { xs: "2.5rem", md: "3.5rem" },
                         }}
                     >
-                        Nos Formations
+                        Mes Formations en Vedettes
                     </MotionTypography>
                     <MotionTypography
                         variant="h5"

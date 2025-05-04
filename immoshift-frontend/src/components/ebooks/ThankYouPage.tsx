@@ -69,17 +69,17 @@ const ThankYouPage: React.FC = () => {
           />
           
           <Typography variant="h4" component="h1" gutterBottom fontWeight={700}>
-            Thank You!
+            Merci !
           </Typography>
           
           <Typography variant="h6" gutterBottom color="text.secondary">
             {ebookTitle 
-              ? `Your e-book "${ebookTitle}" is downloading now.` 
-              : 'Your e-book is downloading now.'}
+              ? `Votre e-book "${ebookTitle}" est en cours de téléchargement.` 
+              : 'Votre e-book est en cours de téléchargement.'}
           </Typography>
           
           <Typography variant="body1" paragraph sx={{ mb: 4 }}>
-            If your download doesn't start automatically, please click the button below.
+            Si votre téléchargement ne démarre pas automatiquement, veuillez cliquer sur le bouton ci-dessous.
           </Typography>
           
           {downloadUrl && (
@@ -95,7 +95,7 @@ const ThankYouPage: React.FC = () => {
                 window.open(downloadUrl, '_blank');
               }}
             >
-              Download Again
+              Télécharger à nouveau
             </Button>
           )}
           
@@ -112,7 +112,7 @@ const ThankYouPage: React.FC = () => {
               startIcon={<HomeIcon />}
               variant="outlined"
             >
-              Back to Home
+              Retour à l'accueil
             </Button>
             <Button
               component={Link}
@@ -120,7 +120,7 @@ const ThankYouPage: React.FC = () => {
               startIcon={<ArrowBackIcon />}
               variant="outlined"
             >
-              Browse More E-books
+              Parcourir plus de E-books
             </Button>
           </Stack>
         </Paper>

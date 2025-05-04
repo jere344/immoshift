@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Box, CircularProgress, Typography, Tooltip, Paper, Button } from '@mui/material';
-import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import PhoneIcon from '@mui/icons-material/Phone';
 import api from '@services/api';
 import { HomeContent } from '@models/HomeContent';
 import TestimonialsSection from './TestimonialsSection';
@@ -120,6 +120,7 @@ const HomePage: React.FC = () => {
         overflow: "hidden",
         scrollBehavior: "smooth",
         position: "relative",
+        padding: 0,
       }}
     >
       {/* Add native meta tags */}
@@ -196,7 +197,7 @@ const HomePage: React.FC = () => {
                 href={calendlyInfo.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                startIcon={<EventAvailableIcon />}
+                startIcon={<PhoneIcon />}
                 sx={{
                   borderRadius: "50px",
                   padding: "12px 20px",

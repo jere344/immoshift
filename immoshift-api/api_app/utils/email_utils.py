@@ -43,13 +43,13 @@ def send_ebook_confirmation_email(recipient_email, first_name, ebook_title):
         text_content = f"""
 Bonjour {first_name},
 
-Merci d'avoir téléchargé notre ebook "{ebook_title}".
+Merci d'avoir téléchargé cet ebook "{ebook_title}".
 Vous pouvez accéder à votre ebook via le lien fourni lors de votre demande.
 
-Si vous avez des questions, n'hésitez pas à nous contacter.
+Si vous avez des questions, n'hésitez pas à me contacter.
 
 Cordialement,
-L'équipe Immoshift
+Immoshift
         """
 
         # Render the HTML content from the template file

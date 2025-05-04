@@ -257,7 +257,7 @@ const ArticleDetail: React.FC = () => {
                 </>
               ) : (
                 <Typography variant="body2">
-                  Restez informé des dernières tendances et innovations dans l'immobilier grâce à nos articles et formations.
+                  Restez informé des dernières tendances et innovations dans l'immobilier grâce à mes articles et formations.
                 </Typography>
               )}
             </MotionPaper>

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Box, Container, Typography, Grid, Card, CardContent, CardMedia, Button, useTheme, Divider, Avatar, Pagination } from '@mui/material';
+import { Box, Container, Typography, Grid, Card, CardContent, CardMedia, Button, useTheme, Divider, Avatar, Pagination, Tabs, Tab } from '@mui/material';
 import { ArticleSummary } from '@models/Article';
 import { Link as RouterLink } from 'react-router-dom';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import PersonIcon from '@mui/icons-material/Person';
 import LinkIcon from '@mui/icons-material/Link';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { getArticleImage } from '../../utils/placeholderUtils';
@@ -20,30 +21,67 @@ interface ArticlesSectionProps {
   articles: ArticleSummary[];
 }
 
+// Interface for grouped articles
+interface GroupedArticles {
+  [author: string]: {
+    articles: ArticleSummary[];
+    authorPicture?: string;
+    isExternal: boolean;
+  };
+}
+
 const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
   const theme = useTheme();
+  const [activeAuthor, setActiveAuthor] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const articlesPerPage = 6;
   const controls = useAnimation();
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.1 }); // Removed once: true
-  const [hasAnimated, setHasAnimated] = useState(false); 
+  const isInView = useInView(ref, { amount: 0.1 });
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const [groupedArticles, setGroupedArticles] = useState<GroupedArticles>({});
+
+  // Group articles by author
+  useEffect(() => {
+    const grouped: GroupedArticles = {};
+    
+    articles.forEach(article => {
+      const authorName = article.author_name || (article.source_url ? 'Publications Externes' : 'ImmoShift');
+      
+      if (!grouped[authorName]) {
+        grouped[authorName] = {
+          articles: [],
+          authorPicture: article.author_picture,
+          isExternal: !!article.source_url
+        };
+      }
+      
+      grouped[authorName].articles.push(article);
+    });
+    
+    setGroupedArticles(grouped);
+    
+    // Set the first author as active by default
+    if (Object.keys(grouped).length > 0 && !activeAuthor) {
+      setActiveAuthor(Object.keys(grouped)[0]);
+    }
+  }, [articles]);
 
   useEffect(() => {
-    // Handle initial animation when scrolling into view
     if (isInView) {
       controls.start('visible');
       setHasAnimated(true);
     }
   }, [isInView, controls]);
 
-  // Reset and play animation when page changes, but only after initial render
+  // Reset and play animation when author tab or page changes
   useEffect(() => {
     if (hasAnimated) {
       controls.set('hidden');
       controls.start('visible');
+      setPage(1); // Reset to page 1 when changing authors
     }
-  }, [page, controls, hasAnimated]);
+  }, [activeAuthor, hasAnimated, controls]);
 
   // Animation Variants
   const containerVariants = {
@@ -70,13 +108,27 @@ const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
-  // Calculate total pages
-  const totalPages = Math.ceil(articles.length / articlesPerPage);
+  // Handle author tab change
+  const handleAuthorChange = (event: React.SyntheticEvent, newAuthor: string) => {
+    setActiveAuthor(newAuthor);
+    setPage(1); // Reset to page 1 when changing authors
+  };
 
-  // Get current page articles
-  const indexOfLastArticle = page * articlesPerPage;
-  const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-  const currentArticles = articles.slice(indexOfFirstArticle, indexOfLastArticle);
+  // Get current articles for the active author and page
+  const getCurrentArticles = () => {
+    if (!activeAuthor || !groupedArticles[activeAuthor]) return [];
+    
+    const authorArticles = groupedArticles[activeAuthor].articles;
+    const indexOfLastArticle = page * articlesPerPage;
+    const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
+    return authorArticles.slice(indexOfFirstArticle, indexOfLastArticle);
+  };
+
+  // Calculate total pages for current author
+  const getTotalPages = () => {
+    if (!activeAuthor || !groupedArticles[activeAuthor]) return 1;
+    return Math.ceil(groupedArticles[activeAuthor].articles.length / articlesPerPage);
+  };
 
   // Handle page change
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -97,6 +149,9 @@ const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
       return dateString;
     }
   };
+
+  const currentArticles = getCurrentArticles();
+  const totalPages = getTotalPages();
 
   return (
     <MotionBox
@@ -139,12 +194,72 @@ const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
           </MotionTypography>
         </MotionBox>
 
+        {/* Author Tabs */}
+        <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 4 }}>
+          <Tabs 
+            value={activeAuthor} 
+            onChange={handleAuthorChange}
+            variant="scrollable"
+            scrollButtons={true}
+            allowScrollButtonsMobile
+            
+            aria-label="author tabs"
+          >
+            {Object.keys(groupedArticles).map((author) => (
+              <Tab 
+                key={author} 
+                value={author} 
+                label={
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    {groupedArticles[author].authorPicture ? (
+                      <Avatar 
+                        src={groupedArticles[author].authorPicture} 
+                        sx={{ width: 24, height: 24, mr: 1 }}
+                        alt={author} 
+                      />
+                    ) : groupedArticles[author].isExternal ? (
+                      <LinkIcon sx={{ mr: 1 }} />
+                    ) : (
+                      <PersonIcon sx={{ mr: 1 }} />
+                    )}
+                    <Typography>{author}</Typography>
+                    {author === 'LinkedIn' && <LinkedInIcon sx={{ ml: 1 }} />}
+                  </Box>
+                } 
+                sx={{ 
+                  textTransform: 'none', 
+                  fontWeight: 500,
+                  '&.Mui-selected': { fontWeight: 700 }
+                }} 
+              />
+            ))}
+          </Tabs>
+        </Box>
+
+        {/* Current Author Section Title */}
+        {activeAuthor && (
+          <MotionBox sx={{ mb: 4 }} variants={titleVariants}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              {groupedArticles[activeAuthor]?.authorPicture && (
+                <Avatar 
+                  src={groupedArticles[activeAuthor].authorPicture} 
+                  sx={{ width: 40, height: 40, mr: 2 }}
+                  alt={activeAuthor} 
+                />
+              )}
+              <Typography variant="h4" component="h3" sx={{ fontWeight: 600 }}>
+                {activeAuthor}
+              </Typography>
+            </Box>
+          </MotionBox>
+        )}
+
         {/* Articles Grid */}
         <MotionGrid
           container
           spacing={4}
           variants={containerVariants}
-          key={`articles-page-${page}`} // Add key that changes with page
+          key={`articles-${activeAuthor}-page-${page}`}
         >
           {currentArticles.map((article) => (
             <MotionGrid
@@ -205,7 +320,7 @@ const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
                     {article.title}
                   </Typography>
 
-                  {article.author_name && (
+                  {article.author_name && article.author_name !== activeAuthor && (
                     <Box sx={{ display: 'flex', alignItems: 'center', mb: 1.5 }}>
                       {article.author_picture ? (
                         <Avatar
@@ -236,8 +351,9 @@ const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
 
                   <Button
                     component={RouterLink}
-                    to={`/articles/${article.slug}`}
-
+                    to={article.source_url || `/articles/${article.slug}`}
+                    target={article.source_url ? "_blank" : "_self"}
+                    rel={article.source_url ? "noopener noreferrer" : ""}
                     variant="outlined"
                     color="primary"
                     size="small"
@@ -247,8 +363,9 @@ const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
                       fontWeight: 600,
                       mt: 'auto'
                     }}
+                    startIcon={article.source_url ? <LinkIcon /> : null}
                   >
-                    Lire plus
+                    {article.source_url ? "Voir sur la source" : "Lire plus"}
                   </Button>
                 </CardContent>
               </MotionCard>

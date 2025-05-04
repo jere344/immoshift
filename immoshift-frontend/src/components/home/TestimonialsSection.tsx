@@ -103,7 +103,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ testimonials 
               fontWeight: 400
             }}
           >
-            Découvrez ce que nos clients disent de leur expérience avec nous
+            Découvrez ce que mes clients disent de leur expérience
           </MotionTypography>
         </Box>
 
