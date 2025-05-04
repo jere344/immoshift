@@ -155,8 +155,8 @@ const PresentationSection = () => {
                 sx={{
                     width: "100%",
                     height: "auto",
-                    maxHeight: { xs: "300px", sm: "400px", md: "unset" },
-                    objectFit: { xs: "cover", md: "contain" },
+                    // maxHeight: { xs: "300px", sm: "400px", md: "unset" },
+                    // objectFit: { xs: "cover", md: "contain" },
                     borderRadius: 2,
                     boxShadow: 3,
                     transition: "transform 0.3s ease-in-out", // Keep CSS transitions for hover
