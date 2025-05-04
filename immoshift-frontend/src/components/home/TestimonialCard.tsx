@@ -5,8 +5,8 @@ import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import { Testimonial } from '@models/Testimonial';
 
 // Motion components
-const MotionBox =  motion.create(Box);
-const MotionAvatar =  motion.create(Avatar);
+const MotionBox = motion(Box);
+const MotionAvatar = motion(Avatar);
 
 const TestimonialCard: React.FC<{ testimonial: Testimonial; index: number }> = ({ testimonial, index }) => {
   const theme = useTheme();
@@ -53,9 +53,8 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial; index: number }> = (
       variants={cardVariants}
       sx={{
         position: 'relative',
-        p: 4,
+        p: 3,
         borderRadius: 4,
-        height: '100%',
         overflow: 'hidden',
         background: `linear-gradient(135deg, rgba(255,255,255,0.9) 0%, ${theme.palette.background.paper} 100%)`,
         backdropFilter: 'blur(10px)',
@@ -65,30 +64,37 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial; index: number }> = (
         '&:hover': {
           transform: 'translateY(-8px)',
           boxShadow: '0 20px 50px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.07)',
-        }
+        },
+        display: 'flex',
+        flexDirection: 'column'
       }}
     >
-      <Box sx={{ position: 'absolute', top: 20, right: 20, opacity: 0.07, transform: 'rotate(5deg)' }}>
-        <FormatQuoteIcon sx={{ fontSize: 120, color: theme.palette.primary.main }} />
+      <Box sx={{ position: 'absolute', top: 15, right: 15, opacity: 0.07, transform: 'rotate(5deg)' }}>
+        <FormatQuoteIcon sx={{ fontSize: 100, color: theme.palette.primary.main }} />
       </Box>
       
       <MotionBox
         variants={quoteVariants}
-        sx={{ mb: 3, position: 'relative', zIndex: 1 }}
+        sx={{ mb: 2, position: 'relative', zIndex: 1, flex: 1 }}
       >
-        <Typography 
-          variant="body1" 
-          sx={{ 
-            fontStyle: 'italic', 
-            fontSize: '1.1rem',
-            color: theme.palette.text.primary,
-            lineHeight: 1.8,
-            mb: 3,
-            fontWeight: 400,
-          }}
-        >
-          "{testimonial.quote}"
-        </Typography>
+        {testimonial.quote.split('\n').map((paragraph, i) => (
+          <Typography 
+            key={i}
+            variant="body1" 
+            paragraph={i < testimonial.quote.split('\n').length - 1}
+            sx={{ 
+              fontStyle: 'italic', 
+              fontSize: '1rem', 
+              color: theme.palette.text.primary,
+              lineHeight: 1.6,
+              mb: i === testimonial.quote.split('\n').length - 1 ? 2 : 1.5, 
+              fontWeight: 400,
+            }}
+          >
+            {i === 0 ? `"${paragraph}` : paragraph}
+            {i === testimonial.quote.split('\n').length - 1 ? '"' : ''}
+          </Typography>
+        ))}
         
         <Rating 
           value={testimonial.rating} 
@@ -98,18 +104,18 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial; index: number }> = (
             '& .MuiRating-iconFilled': {
               color: theme.palette.secondary.dark,
             },
-            mb: 3
+            mb: 2 
           }} 
         />
       </MotionBox>
       
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', mt: 'auto' }}>
         <MotionAvatar
           src={testimonial.avatar}
           alt={testimonial.name}
           sx={{ 
-            width: 64, 
-            height: 64, 
+            width: 56, 
+            height: 56, 
             mr: 2,
             border: `3px solid ${theme.palette.primary.light}`,
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
@@ -126,7 +132,8 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial; index: number }> = (
           <Typography 
             variant="h6" 
             sx={{ 
-              fontWeight: 600, 
+              fontWeight: 600,
+              fontSize: '1rem',
               color: theme.palette.primary.dark,
               mb: 0.5
             }}
@@ -137,7 +144,8 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial; index: number }> = (
             variant="body2" 
             sx={{ 
               color: theme.palette.secondary.dark,
-              fontWeight: 500
+              fontWeight: 500,
+              fontSize: '0.85rem' 
             }}
           >
             {testimonial.role}

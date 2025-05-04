@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react';
-import { Box, Typography, Container, Grid, useTheme, useMediaQuery } from '@mui/material';
+import { Box, Typography, Container, useTheme, useMediaQuery } from '@mui/material';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import { Testimonial } from '@models/Testimonial';
 import TestimonialCard from './TestimonialCard';
+import Masonry from '@mui/lab/Masonry';
 
 // Motion components
-const MotionTypography =  motion(Typography);
+const MotionTypography = motion(Typography);
 
 interface TestimonialsSectionProps {
   testimonials: Testimonial[];
@@ -13,6 +14,7 @@ interface TestimonialsSectionProps {
 
 const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ testimonials }) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
   const controls = useAnimation();
   const ref = useRef(null);
@@ -46,6 +48,9 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ testimonials 
       }
     }
   };
+
+  // Determine number of columns based on screen size
+  const columns = isMobile ? 1 : isTablet ? 2 : 3;
 
   return (
     <Box 
@@ -107,20 +112,20 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ testimonials 
           </MotionTypography>
         </Box>
 
-        <Grid container spacing={4} justifyContent="center">
+        <Masonry 
+          columns={columns} 
+          spacing={3}
+          sx={{ 
+            margin: 0,
+            width: 'auto'
+          }}
+        >
           {testimonials.map((testimonial, index) => (
-            <Grid 
-              item 
-              xs={12} 
-              sm={isTablet ? 12 : 6} 
-              md={6} 
-              lg={testimonial.quote.length > 200 ? 6 : 3}
-              key={testimonial.id}
-            >
+            <Box key={testimonial.id} sx={{ width: '100%', display: 'block' }}>
               <TestimonialCard testimonial={testimonial} index={index} />
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Masonry>
       </Container>
     </Box>
   );
