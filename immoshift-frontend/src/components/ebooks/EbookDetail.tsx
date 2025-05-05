@@ -236,9 +236,21 @@ const EbookDetail: React.FC = () => {
               {ebook.title}
             </MotionTypography>
             
-            <MotionTypography variant="body1" sx={{ mb: 4 }} variants={fadeInUp}>
-              {ebook.description}
-            </MotionTypography>
+            <MotionBox variants={fadeInUp} sx={{ mb: 4 }}>
+              {ebook.description.split('\n').map((paragraph, i) => (
+                <Typography 
+                  key={i}
+                  variant="body1" 
+                  paragraph={i < ebook.description.split('\n').length - 1}
+                  sx={{ 
+                    lineHeight: 1.6,
+                    mb: i === ebook.description.split('\n').length - 1 ? 2 : 1.5, 
+                  }}
+                >
+                  {paragraph}
+                </Typography>
+              ))}
+            </MotionBox>
             
             <MotionBox sx={{ display: 'flex', alignItems: 'center', mb: 3 }} variants={fadeInUp}>
               <PictureAsPdfIcon sx={{ mr: 1, color: 'primary.main' }} />

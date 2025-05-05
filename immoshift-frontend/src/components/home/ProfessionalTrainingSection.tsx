@@ -118,8 +118,14 @@ const ProfessionalTrainingSection: React.FC = () => {
                 Éligible à la formation professionnelle
               </Typography>
             </Box>
+            <Typography variant="body1" paragraph>
+              Formation éligible au 42 heures triennales obligatoire, conformément à loi ALUR, indispensables au renouvellement la carte professionnelle.
+            </Typography>
+            <Typography variant="body1" paragraph>
+              L'ensemble de mes formations sont eligibles aux obligations de formation professionnelle des agents immobiliers.
+            </Typography>
             <Typography variant="body1">
-              Elles peuvent être intégrées dans le cadre de la formation professionnelle continue, en fonction des modalités de ton entreprise ou de ton statut.
+              Elle sont toutes intégrés dans le cadre de la formation professionnelle des agents immobiliers, quelque soit le statut.
             </Typography>
           </MotionPaper>
 
