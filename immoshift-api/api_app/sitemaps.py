@@ -5,7 +5,7 @@ from django.conf import settings # Ensure SITE_URL is defined in settings.py
 
 class ArticleSitemap(Sitemap):
     changefreq = "weekly"
-    priority = 0.8
+    priority = "0.8"
 
     def items(self):
         # Only include published articles
@@ -24,16 +24,10 @@ class ArticleSitemap(Sitemap):
                 'changefreq': self.changefreq,
                 'priority': self.priority,
             }
-    
-    # Override to ensure priority uses dot decimal separator
-    def _get_priority(self, item):
-        if callable(self.priority):
-            return str(self.priority(item)).replace(',', '.')
-        return str(self.priority).replace(',', '.')
 
 class TrainingSitemap(Sitemap):
     changefreq = "monthly"
-    priority = 0.9
+    priority = "0.9"
 
     def items(self):
         # Only include active trainings, ordered by position
@@ -51,16 +45,10 @@ class TrainingSitemap(Sitemap):
                 'changefreq': self.changefreq,
                 'priority': self.priority,
             }
-    
-    # Override to ensure priority uses dot decimal separator
-    def _get_priority(self, item):
-        if callable(self.priority):
-            return str(self.priority(item)).replace(',', '.')
-        return str(self.priority).replace(',', '.')
 
 class EbookSitemap(Sitemap):
     changefreq = "monthly"
-    priority = 0.7
+    priority = "0.7"
 
     def items(self):
         # Only include active ebooks, ordered by position
@@ -78,15 +66,9 @@ class EbookSitemap(Sitemap):
                 'changefreq': self.changefreq,
                 'priority': self.priority,
             }
-    
-    # Override to ensure priority uses dot decimal separator
-    def _get_priority(self, item):
-        if callable(self.priority):
-            return str(self.priority(item)).replace(',', '.')
-        return str(self.priority).replace(',', '.')
 
 class StaticViewSitemap(Sitemap):
-    priority = 0.5
+    priority = "0.5"
     changefreq = "monthly"
 
     def items(self):
@@ -102,9 +84,3 @@ class StaticViewSitemap(Sitemap):
                 'changefreq': self.changefreq,
                 'priority': self.priority,
             }
-    
-    # Override to ensure priority uses dot decimal separator
-    def _get_priority(self, item):
-        if callable(self.priority):
-            return str(self.priority(item)).replace(',', '.')
-        return str(self.priority).replace(',', '.')
