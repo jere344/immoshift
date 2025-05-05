@@ -24,6 +24,12 @@ class ArticleSitemap(Sitemap):
                 'changefreq': self.changefreq,
                 'priority': self.priority,
             }
+    
+    # Override to ensure priority uses dot decimal separator
+    def _get_priority(self, item):
+        if callable(self.priority):
+            return str(self.priority(item)).replace(',', '.')
+        return str(self.priority).replace(',', '.')
 
 class TrainingSitemap(Sitemap):
     changefreq = "monthly"
@@ -45,6 +51,12 @@ class TrainingSitemap(Sitemap):
                 'changefreq': self.changefreq,
                 'priority': self.priority,
             }
+    
+    # Override to ensure priority uses dot decimal separator
+    def _get_priority(self, item):
+        if callable(self.priority):
+            return str(self.priority(item)).replace(',', '.')
+        return str(self.priority).replace(',', '.')
 
 class EbookSitemap(Sitemap):
     changefreq = "monthly"
@@ -66,6 +78,12 @@ class EbookSitemap(Sitemap):
                 'changefreq': self.changefreq,
                 'priority': self.priority,
             }
+    
+    # Override to ensure priority uses dot decimal separator
+    def _get_priority(self, item):
+        if callable(self.priority):
+            return str(self.priority(item)).replace(',', '.')
+        return str(self.priority).replace(',', '.')
 
 class StaticViewSitemap(Sitemap):
     priority = 0.5
@@ -84,3 +102,9 @@ class StaticViewSitemap(Sitemap):
                 'changefreq': self.changefreq,
                 'priority': self.priority,
             }
+    
+    # Override to ensure priority uses dot decimal separator
+    def _get_priority(self, item):
+        if callable(self.priority):
+            return str(self.priority(item)).replace(',', '.')
+        return str(self.priority).replace(',', '.')
