@@ -104,6 +104,7 @@ const PresentationSection = () => {
             variant="h3"
             sx={{
                 fontWeight: 700,
+                fontSize: { xs: "2rem", sm: "2.5rem" },
                 mb: 3,
                 color: theme.palette.primary.main,
                 position: "relative",
