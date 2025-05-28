@@ -38,7 +38,6 @@ const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
   const controls = useAnimation();
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.1 });
-  const [hasAnimated, setHasAnimated] = useState(false);
   const [groupedArticles, setGroupedArticles] = useState<GroupedArticles>({});
 
   // Group articles by author
@@ -70,18 +69,16 @@ const ArticlesSection: React.FC<ArticlesSectionProps> = ({ articles }) => {
   useEffect(() => {
     if (isInView) {
       controls.start('visible');
-      setHasAnimated(true);
     }
   }, [isInView, controls]);
 
-  // Reset and play animation when author tab or page changes
+  // Trigger animation when author tab or page changes
   useEffect(() => {
-    if (hasAnimated) {
+    if (isInView) {
       controls.set('hidden');
       controls.start('visible');
-      setPage(1); // Reset to page 1 when changing authors
     }
-  }, [activeAuthor, hasAnimated, controls]);
+  }, [activeAuthor, page, isInView, controls]);
 
   // Animation Variants
   const containerVariants = {
