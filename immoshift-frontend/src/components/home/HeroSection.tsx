@@ -225,10 +225,10 @@ const HeroSection: React.FC = () => {
 
           <MotionBox
             sx={{
-              width: { xs: '300px', md: '40%' },
-              height: { xs: '300px', md: '400px' },
-              maxWidth: { xs: '100%', md: '40%' },
-              aspectRatio: '1/1',
+              width: { xs: '300px', md: '320px', lg: '360px' },
+              height: { xs: '400px', md: '480px', lg: '540px' },
+              maxWidth: { xs: '100%', md: '35%' },
+              aspectRatio: { xs: '3/4', md: '2/3', lg: '2/3' },
               bgcolor: 'white',
               borderRadius: 4,
               boxShadow: 3,
@@ -249,6 +249,7 @@ const HeroSection: React.FC = () => {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
+                objectPosition: '50% 35%', // Center horizontally, position vertically to show face (35% from top)
               }}
               initial={{ scale: 1.1 }} // Slight zoom-in effect initially
               animate={{ scale: 1 }}
