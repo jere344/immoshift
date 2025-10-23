@@ -564,8 +564,9 @@ const PresentationSection = () => {
                                         }}
                                         variants={textVariantsRight}
                                     >
-                                        Je ne me contente pas d'enseigner des techniques.
-                                        Je construis des agents stratégiques, mentalement solides et humainement impactants.
+                                        Je ne me contente pas de transmettre des méthodes de travail.
+                                        J'aide chaque professionnel à incarner une posture claire, stratégique et impactante dans la relation client.
+                                        Mes accompagnements allient expertise métier, intelligence comportementale et communication d'influence éthique pour structurer la performance durable en immobilier.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
@@ -576,33 +577,9 @@ const PresentationSection = () => {
                                         }}
                                         variants={textVariantsRight}
                                     >
-                                        Diplômée en PNL (Programmation Neuro-Linguistique) et en hypnose ericksonienne,
-                                        j'intègre à mes accompagnements des outils avancés de communication et de renforcement mental.
-                                    </MotionTypography>
-                                    <MotionTypography
-                                        variant="body1"
-                                        sx={{
-                                            mb: 2,
-                                            color: theme.palette.text.secondary,
-                                            lineHeight: 1.7,
-                                            fontWeight: 600,
-                                        }}
-                                        variants={textVariantsRight}
-                                    >
-                                        Important :
-                                    </MotionTypography>
-                                    <MotionTypography
-                                        variant="body1"
-                                        sx={{
-                                            mb: 3,
-                                            color: theme.palette.text.secondary,
-                                            lineHeight: 1.7,
-                                        }}
-                                        variants={textVariantsRight}
-                                    >
-                                        L'hypnose ericksonienne n'est pas une technique de manipulation.
-                                        C'est un outil d'accompagnement respectueux, destiné à activer tes propres ressources,
-                                        à renforcer ta confiance, ta stabilité émotionnelle et ton impact relationnel.
+                                        Formée aux sciences du langage et aux approches comportementales appliquées à la communication professionnelle,
+                                        j'intègre dans mes formations des outils concrets de maîtrise relationnelle, de stabilité émotionnelle en situation de négociation et de consolidation du leadership commercial.
+                                        Ces leviers permettent aux agents de renforcer leur impact, leur crédibilité et leur efficacité sur le terrain, tout en restant alignés avec les exigences réelles du métier.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
@@ -619,92 +596,15 @@ const PresentationSection = () => {
                                     <MotionTypography
                                         variant="body1"
                                         sx={{
-                                            mb: 2,
+                                            mb: 3,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
                                         }}
                                         variants={textVariantsRight}
                                     >
-                                        Parce que :
+                                        Parce qu'un agent performant ne se définit pas seulement par ses connaissances du marché,
+                                        mais par sa capacité à inspirer confiance, à piloter la relation et à maintenir un haut niveau de lucidité, même sous pression.
                                     </MotionTypography>
-                                    <motion.div variants={listContainerVariants}>
-                                        <MotionStack spacing={1} sx={{ mb: 3 }} variants={listContainerVariants}> {/* Use MotionStack */}
-                                            { [
-                                                "Convaincre un propriétaire, c'est avant tout générer de la confiance et de l'adhésion émotionnelle.",
-                                                "Gérer un rendez-vous vendeur, c'est maîtriser son langage, sa posture, son pouvoir d'influence éthique.",
-                                                "Tenir dans la durée, performer semaine après semaine, exige un mental structuré, préparé, orienté réussite."
-                                            ].map((item, index) => (
-                                                <motion.div key={index} variants={listItemVariants}>
-                                                    <Box
-                                                        sx={{
-                                                            display: "flex",
-                                                            alignItems: "flex-start",
-                                                            mt: 0.7,
-                                                        }}
-                                                    >
-                                                        <Box
-                                                            sx={{
-                                                                minWidth: 15,
-                                                            }}
-                                                        >
-                                                            •
-                                                        </Box>
-                                                        <Typography variant="body1" sx={{ color: theme.palette.text.secondary }}>
-                                                            {item}
-                                                        </Typography>
-                                                    </Box>
-                                                </motion.div>
-                                            ))}
-                                        </MotionStack>
-                                    </motion.div>
-                                    <MotionTypography
-                                        variant="body1"
-                                        sx={{
-                                            mb: 2,
-                                            color: theme.palette.text.secondary,
-                                            lineHeight: 1.7,
-                                        }}
-                                        variants={textVariantsRight}
-                                    >
-                                        Avec mes compétences de PNL et d'hypnose ericksonienne intégrées intelligemment à ma méthode,
-                                        je t'aide à :
-                                    </MotionTypography>
-                                    <motion.div variants={listContainerVariants}>
-                                        <MotionStack spacing={1} sx={{ mb: 3 }} variants={listContainerVariants}> {/* Use MotionStack */}
-                                            { [
-                                                "Reprogrammer ta discipline",
-                                                "Ancrer ton pilotage business",
-                                                "Maîtriser ta communication d'influence",
-                                                "Performer sans t'épuiser"
-                                            ].map((item, index) => (
-                                                <motion.div key={index} variants={listItemVariants}>
-                                                    <Box
-                                                        sx={{
-                                                            display: "flex",
-                                                            alignItems: "flex-start",
-                                                        }}
-                                                    >
-                                                        <Box
-                                                            sx={{
-                                                                width: "10px",
-                                                                height: "10px",
-                                                                minWidth: "10px", // Prevent horizontal squishing
-                                                                flexShrink: 0,    // Prevent flexbox from shrinking this element
-                                                                borderRadius: "50%",
-                                                                bgcolor: theme.palette.primary.main,
-                                                                mt: 0.7,
-                                                                mr: 2,
-                                                                display: "block", // Ensure it's rendered as a block element
-                                                            }}
-                                                        />
-                                                        <Typography variant="body1" sx={{ color: theme.palette.text.secondary }}>
-                                                            {item}
-                                                        </Typography>
-                                                    </Box>
-                                                </motion.div>
-                                            ))}
-                                        </MotionStack>
-                                    </motion.div>
                                     <MotionTypography
                                         variant="body1"
                                         sx={{
@@ -714,8 +614,10 @@ const PresentationSection = () => {
                                         }}
                                         variants={textVariantsRight}
                                     >
-                                        L'immobilier est un métier de stratégie ET d'émotion.
-                                        Je t'enseigne à maîtriser les deux.
+                                        Apprendre à communiquer avec précision, à canaliser ses émotions et à structurer son influence relationnelle
+                                        fait partie intégrante de la compétence professionnelle.
+                                        Ces aptitudes, une fois maîtrisées, deviennent de véritables leviers de performance,
+                                        autant pour convaincre, fidéliser que pour durer dans un métier d'endurance et d'impact.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="h5"
