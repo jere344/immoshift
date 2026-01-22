@@ -419,7 +419,7 @@ const PresentationSection = () => {
                     {/* Coaching Style Section */}
                     <MotionBox component="section" variants={sectionVariants}>
                         <Grid container spacing={6}>
-                            <Grid item xs={12} md={6}>
+                            <Grid item xs={12}>
                                 <ContentBox variants={textVariants}>
                                     <SectionTitle>Mon style d'accompagnement</SectionTitle>
                                     <MotionTypography
@@ -551,35 +551,241 @@ const PresentationSection = () => {
                                     </MotionTypography>
                                 </ContentBox>
                             </Grid>
+                        </Grid>
+                    </MotionBox>
 
-                            <Grid item xs={12} md={6}>
-                                <ContentBox variants={textVariantsRight}>
+                    <AnimatedSection variants={dividerVariants} threshold={0.5}>
+                        <MotionDivider sx={{ width: "40%", mx: "auto", borderColor: theme.palette.primary.light }} />
+                    </AnimatedSection>
+
+                    {/* Differentiating Asset Section */}
+                    <MotionBox component="section" variants={sectionVariants}>
+                        <Grid container spacing={6}>
+                            <Grid item xs={12}>
+                                <ContentBox variants={textVariants}>
                                     <SectionTitle>Mon atout différenciant</SectionTitle>
                                     <MotionTypography
                                         variant="body1"
                                         sx={{
-                                            mb: 3,
+                                            mb: 2,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
                                         }}
-                                        variants={textVariantsRight}
+                                        variants={textVariants}
                                     >
-                                        Je ne me contente pas de transmettre des méthodes de travail.
-                                        J'aide chaque professionnel à incarner une posture claire, stratégique et impactante dans la relation client.
-                                        Mes accompagnements allient expertise métier, intelligence comportementale et communication d'influence éthique pour structurer la performance durable en immobilier.
+                                        Le métier d'agent immobilier est souvent mal compris.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
                                         sx={{
-                                            mb: 3,
+                                            mb: 4,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            fontWeight: 600,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Même par les agents.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 2,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
                                         }}
-                                        variants={textVariantsRight}
+                                        variants={textVariants}
                                     >
-                                        Formée aux sciences du langage et aux approches comportementales appliquées à la communication professionnelle,
-                                        j'intègre dans mes formations des outils concrets de maîtrise relationnelle, de stabilité émotionnelle en situation de négociation et de consolidation du leadership commercial.
-                                        Ces leviers permettent aux agents de renforcer leur impact, leur crédibilité et leur efficacité sur le terrain, tout en restant alignés avec les exigences réelles du métier.
+                                        Il est souvent vécu comme un métier d'exécution :
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 1,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            fontStyle: 'italic',
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        répondre, organiser, visiter, publier, relancer, négocier.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 4,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            fontWeight: 600,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Bref : faire tourner.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 4,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            fontWeight: 600,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Mais la réalité est plus exigeante et beaucoup plus rare : ce métier n’est pas un métier “d’actions”, mais de décisions. Les décisions des clients.
+                                    </MotionTypography>
+                                    <Box sx={{ mb: 4, pl: 3, borderLeft: `4px solid ${theme.palette.primary.main}` }}>
+                                        <MotionTypography
+                                            variant="body1"
+                                            sx={{
+                                                mb: 2,
+                                                color: theme.palette.text.secondary,
+                                                lineHeight: 1.7,
+                                            }}
+                                            variants={textVariants}
+                                        >
+                                            La décision d'un vendeur de confier son bien, de suivre un plan de vente réaliste et d'assumer un prix cohérent.
+                                        </MotionTypography>
+                                        <MotionTypography
+                                            variant="body1"
+                                            sx={{
+                                                color: theme.palette.text.secondary,
+                                                lineHeight: 1.7,
+                                            }}
+                                            variants={textVariants}
+                                        >
+                                            La décision d'un acheteur de se positionner, d'avancer, s'engager, de faire une offre.
+                                        </MotionTypography>
+                                    </Box>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 4,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Et un dossier ne se perd pas seulement “à cause du marché”. Il se perd quand, à un moment précis, la décision du client n’a pas été construite ou protégée.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 2,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Le problème, c'est que cette perte ne fait pas de bruit sur l'instant. Elle ressemble souvent à quelque chose de banal :
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 4,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            fontStyle: 'italic',
+                                            pl: 2,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        un "je vais réfléchir", un "je dois en parler", un "on se rappelle".
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 4,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Mais derrière ces phrases, le même mécanisme se répète: la vente se décentre, le cadre se fragilise, et l’agent est ramené à un rôle qu’il n’a pas choisi.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 4,
+                                            color: theme.palette.primary.main,
+                                            lineHeight: 1.7,
+                                            fontWeight: 700,
+                                            fontSize: '1.1rem',
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        C’est exactement là que se situe mon atout différenciant.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 2,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        ImmoShift ne vient pas rendre un agent plus occupé.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 4,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            fontWeight: 600,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        ImmoShift vient rendre et agent capable de conduire une vente, du début à la fin, sans négociation permanente de son rôle.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 2,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Car tant que le rôle ressemble à une prestation, le client se comporte comme avec une prestation :
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 4,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            fontStyle: 'italic',
+                                            pl: 2,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        il compare, il teste, il met en concurrence, il découpe le discours, il repousse l'engagement.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 2,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Et l'agent, même sérieux, finit par glisser.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 4,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            fontStyle: 'italic',
+                                            pl: 2,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Il s’adapte trop, rassure trop, explique trop et se justifie trop.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
@@ -589,9 +795,103 @@ const PresentationSection = () => {
                                             lineHeight: 1.7,
                                             fontWeight: 600,
                                         }}
-                                        variants={textVariantsRight}
+                                        variants={textVariants}
                                     >
-                                        Pourquoi est-ce fondamental en immobilier ?
+                                        Et ce glissement a un prix.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 1,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Pas seulement en chiffre mais aussi énergie, en tempo, en stabilité, en autorité.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 4,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            fontWeight: 600,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Et surtout, en respect du rôle.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 4,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            fontWeight: 600,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        ImmoShift remet alors l’agent à sa place, au sens de son juste rang professionnel.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 1,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Le juste rang, c'est quand l'agent n'est plus perçu comme quelqu'un "qu'on consulte".
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 4,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            fontWeight: 600,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        C’est quand il est perçu comme quelqu’un qu’on suit.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 2,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Parce que, dans les faits, un vendeur n'a pas besoin d'un intervenant de plus.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 4,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            fontWeight: 600,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Il a besoin d’un professionnel qui tient une direction :
+                                        quelqu’un qui sait ce qui doit être décidé, dans quel ordre, et à quel moment.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            fontWeight: 600,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Et c’est exactement ce que fait un agent au bon niveau :
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
@@ -602,8 +902,100 @@ const PresentationSection = () => {
                                         }}
                                         variants={textVariantsRight}
                                     >
-                                        Parce qu'un agent performant ne se définit pas seulement par ses connaissances du marché,
-                                        mais par sa capacité à inspirer confiance, à piloter la relation et à maintenir un haut niveau de lucidité, même sous pression.
+                                        Il ne “prend pas une demande” mais prend la main sur un processus.
+                                        Il ne “donne pas un avis sur le prix” mais rend le marché lisible.
+                                        Il ne “se bat pas sur le prix”, mais construit une cohérence de vente.
+                                        Il ne “répond pas aux objections” mais maintient l’adhésion du vendeur au plan de vente.
+                                        Il ne “fait pas visiter” mais fait avancer une décision.
+                                    </MotionTypography>
+                                    <MotionDivider sx={{ my: 4, borderColor: theme.palette.primary.light }} />
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            fontWeight: 600,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Ce repositionnement repose sur une tenue précise des scènes qui déterminent tout :
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        L’ordre des sujets en rendez-vous vendeur, pour que le client comprenne la logique avant de juger le reste.
+                                        La façon d’amener le prix sans déclencher un bras de fer, pour que le chiffre reste recevable.
+                                        Le traitement des objections sans se sur-expliquer, pour que la posture professionnelle reste stable.
+                                        La visite tenue comme une progression, pour que l’intérêt devienne une intention.
+                                        Et le suivi pensé comme une continuité, pour que la décision ne se délite pas après coup.
+                                    </MotionTypography>
+                                    <MotionDivider sx={{ my: 4, borderColor: theme.palette.primary.light }} />
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            fontWeight: 600,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Ce que cela change, sur le terrain, est immédiat.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 2,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            fontWeight: 600,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        L'agent récupère une chose rare : sa maîtrise.
+                                    </MotionTypography>
+                                    <Box sx={{ mb: 3, pl: 2 }}>
+                                        <MotionTypography variant="body1" sx={{ mb: 0.5, color: theme.palette.text.secondary, lineHeight: 1.7 }} variants={textVariants}>
+                                            • Moins de dossiers qui s'étirent.
+                                        </MotionTypography>
+                                        <MotionTypography variant="body1" sx={{ mb: 0.5, color: theme.palette.text.secondary, lineHeight: 1.7 }} variants={textVariants}>
+                                            • Moins d'énergie gaspillée à "rattraper".
+                                        </MotionTypography>
+                                        <MotionTypography variant="body1" sx={{ mb: 0.5, color: theme.palette.text.secondary, lineHeight: 1.7 }} variants={textVariants}>
+                                            • Moins de négociations inutiles sur le prix, le mandat, les honoraires, le tempo.
+                                        </MotionTypography>
+                                    </Box>
+                                    <Box sx={{ mb: 4, pl: 2 }}>
+                                        <MotionTypography variant="body1" sx={{ mb: 0.5, color: theme.palette.text.secondary, lineHeight: 1.7, fontWeight: 600 }} variants={textVariants}>
+                                            • Plus de décisions franches.
+                                        </MotionTypography>
+                                        <MotionTypography variant="body1" sx={{ mb: 0.5, color: theme.palette.text.secondary, lineHeight: 1.7, fontWeight: 600 }} variants={textVariants}>
+                                            • Plus d'adhésion du vendeur au plan de vente.
+                                        </MotionTypography>
+                                        <MotionTypography variant="body1" sx={{ mb: 0.5, color: theme.palette.text.secondary, lineHeight: 1.7, fontWeight: 600 }} variants={textVariants}>
+                                            • Plus de cohérence dans les échanges.
+                                        </MotionTypography>
+                                        <MotionTypography variant="body1" sx={{ mb: 0.5, color: theme.palette.text.secondary, lineHeight: 1.7, fontWeight: 600 }} variants={textVariants}>
+                                            • Plus de stabilité dans l'activité.
+                                        </MotionTypography>
+                                    </Box>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 2,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Et surtout, une posture professionnelle qui se tient, parce qu'elle est portée par une méthode visible.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
@@ -611,36 +1003,37 @@ const PresentationSection = () => {
                                             mb: 4,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
+                                            fontWeight: 600,
                                         }}
-                                        variants={textVariantsRight}
+                                        variants={textVariants}
                                     >
-                                        Apprendre à communiquer avec précision, à canaliser ses émotions et à structurer son influence relationnelle
-                                        fait partie intégrante de la compétence professionnelle.
-                                        Ces aptitudes, une fois maîtrisées, deviennent de véritables leviers de performance,
-                                        autant pour convaincre, fidéliser que pour durer dans un métier d'endurance et d'impact.
+                                        Une posture qui n’a plus besoin d’être défendue, parce qu’elle est devenue évidente.
+                                    </MotionTypography>
+                                    <MotionDivider sx={{ my: 4, borderColor: theme.palette.primary.light }} />
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 2,
+                                            color: theme.palette.primary.main,
+                                            lineHeight: 1.7,
+                                            fontWeight: 700,
+                                            fontSize: '1.1rem',
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Voilà mon atout différenciant :
                                     </MotionTypography>
                                     <MotionTypography
-                                        variant="h5"
+                                        variant="body1"
                                         sx={{
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
                                             fontWeight: 600,
-                                            color: theme.palette.primary.main,
-                                            fontStyle: "italic",
+                                            fontSize: '1.05rem',
                                         }}
-                                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6, duration: 0.5 }}
+                                        variants={textVariants}
                                     >
-                                        ImmoShift
-                                    </MotionTypography>
-                                    <MotionTypography
-                                        variant="h6"
-                                        sx={{
-                                            fontWeight: 600,
-                                            color: theme.palette.primary.main,
-                                            fontStyle: "italic",
-                                        }}
-                                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 0.5 }}
-                                    >
-                                        Change ton approche.
-                                        Change ta trajectoire.
+                                        sortir définitivement l’agent du rôle prestataire, pour remettre son métier à son niveau réel : un métier incontestable.
                                     </MotionTypography>
                                 </ContentBox>
                             </Grid>
