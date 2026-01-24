@@ -84,7 +84,7 @@ const TrainingsSection: React.FC<TrainingsSectionProps> = ({ trainings }) => {
                             fontSize: { xs: "2.5rem", md: "3.5rem" },
                         }}
                     >
-                        Mes Formations en Vedette
+                        Exemples de formations ImmoShift
                     </MotionTypography>
                     <MotionTypography
                         variant="h5"
@@ -94,9 +94,10 @@ const TrainingsSection: React.FC<TrainingsSectionProps> = ({ trainings }) => {
                             mx: "auto",
                             color: theme.palette.text.secondary,
                             fontSize: { xs: "1.2rem", md: "1.4rem" },
+                            textAlign: 'justify',
                         }}
                     >
-                        Des formations exclusives pour maîtriser l'investissement immobilier
+                        Ces formats sont des repères. Pour toute demande spécifique ou formation sur mesure, il suffit de me contacter.
                     </MotionTypography>
                 </MotionBox>
 

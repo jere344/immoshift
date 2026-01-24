@@ -141,7 +141,7 @@ const HeroSection: React.FC = () => {
               }}
               variants={subtitleVariants}
             >
-              Business - Vision - Posture
+              VISION - POSTURE BUSINESS
             </MotionTypography>
             
             <MotionTypography
@@ -152,12 +152,26 @@ const HeroSection: React.FC = () => {
                 fontSize: '1.1rem',
                 lineHeight: 1.8,
                 maxWidth: '95%',
+                
               }}
               variants={subtitleVariants}
             >
-              Des formations déjà conçues ou sur mesure,
-              à distance ou en présentiel, pensées pour les agents
-              qui veulent reprendre le lead et faire décoller leur activité.
+              Des formations professionnelles, à distance ou en présentiel, pour replacer l'agent immobilier à son juste rang : celui d'un référent qu'on ne met plus en concurrence, parce qu'il tient une maîtrise visible et une conduite de vente sans flottement, du premier échange jusqu'à la signature.
+            </MotionTypography>
+
+            <MotionTypography
+              variant="body1"
+              sx={{
+                color: theme.palette.text.secondary,
+                mb: 2,
+                fontSize: '1.1rem',
+                lineHeight: 1.8,
+                maxWidth: '95%',
+                
+              }}
+              variants={subtitleVariants}
+            >
+               L'objectif : faire passer l'agent du statut "interchangeable" au statut d'évidence avec une tenue commerciale solide, une parole qui engage, et une manière de mener chaque dossier qui amène vendeurs et acheteurs à s'aligner sur une stratégie claire, sans test permanent, sans perte d'ascendant, et sans dilution du rôle.
             </MotionTypography>
             
             <MotionTypography

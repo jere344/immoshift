@@ -66,6 +66,7 @@ export const getLightTheme = () => createTheme({
         },
         body1: {
             lineHeight: 1.7,
+            textAlign: 'justify',
         },
     },
     components: {

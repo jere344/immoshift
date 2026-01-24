@@ -189,14 +189,16 @@ const PresentationSection = () => {
                                     <MotionTypography
                                         variant="body1"
                                         sx={{
-                                            mb: 4,
+                                            mb: 3,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
+                                            
                                         }}
                                         variants={textVariants}
                                     >
-                                        Je suis sur le terrain.
-                                        Depuis 2006, l'immobilier est devenu pour moi un métier d'exigence, de rigueur, d'endurance et de résultats.
+                                        J'ai été agent immobilier pendant 20 ans.
+                                        Et dans ce métier, il n'y a rien que je n'aie vécu, transpiré, encaissé, subi, appris, corrigé, traversé et transformé en maîtrise.
+                                        Le rythme, la pression, les retournements, les victoires, les dossiers qui tombent, les journées qui débordent, la charge invisible,  celle que seuls les agents comprennent.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
@@ -204,44 +206,12 @@ const PresentationSection = () => {
                                             mb: 3,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
+                                            
                                         }}
                                         variants={textVariants}
                                     >
-                                        J'ai tout traversé :
-                                    </MotionTypography>
-                                    <motion.div variants={listContainerVariants}>
-                                        <MotionStack spacing={1} sx={{ mb: 3 }} variants={listContainerVariants}> {/* Use MotionStack */}
-                                            {["La prospection.",
-                                              "La pige.",
-                                              "La signature.",
-                                              "La négociation.",
-                                              "Et surtout : la performance terrain, validée par des podiums de chiffre d'affaires sur plusieurs années."
-                                            ].map((item, index) => (
-                                                <motion.div key={index} variants={listItemVariants}>
-                                                    <Typography
-                                                        variant="body1"
-                                                        sx={{
-                                                            color: theme.palette.text.secondary,
-                                                            lineHeight: 1.7,
-                                                        }}
-                                                    >
-                                                        {item}
-                                                    </Typography>
-                                                </motion.div>
-                                            ))}
-                                        </MotionStack>
-                                    </motion.div>
-                                    <MotionTypography
-                                        variant="body1"
-                                        sx={{
-                                            mb: 3,
-                                            color: theme.palette.text.secondary,
-                                            lineHeight: 1.7,
-                                        }}
-                                        variants={textVariants}
-                                    >
-                                        Pendant une grande partie de ma carrière, j'ai occupé le rôle de directrice d'agence, où j'ai dirigé, formé, inspiré des équipes, tout en restant en lien avec la réalité du terrain.
-                                        J'ai non seulement piloté des équipes mais aussi performé à titre individuel en générant des résultats solides.
+                                        Je l'ai porté, dans le beau comme dans le dur.
+                                        Et c'est précisément ce qui forge une vraie légitimité : traverser le réel, sans filtre, jusqu'à en comprendre la logique.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
@@ -249,11 +219,15 @@ const PresentationSection = () => {
                                             mb: 3,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
+                                            
                                         }}
                                         variants={textVariants}
                                     >
-                                        Je connais intimement la réalité de ce métier :
-                                        l'adrénaline des signatures, la pression des objectifs, le doute après plusieurs rendez-vous infructueux, l'exigence mentale d'enchaîner les jours sans relâche.
+                                        En vingt ans, j'ai connu plusieurs marchés.
+                                        Des conjonctures favorables, d'autres plus exigeantes, des périodes fluides, des périodes tendues.
+                                        Ce parcours m'a appris une chose simple : le marché immobilier a toujours été en mouvement.
+                                        Un agent ne devient pas solide parce que le contexte l'aide.
+                                        Il devient solide parce que son niveau tient, même quand le contexte change.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
@@ -261,22 +235,64 @@ const PresentationSection = () => {
                                             mb: 3,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
+                                            
                                         }}
                                         variants={textVariants}
                                     >
-                                        Année après année, transaction après transaction, j'ai bâti une carrière rentable et structurée — non pas par hasard, mais par méthode, par rigueur et par discipline.
+                                        Pendant une grande partie de ces années, j'ai dirigé plusieurs agences.
+                                        Et cette place-là m'a donné une lecture claire : il existe mille profils d'agents, mille styles, mille trajectoires… mais une seule frontière sépare ceux qui subissent le métier de ceux qui le tiennent vraiment : la tenue professionnelle, la cohérence, la capacité à rester leader dans la relation client.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
                                         sx={{
+                                            mb: 3,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
+                                            
                                         }}
                                         variants={textVariants}
                                     >
-                                        À force de produire et de performer, mes confrères sont venus naturellement me chercher.
-                                        "Comment tu fais ?" "Comment tu t'organises ?"
-                                        Et de fil en aiguille, la transmission est devenue une mission : transmettre ce que j'aurais rêvé qu'on m'apprenne dès mes débuts.
+                                        Au fil du temps, je me suis nourrie des meilleurs.
+                                        Dans l'immobilier, évidemment.
+                                        Et aussi ailleurs : auprès d'univers où l'exigence est un standard, où l'on apprend à penser plus haut, à structurer plus juste, à performer sans se trahir.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        C'est ce chemin-là qui a façonné ce que je transmets aujourd'hui.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Ces dernières années, j'ai choisi de former et d'accompagner des agents immobiliers de tous niveaux, à distance et en présentiel.
+                                        Avec une intention très précise : élever le métier, et replacer l'agent dans son juste rang , à savoir  celui d'un professionnel qu'on écoute, qu'on respecte, et qu'on suit comme une évidence.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        ImmoShift n'existe pas pour ajouter une couche de plus.
+                                        ImmoShift existe pour installer un niveau : une vision, une tenue, une méthode de travail qui se voit… et qui change tout sur le terrain.
                                     </MotionTypography>
                                 </ContentBox>
                             </Grid>
@@ -296,13 +312,13 @@ const PresentationSection = () => {
                     {/* Current Work Section */}
                     <MotionBox component="section" variants={sectionVariants}>
                         <Grid container spacing={6} alignItems="center">
-                            <Grid item xs={12} md={6} sx={{ order: { xs: 2, md: 1 } }}>
+                            <Grid item xs={12} md={6} sx={{ order: { xs: 2 } }}>
                                 <Box sx={{ p: 2 }}>
                                     <ImageDisplay src={working} alt="ImmoShift approach" />
                                 </Box>
                             </Grid>
 
-                            <Grid item xs={12} md={6} sx={{ order: { xs: 1, md: 2 } }}>
+                            <Grid item xs={12} sx={{ order: { xs: 1 } }}>
                                 <ContentBox variants={textVariantsRight}>
                                     <SectionTitle>Ce que je fais aujourd'hui</SectionTitle>
                                     <MotionTypography
@@ -311,11 +327,285 @@ const PresentationSection = () => {
                                             mb: 3,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
+                                            
                                         }}
                                         variants={textVariantsRight}
                                     >
-                                        Je ne suis pas une formatrice de vitrines.
-                                        Je suis une stratège de terrain.
+                                        ImmoShift intervient là où le métier se joue vraiment :
+                                        dans les moments où un agent ne "fait" plus simplement de l'immobilier… mais doit tenir une vente, tenir un client, tenir une direction, et tenir son rang, malgré la pression, la concurrence, l'émotion et l'incertitude.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        L'objectif est d'installer une méthode lisible et exigeante, capable de transformer une activité parfois brillante mais instable en trajectoire professionnelle maîtrisée.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 1,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        Car dans ce métier, tout finit par se payer :
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 0.5,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        l'improvisation se paie en rendez-vous fragiles,
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 0.5,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        la dispersion se paie en dossiers interminables,
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 0.5,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        le flou se paie en négociations permanentes,
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        et la posture "prestataire" se paie en mise en concurrence automatique.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        ImmoShift travaille donc sur l'essentiel :
+                                        rendre l'agent incontournable dans la mécanique de décision du client.
+                                        Non par domination, non par mise en scène.
+                                        Par justesse, par structure, par tenue, par séquençage, et par maîtrise des scènes qui font basculer un dossier d'un "peut-être" vers un "oui".
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="h6"
+                                        sx={{
+                                            mb: 2,
+                                            mt: 4,
+                                            color: theme.palette.primary.main,
+                                            fontWeight: 600,
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        Une formation pensée pour le terrain réel
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        Chaque action de formation démarre par une étape fondatrice : comprendre la réalité professionnelle de l'agent avant de transmettre quoi que ce soit.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        Cela passe par une lecture précise de son fonctionnement :
+                                        son organisation, ses habitudes métier, ses angles morts, ses points de friction, ses réflexes sous pression, ses priorités, et la manière dont il tient ou perd la main dans une vente.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        Un échange téléphonique de cadrage et un questionnaire de positionnement permettent d'identifier ce qui doit être renforcé, simplifié, consolidé ou reconstruit, afin que la formation réponde à une réalité concrète, et non à une version théorique du métier.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="h6"
+                                        sx={{
+                                            mb: 2,
+                                            mt: 4,
+                                            color: theme.palette.primary.main,
+                                            fontWeight: 600,
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        Des formats adaptés, sans dilution
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 2,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        Les actions de formation sont proposées :
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 0.5,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        en individuel ou en groupe,
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        à distance ou en présentiel.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        La formation à distance signifie une transmission structurée en visio, avec le même niveau d'exigence que sur le terrain : une pédagogie vivante, une précision de lecture, un tempo, et un travail appliqué à des situations professionnelles réelles.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        Quel que soit le format, l'intention reste identique :
+                                        installer une méthode qui tient dans la durée, et une posture qui se voit dans les résultats.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="h6"
+                                        sx={{
+                                            mb: 2,
+                                            mt: 4,
+                                            color: theme.palette.primary.main,
+                                            fontWeight: 600,
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        Ce que cela transforme chez un agent
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        Lorsque la méthode est posée au bon niveau, les effets deviennent concrets :
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        les rendez-vous gagnent en tenue, les échanges gagnent en poids, les objections cessent d'être des pièges,
+                                        le prix cesse d'être une guerre,
+                                        le mandat cesse d'être "à obtenir", et l'agent cesse de se justifier pour exister.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        L'activité devient plus lisible, 
+                                        cohérente, constante. 
+                                        Et surtout : moins dépendante du hasard, du contexte conjoncturel, ou de l'énergie du moment.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="h6"
+                                        sx={{
+                                            mb: 2,
+                                            mt: 4,
+                                            color: theme.palette.primary.main,
+                                            fontWeight: 600,
+                                        }}
+                                        variants={textVariantsRight}
+                                    >
+                                        ImmoShift
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
@@ -324,88 +614,11 @@ const PresentationSection = () => {
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
                                             fontWeight: 600,
+                                            
                                         }}
                                         variants={textVariantsRight}
                                     >
-                                        ImmoShift est né d'une conviction forte :
-                                    </MotionTypography>
-                                    <MotionTypography
-                                        variant="body1"
-                                        sx={{
-                                            mb: 3,
-                                            color: theme.palette.text.secondary,
-                                            lineHeight: 1.7,
-                                        }}
-                                        variants={textVariantsRight}
-                                    >
-                                        Quand on structure ses méthodes, ses rituels et son pilotage business, on ne subit plus ce métier. On le maîtrise.
-                                    </MotionTypography>
-                                    <MotionTypography
-                                        variant="body1"
-                                        sx={{
-                                            mb: 3,
-                                            color: theme.palette.text.secondary,
-                                            lineHeight: 1.7,
-                                        }}
-                                        variants={textVariantsRight}
-                                    >
-                                        Je n'enseigne rien que je n'ai pas appliqué, éprouvé, et optimisé par l'expérience terrain.
-                                        Pas de recettes miracles.
-                                        Pas de discours théoriques.
-                                        Pas de promesses creuses.
-                                    </MotionTypography>
-                                    <MotionTypography
-                                        variant="body1"
-                                        sx={{
-                                            mb: 2,
-                                            color: theme.palette.text.secondary,
-                                            lineHeight: 1.7,
-                                        }}
-                                        variants={textVariantsRight}
-                                    >
-                                        Ce que je propose, c'est un accompagnement à haute valeur humaine :
-                                    </MotionTypography>
-                                    <motion.div variants={listContainerVariants}>
-                                        <MotionStack spacing={1} sx={{ mb: 3 }} variants={listContainerVariants}> {/* Use MotionStack */}
-                                            {[
-                                                "Des sessions stratégiques exigeantes",
-                                                "Des outils concrets et personnalisés",
-                                                "Des échanges réguliers pour ancrer la transformation",
-                                                "Et surtout, une vraie présence humaine : je reste en contact direct avec les agents que j'accompagne."
-                                            ].map((item, index) => (
-                                                <motion.div key={index} variants={listItemVariants}>
-                                                    <Box
-                                                        sx={{
-                                                            display: "flex",
-                                                            alignItems: "flex-start",
-                                                            mt: 0.7,
-                                                        }}
-                                                    >
-                                                        <Box
-                                                            sx={{
-                                                                minWidth: 15,
-                                                            }}
-                                                        >
-                                                            •
-                                                        </Box>
-                                                        <Typography variant="body1" sx={{ color: theme.palette.text.secondary }}>
-                                                            {item}
-                                                        </Typography>
-                                                    </Box>
-                                                </motion.div>
-                                            ))}
-                                        </MotionStack>
-                                    </motion.div>
-                                    <MotionTypography
-                                        variant="body1"
-                                        sx={{
-                                            color: theme.palette.text.secondary,
-                                            lineHeight: 1.7,
-                                        }}
-                                        variants={textVariantsRight}
-                                    >
-                                        Chaque agent que je forme ressort avec bien plus qu'une formation :
-                                        il repart avec une méthode, une posture, une discipline, une véritable trajectoire professionnelle.
+                                        ImmoShift forme des professionnels capables de conduire une vente du début à la fin, avec une légitimité qui ne se négocie plus à chaque étape.
                                     </MotionTypography>
                                 </ContentBox>
                             </Grid>
@@ -421,63 +634,19 @@ const PresentationSection = () => {
                         <Grid container spacing={6}>
                             <Grid item xs={12}>
                                 <ContentBox variants={textVariants}>
-                                    <SectionTitle>Mon style d'accompagnement</SectionTitle>
+                                    <SectionTitle>MON STYLE D'ACCOMPAGNEMENT</SectionTitle>
                                     <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 3,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
+                                            
                                         }}
                                         variants={textVariants}
                                     >
-                                        Je travaille comme j'aurais aimé qu'on travaille avec moi il y a 15 ans :
-                                    </MotionTypography>
-                                    <motion.div variants={listContainerVariants}>
-                                        <MotionStack spacing={2} sx={{ mb: 3 }} variants={listContainerVariants}> {/* Use MotionStack */}
-                                            {[
-                                                "Avec exigence, parce que l'excellence se construit.",
-                                                "Avec sur-mesure, parce que chaque agent a une histoire différente.",
-                                                "Avec impact, parce qu'un changement sans exécution n'est qu'une idée.",
-                                            ].map((item, index) => (
-                                                <motion.div key={index} variants={listItemVariants}>
-                                                    <Box
-                                                        sx={{
-                                                            display: "flex",
-                                                            backgroundColor: theme.palette.background.default,
-                                                            p: 2,
-                                                            borderRadius: 1,
-                                                        }}
-                                                    >
-                                                        <Box
-                                                            sx={{
-                                                                width: "10px",
-                                                                height: "10px",
-                                                                flexShrink: 0,    // Prevent flexbox from shrinking this element
-                                                                borderRadius: "50%",
-                                                                bgcolor: theme.palette.primary.main,
-                                                                mr: 2,
-                                                                mt: 1,
-                                                            }}
-                                                        />
-                                                        <Typography variant="body1" sx={{ color: theme.palette.text.secondary }}>
-                                                            {item}
-                                                        </Typography>
-                                                    </Box>
-                                                </motion.div>
-                                            ))}
-                                        </MotionStack>
-                                    </motion.div>
-                                    <MotionTypography
-                                        variant="body1"
-                                        sx={{
-                                            mb: 3,
-                                            color: theme.palette.text.secondary,
-                                            lineHeight: 1.7,
-                                        }}
-                                        variants={textVariants}
-                                    >
-                                        Mon accompagnement s'adresse à tous les agents, débutants comme confirmés.
+                                        Je forme avec une exigence élevée et une attention fine au réel. Parce qu'un agent immobilier ne peut pas exercer ce métier comme un prestataire exécutant,  même armé des meilleurs outils, des meilleures plateformes, ou de l'IA la plus performante.
+                                        Ce métier ne se gagne pas à coups de fonctionnalités. Il se gagne à coups de tenue.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
@@ -485,11 +654,12 @@ const PresentationSection = () => {
                                             mb: 3,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
-                                            fontWeight: 600,
+                                            
                                         }}
                                         variants={textVariants}
                                     >
-                                        Car l'expérience ne garantit pas toujours la bonne méthode :
+                                        L'immobilier demande une maîtrise globale : savoir capter l'attention, poser une direction de vente, rendre un marché compréhensible, gérer le tempo, absorber les tensions, traverser les hésitations, sécuriser une décision.
+                                        Et pendant que le client vit son projet avec l'émotion, l'argent, l'urgence ou la peur de se tromper, l'agent, lui, doit rester stable : précis, crédible, et irréprochable dans sa manière de conduire.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
@@ -497,10 +667,12 @@ const PresentationSection = () => {
                                             mb: 3,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
+                                            
                                         }}
                                         variants={textVariants}
                                     >
-                                        Même les meilleurs peuvent tomber dans des routines inefficaces, perdre du focus ou décaler leur posture sans même s'en rendre compte.
+                                        Le marché n'est jamais figé. Il évolue, se retourne, accélère, se contracte.
+                                        Et au milieu de ces mouvements, il existe une variable plus imprévisible que toutes les autres : la part humaine. Des arbitrages qui changent, des silences qui apparaissent, des résistances qui montent, des projets qui avancent puis se tendent. C'est là que se joue la vraie différence entre un agent actif… et un agent qui tient une vente.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
@@ -508,10 +680,12 @@ const PresentationSection = () => {
                                             mb: 3,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
+                                            
                                         }}
                                         variants={textVariants}
                                     >
-                                        Je t'aide à réaligner ton activité, quelle que soit ta phase de carrière.
+                                        C'est pour cela que mon travail commence toujours par une compréhension précise de votre réalité terrain.
+                                        Un échange préalable et un questionnaire me permettent de situer votre contexte, vos priorités, votre niveau de maîtrise, et les zones exactes où votre activité se fragilise, se disperse, ou plafonne,  parfois sans signal évident.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
@@ -519,11 +693,12 @@ const PresentationSection = () => {
                                             mb: 3,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
+                                            
                                         }}
                                         variants={textVariants}
                                     >
-                                        Et si tu ne trouves pas de programme qui correspond exactement à ton besoin sur mon site,
-                                        je construis aussi des accompagnements sur-mesure, pour que tu bénéficies d'une trajectoire totalement adaptée à ton ambition.
+                                        Ensuite, la formation suit une progression claire.
+                                        Qu'il s'agisse d'un format déjà conçu (présenté dans la rubrique « mes formations en vedette ») ou d'un format construit sur mesure, tout repose sur une logique pédagogique : objectifs définis, étapes structurées, travail sur vos situations réelles, consolidation de ce qui doit tenir dans la durée.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
@@ -531,23 +706,53 @@ const PresentationSection = () => {
                                             mb: 3,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
+                                            
                                         }}
                                         variants={textVariants}
                                     >
-                                        Je t'apprends à devenir stratège de ton propre business, pas à suivre une check-list.
-                                        Je t'aide à ancrer des méthodes, bâtir des routines, tenir ton cap même quand les vents sont contraires.
+                                        Ce que la formation installe, c'est une tenue professionnelle incontestable : une parole plus nette, une méthode plus cohérente, une conduite plus précise, et une capacité à faire avancer un dossier sans se laisser déplacer.
+                                        C'est cette tenue qui change la façon dont le client se comporte : moins de tests, moins de négociation permanente, plus d'adhésion, plus de décisions franches.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
                                         sx={{
+                                            mb: 3,
                                             color: theme.palette.text.secondary,
                                             lineHeight: 1.7,
+                                            
                                         }}
                                         variants={textVariants}
                                     >
-                                        Pas d'effets de mode.
-                                        Pas de one shot.
-                                        Un changement profond et durable.
+                                        Lorsque la formation se fait à distance, elle reste profondément humaine et impliquée. Ce sont de vrais échanges, en direct, avec un travail précis sur vos situations réelles, et une présence qui suit le fil : comprendre, ajuster, renforcer, faire progresser.
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Mon travail s'adresse aussi bien aux agents débutants qu'aux confirmés.
+                                        Parce qu'on peut être très investi et manquer d'ordre.
+                                        On peut être expérimenté et s'être installé dans des automatismes qui coûtent cher.
+                                        Et on peut aussi être déjà performant, tout en visant plus haut : franchir un palier, gagner en impact, tenir des dossiers plus ambitieux, et cesser de plafonner à un niveau "correct".
+                                    </MotionTypography>
+                                    <MotionTypography
+                                        variant="body1"
+                                        sx={{
+                                            mb: 3,
+                                            color: theme.palette.text.secondary,
+                                            lineHeight: 1.7,
+                                            
+                                        }}
+                                        variants={textVariants}
+                                    >
+                                        Si votre besoin ne correspond pas exactement aux formats présentés, je construis également une formation sur mesure, pensée pour vous.
+                                        Je garde une règle simple : on ne forme pas un agent sur une idée, on le forme sur une réalité.
+                                        L'objectif est d'élever votre niveau de maîtrise et de vous rendre capable de tenir votre métier avec plus d'ascendant, plus de solidité, et plus de résultats.
                                     </MotionTypography>
                                 </ContentBox>
                             </Grid>
@@ -567,60 +772,22 @@ const PresentationSection = () => {
                                     <MotionTypography
                                         variant="body1"
                                         sx={{
-                                            mb: 2,
+                                            mb: 3,
                                             color: theme.palette.text.secondary,
-                                            lineHeight: 1.7,
                                         }}
                                         variants={textVariants}
                                     >
-                                        Le métier d'agent immobilier est souvent mal compris.
+                                        Le métier d'agent immobilier est souvent mal compris. Même par les agents.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
                                         sx={{
                                             mb: 4,
                                             color: theme.palette.text.secondary,
-                                            lineHeight: 1.7,
-                                            fontWeight: 600,
                                         }}
                                         variants={textVariants}
                                     >
-                                        Même par les agents.
-                                    </MotionTypography>
-                                    <MotionTypography
-                                        variant="body1"
-                                        sx={{
-                                            mb: 2,
-                                            color: theme.palette.text.secondary,
-                                            lineHeight: 1.7,
-                                        }}
-                                        variants={textVariants}
-                                    >
-                                        Il est souvent vécu comme un métier d'exécution :
-                                    </MotionTypography>
-                                    <MotionTypography
-                                        variant="body1"
-                                        sx={{
-                                            mb: 1,
-                                            color: theme.palette.text.secondary,
-                                            lineHeight: 1.7,
-                                            fontStyle: 'italic',
-                                        }}
-                                        variants={textVariants}
-                                    >
-                                        répondre, organiser, visiter, publier, relancer, négocier.
-                                    </MotionTypography>
-                                    <MotionTypography
-                                        variant="body1"
-                                        sx={{
-                                            mb: 4,
-                                            color: theme.palette.text.secondary,
-                                            lineHeight: 1.7,
-                                            fontWeight: 600,
-                                        }}
-                                        variants={textVariants}
-                                    >
-                                        Bref : faire tourner.
+                                        Il est souvent vécu comme un métier d'exécution : répondre, organiser, visiter, publier, relancer, négocier. Bref : faire tourner.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
