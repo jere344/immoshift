@@ -634,7 +634,7 @@ const PresentationSection = () => {
                         <Grid container spacing={6}>
                             <Grid item xs={12}>
                                 <ContentBox variants={textVariants}>
-                                    <SectionTitle>MON STYLE D'ACCOMPAGNEMENT</SectionTitle>
+                                    <SectionTitle>Mon Style d'Accompagnement</SectionTitle>
                                     <MotionTypography
                                         variant="body1"
                                         sx={{
