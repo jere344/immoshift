@@ -138,6 +138,9 @@ const HeroSection: React.FC = () => {
                 fontWeight: 500,
                 lineHeight: 1.4,
                 letterSpacing: 0.5,
+                justifyContent: 'left',
+                textAlign: 'left',
+                fontSize: '1.85rem',
               }}
               variants={subtitleVariants}
             >
