@@ -7,11 +7,12 @@ from django.conf import settings
 from django.db.models import Q
 from django.http import FileResponse
 import os
-from .models import Testimonial, Article, Training, Paragraph, Ebook, EbookDownload
+from .models import Testimonial, Article, Training, Paragraph, Ebook, EbookDownload, RGPDContent
 from .serializers import (
     TestimonialSerializer, ArticleListSerializer, ArticleDetailSerializer,
     TrainingListSerializer, TrainingDetailSerializer, ParagraphSerializer,
-    EbookSerializer, EbookDetailSerializer, EbookDownloadCreateSerializer
+    EbookSerializer, EbookDetailSerializer, EbookDownloadCreateSerializer,
+    RGPDContentSerializer
 )
 from .utils.email_utils import send_ebook_confirmation_email, send_admin_ebook_download_notification
 
@@ -165,3 +166,19 @@ def download_ebook(request):
         }, status=status.HTTP_201_CREATED)
     
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def rgpd_content(request):
+    """API endpoint for legal notice and personal data information."""
+    content, _ = RGPDContent.objects.get_or_create(pk=1)
+
+    if not content.host_name and not content.host_address and not content.host_contact:
+        content.host_name = "o2switch"
+        content.host_address = "Chemin des Pardiaux, 63000 Clermont-Ferrand, France"
+        content.host_contact = "https://www.o2switch.fr/support-hebergeur/"
+        content.save(update_fields=['host_name', 'host_address', 'host_contact', 'updated_at'])
+
+    serializer = RGPDContentSerializer(content)
+    return Response(serializer.data)

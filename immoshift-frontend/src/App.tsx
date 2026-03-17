@@ -12,6 +12,7 @@ import ArticleDetail from "./components/article/ArticleDetail";
 import TrainingDetail from "./components/training/TrainingDetail";
 import EbookDetailPage from "./components/ebooks/EbookDetail";
 import ThankYouPage from "./components/ebooks/ThankYouPage";
+import LegalNoticePage from "./components/legal/LegalNoticePage";
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
     const location = useLocation();
@@ -39,6 +40,7 @@ function App() {
                     <Route path="/training/:slug" element={<TrainingDetail />} />
                     <Route path="/ebooks/:slug" element={<EbookDetailPage />} />
                     <Route path="/thank-you" element={<ThankYouPage />} />
+                    <Route path="/mentions-legales" element={<LegalNoticePage />} />
                     
                     {/* Catch all route */}
                     <Route path="*" element={<Navigate to="/" replace />} />

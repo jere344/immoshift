@@ -34,6 +34,9 @@ urlpatterns = [
     
     # Ebook download route
     path('download-ebook/', views.download_ebook, name='download_ebook'),
+
+    # Legal notice and RGPD content route
+    path('rgpd/', views.rgpd_content, name='rgpd_content'),
     
     # Sitemap configuration
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),

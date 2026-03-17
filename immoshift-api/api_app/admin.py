@@ -10,7 +10,7 @@ from django.urls import path
 from django.utils.text import slugify
 from django.db import transaction
 from .models import (
-    Testimonial, Article, Training, Paragraph, Ebook, EbookDownload, Author
+    Testimonial, Article, Training, Paragraph, Ebook, EbookDownload, Author, RGPDContent
 )
 from .forms import LinkedInPostImportForm
 from .utils.linkedin_scraper import scrape_linkedin_post, download_image_from_url
@@ -296,6 +296,39 @@ class EbookDownloadAdmin(admin.ModelAdmin):
         messages.success(request, f'{count} email(s) exporté(s) avec succès.')
         return response
 
+
+class RGPDContentAdmin(admin.ModelAdmin):
+    list_display = ('trade_name', 'owner_name', 'email', 'phone', 'updated_at')
+
+    fieldsets = (
+        ('Mentions légales', {
+            'fields': (
+                'owner_name',
+                'trade_name',
+                'legal_status',
+                'siret',
+                'address',
+                'email',
+                'phone',
+            )
+        }),
+        ('Hébergeur', {
+            'fields': ('host_name', 'host_address', 'host_contact')
+        }),
+        ('Données personnelles', {
+            'fields': ('personal_data_text', 'cookies_text')
+        }),
+    )
+    readonly_fields = ('updated_at',)
+
+    def has_add_permission(self, request):
+        if RGPDContent.objects.exists():
+            return False
+        return super().has_add_permission(request)
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 # Register all models with their admin classes
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Testimonial, TestimonialAdmin)
@@ -304,3 +337,4 @@ admin.site.register(Training, TrainingAdmin)
 admin.site.register(Paragraph, ParagraphAdmin)
 admin.site.register(Ebook, EbookAdmin)
 admin.site.register(EbookDownload, EbookDownloadAdmin)
+admin.site.register(RGPDContent, RGPDContentAdmin)

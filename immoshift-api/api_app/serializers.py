@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import (
-    Testimonial, Training, Article, Paragraph, Ebook, EbookDownload, Author
+    Testimonial, Training, Article, Paragraph, Ebook, EbookDownload, Author, RGPDContent
 )
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -107,4 +107,24 @@ class EbookDownloadAdminSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'ebook', 'ebook_title', 'first_name', 'last_name', 
             'email', 'phone', 'consent_mailing', 'download_date', 'ip_address'
+        ]
+
+
+class RGPDContentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RGPDContent
+        fields = [
+            'owner_name',
+            'trade_name',
+            'legal_status',
+            'siret',
+            'address',
+            'email',
+            'phone',
+            'host_name',
+            'host_address',
+            'host_contact',
+            'personal_data_text',
+            'cookies_text',
+            'updated_at',
         ]

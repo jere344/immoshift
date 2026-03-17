@@ -180,9 +180,19 @@ const Footer: React.FC = () => {
         <Divider sx={{ my: 4 }} />
         
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="body2" color="text.secondary" sx={{ mb: { xs: 2, sm: 0 } }}>
-            © {currentYear} {companyInfo.name}. Tous droits réservés.
-          </Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: { xs: 'center', sm: 'flex-start' }, mb: { xs: 2, sm: 0 } }}>
+            <Typography variant="body2" color="text.secondary">
+              © {currentYear} {companyInfo.name}. Tous droits réservés.
+            </Typography>
+            <Link
+              component={RouterLink}
+              to="/mentions-legales"
+              underline="hover"
+              sx={{ mt: 0.5, fontSize: '0.85rem' }}
+            >
+              Mentions légales & RGPD
+            </Link>
+          </Box>
           <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.75rem', opacity: 0.8 }}>
             Développé par{" "}
             <Link 

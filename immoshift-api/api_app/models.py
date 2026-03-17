@@ -244,3 +244,42 @@ class EbookDownload(models.Model):
     class Meta:
         verbose_name = "Téléchargement E-book"
         verbose_name_plural = "Téléchargements E-books"
+
+
+class RGPDContent(models.Model):
+    owner_name = models.CharField(max_length=150, default="Audrey Antonini", verbose_name="Nom de la responsable")
+    trade_name = models.CharField(max_length=150, default="ImmoShift", verbose_name="Nom commercial")
+    legal_status = models.CharField(max_length=150, default="Entreprise individuelle", verbose_name="Statut")
+    siret = models.CharField(max_length=20, default="503 425 027 00045", verbose_name="SIRET")
+    address = models.CharField(max_length=255, default="12 les 4 canaux, 34250 Palavas-les-Flots", verbose_name="Adresse")
+    email = models.EmailField(default="immoshift.business@gmail.com", verbose_name="Email")
+    phone = models.CharField(max_length=20, default="0609093075", verbose_name="Téléphone")
+
+    host_name = models.CharField(max_length=200, blank=True, default="o2switch", verbose_name="Nom de l'hébergeur")
+    host_address = models.CharField(max_length=255, blank=True, default="Chemin des Pardiaux, 63000 Clermont-Ferrand, France", verbose_name="Adresse de l'hébergeur")
+    host_contact = models.CharField(max_length=255, blank=True, default="https://www.o2switch.fr/support-hebergeur/", verbose_name="Contact de l'hébergeur")
+
+    personal_data_text = models.TextField(
+        default=(
+            "Les données personnelles collectées via le formulaire de contact et le formulaire de téléchargement "
+            "des e-books (nom, prénom, email, téléphone) sont utilisées uniquement dans le cadre de la relation "
+            "commerciale avec ImmoShift.\n\n"
+            "Les prises de rendez-vous via Calendly sont gérées par ce service tiers et soumises à sa propre "
+            "politique de confidentialité.\n\n"
+            "Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos "
+            "données. Vous pouvez exercer ce droit en écrivant à immoshift.business@gmail.com."
+        ),
+        verbose_name="Texte données personnelles",
+    )
+    cookies_text = models.TextField(
+        default="Ce site utilise uniquement des cookies strictement nécessaires à son fonctionnement. Aucun cookie de suivi publicitaire n'est déposé.",
+        verbose_name="Texte cookies",
+    )
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Dernière mise à jour")
+
+    def __str__(self):
+        return "Mentions légales et RGPD"
+
+    class Meta:
+        verbose_name = "RGPD"
+        verbose_name_plural = "RGPD"
