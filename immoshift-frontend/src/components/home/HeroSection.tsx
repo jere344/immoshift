@@ -1,9 +1,10 @@
 import React from 'react';
 import { Box, Button, Container, Typography, useTheme } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import home from '@assets/audreyantonini.jpg';
+import homeFallback from '@assets/audreyantonini.jpg';
 import backgroundImage from '@assets/background.jpg';
 import { motion } from 'framer-motion';
+import { useSiteConfig } from '../../contexts/SiteConfigContext';
 
 // Motion components
 const MotionBox = motion(Box);
@@ -12,6 +13,7 @@ const MotionButton = motion(Button);
 
 const HeroSection: React.FC = () => {
   const theme = useTheme();
+  const { config, loading } = useSiteConfig();
 
   // Animation Variants
   const containerVariants = {
@@ -127,7 +129,7 @@ const HeroSection: React.FC = () => {
               variants={titleVariants}
               transition={{ delay: 0.5, duration: 0.6 }}
             >
-              ImmoShift
+              {config?.hero_title || 'ImmoShift'}
             </MotionTypography>
 
             <MotionTypography
@@ -144,7 +146,7 @@ const HeroSection: React.FC = () => {
               }}
               variants={subtitleVariants}
             >
-              VISION - POSTURE BUSINESS
+              {config?.hero_subtitle || 'VISION - POSTURE BUSINESS'}
             </MotionTypography>
             
             <MotionTypography
@@ -159,7 +161,7 @@ const HeroSection: React.FC = () => {
               }}
               variants={subtitleVariants}
             >
-              Des formations professionnelles, à distance ou en présentiel, pour replacer l'agent immobilier à son juste rang : celui d'un référent qu'on ne met plus en concurrence, parce qu'il tient une maîtrise visible et une conduite de vente sans flottement, du premier échange jusqu'à la signature.
+              {config?.hero_description_1 || "Des formations professionnelles, à distance ou en présentiel, pour replacer l'agent immobilier à son juste rang : celui d'un référent qu'on ne met plus en concurrence, parce qu'il tient une maîtrise visible et une conduite de vente sans flottement, du premier échange jusqu'à la signature."}
             </MotionTypography>
 
             <MotionTypography
@@ -174,7 +176,7 @@ const HeroSection: React.FC = () => {
               }}
               variants={subtitleVariants}
             >
-               L'objectif : faire passer l'agent du statut "interchangeable" au statut d'évidence avec une tenue commerciale solide, une parole qui engage, et une manière de mener chaque dossier qui amène vendeurs et acheteurs à s'aligner sur une stratégie claire, sans test permanent, sans perte d'ascendant, et sans dilution du rôle.
+               {config?.hero_description_2 || 'L\'objectif : faire passer l\'agent du statut "interchangeable" au statut d\'évidence avec une tenue commerciale solide, une parole qui engage, et une manière de mener chaque dossier qui amène vendeurs et acheteurs à s\'aligner sur une stratégie claire, sans test permanent, sans perte d\'ascendant, et sans dilution du rôle.'}
             </MotionTypography>
             
             <MotionTypography
@@ -187,7 +189,7 @@ const HeroSection: React.FC = () => {
               }}
               variants={subtitleVariants}
             >
-              Méthode. Discipline. Exécution.
+              {config?.hero_catchphrase || 'Méthode. Discipline. Exécution.'}
             </MotionTypography>
 
             <MotionBox
@@ -260,7 +262,7 @@ const HeroSection: React.FC = () => {
             variants={imageVariants}
           >
             <motion.img
-              src={home}
+              src={config?.hero_image || homeFallback}
               alt="Real estate expertise"
               style={{
                 width: '100%',

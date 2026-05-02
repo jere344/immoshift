@@ -19,7 +19,7 @@ import api from '@services/api';
 import DownloadIcon from '@mui/icons-material/Download';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { motion } from 'framer-motion'; // Import motion
-import { companyInfo, logoUrl } from '@config/siteConfig'; // Import companyInfo and logoUrl
+import { useSiteConfig } from '../../contexts/SiteConfigContext';
 
 interface FormState {
   first_name: string;
@@ -51,6 +51,7 @@ const MotionTypography = motion(Typography);
 const MotionPaper = motion(Paper);
 
 const EbookDetail: React.FC = () => {
+  const { config } = useSiteConfig();
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const [ebook, setEbook] = useState<Ebook | null>(null);
@@ -183,7 +184,7 @@ const EbookDetail: React.FC = () => {
   const canonicalUrl = `${window.location.origin}/ebooks/${ebook.slug}`;
   const imageUrl = ebook.cover_image 
     ? (ebook.cover_image.startsWith('http') ? ebook.cover_image : `${window.location.origin}${ebook.cover_image}`)
-    : `${window.location.origin}${logoUrl.startsWith('/') ? logoUrl.substring(1) : logoUrl}`; // Fallback to logo
+    : (config?.logo ? (config.logo.startsWith('http') ? config.logo : `${window.location.origin}${config.logo.startsWith('/') ? config.logo.substring(1) : config.logo}`) : `${window.location.origin}/logo.jpg`);
 
   return (
     <Box sx={{ bgcolor: 'background.default', minHeight: '100vh' }}>
@@ -198,7 +199,7 @@ const EbookDetail: React.FC = () => {
       <meta property="og:type" content="book" /> 
       <meta property="og:image" content={imageUrl} />
       <meta property="og:image:alt" content={ebook.title} />
-      <meta property="og:site_name" content={companyInfo.name} />
+        <meta property="og:site_name" content={config?.company_name} />
       <meta property="og:locale" content="fr_FR" />
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />

@@ -59,7 +59,7 @@ const LegalNoticePage: React.FC = () => {
   }
 
   return (
-    <Box sx={{ py: { xs: 5, md: 8 }, background: 'linear-gradient(180deg, #f7f9fc 0%, white 100%)', minHeight: '80vh' }}>
+    <Box sx={{ py: { xs: 12 }, background: 'linear-gradient(180deg, #f7f9fc 0%, white 100%)', minHeight: '80vh' }}>
       <Container maxWidth="md">
         <Paper elevation={0} sx={{ p: { xs: 3, md: 5 }, borderRadius: 3, border: '1px solid', borderColor: 'divider' }}>
           <Typography variant="h3" sx={{ fontWeight: 700, mb: 1 }}>

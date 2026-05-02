@@ -5,7 +5,8 @@ import {
   EbookDetailResponse,
   HomePageResponse,
   EbookDownloadResponse,
-  RGPDContentResponse
+  RGPDContentResponse,
+  SiteConfigResponse
 } from '@models/ApiResponses';
 import { EbookDownloadRequest } from '@models/Ebook';
 import { processArticle } from '@models/Article';
@@ -13,6 +14,7 @@ import { processTraining } from '@models/Training';
 import { processEbook } from '@models/Ebook';
 import { processHomeContent } from '@models/HomeContent';
 import { processRGPDContent } from '@models/RGPD';
+import { processSiteConfig } from '@models/SiteConfig';
 
 // Create a simple API client with default configuration
 const apiClient = axios.create({
@@ -55,6 +57,11 @@ const api = {
   getRGPDContent: async (): Promise<RGPDContentResponse> => {
     const response = await apiClient.get('/rgpd/');
     return processRGPDContent(response.data);
+  },
+
+  getSiteConfig: async (): Promise<SiteConfigResponse> => {
+    const response = await apiClient.get('/site-config/');
+    return processSiteConfig(response.data);
   },
 };
 

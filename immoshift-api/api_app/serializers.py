@@ -1,7 +1,12 @@
 from rest_framework import serializers
 from .models import (
-    Testimonial, Training, Article, Paragraph, Ebook, EbookDownload, Author, RGPDContent
+    Testimonial, Training, Article, Paragraph, Ebook, EbookDownload, Author, RGPDContent, SiteConfiguration
 )
+
+class SiteConfigurationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SiteConfiguration
+        fields = '__all__'
 
 class AuthorSerializer(serializers.ModelSerializer):
     """Serializer for Author model"""

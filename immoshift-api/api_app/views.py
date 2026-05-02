@@ -7,12 +7,12 @@ from django.conf import settings
 from django.db.models import Q
 from django.http import FileResponse
 import os
-from .models import Testimonial, Article, Training, Paragraph, Ebook, EbookDownload, RGPDContent
+from .models import Testimonial, Article, Training, Paragraph, Ebook, EbookDownload, RGPDContent, SiteConfiguration
 from .serializers import (
     TestimonialSerializer, ArticleListSerializer, ArticleDetailSerializer,
     TrainingListSerializer, TrainingDetailSerializer, ParagraphSerializer,
     EbookSerializer, EbookDetailSerializer, EbookDownloadCreateSerializer,
-    RGPDContentSerializer
+    RGPDContentSerializer, SiteConfigurationSerializer
 )
 from .utils.email_utils import send_ebook_confirmation_email, send_admin_ebook_download_notification
 
@@ -181,4 +181,13 @@ def rgpd_content(request):
         content.save(update_fields=['host_name', 'host_address', 'host_contact', 'updated_at'])
 
     serializer = RGPDContentSerializer(content)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def site_configuration_view(request):
+    config = SiteConfiguration.objects.first()
+    if not config:
+        config = SiteConfiguration.objects.create()
+    serializer = SiteConfigurationSerializer(config)
     return Response(serializer.data)

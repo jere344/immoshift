@@ -23,8 +23,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { Link as RouterLink } from 'react-router-dom';
-import { navigationLinks, transparentLogoUrl, companyInfo } from '@config/siteConfig';
 import { motion } from 'framer-motion';
+import { useSiteConfig } from '../../contexts/SiteConfigContext';
 
 // Motion components
 const MotionBox = motion(Box);
@@ -49,10 +49,22 @@ function HideOnScroll({ children }: HideOnScrollProps) {
 }
 
 const Header: React.FC = () => {
+  const { config } = useSiteConfig();
   const theme = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  
+  const navigationLinks = [
+      { name: "Accueil", path: "/", home: true },
+      { name: "Presentation", path: "/#presentation" },
+      { name: "Formations", path: "/#trainings" },
+      { name: "Articles", path: "/#articles" },
+      { name: "Ebooks", path: "/#ebooks" },
+      { name: "Témoignages", path: "/#testimonials" },
+      { name: "Contact", path: "https://calendly.com/audreyantonini13/45-minutes-pour-faire-le-point", external: true },
+      { name: "FAQ", path: "/#faq" },
+];
   
   const handleOpenMobileMenu = () => {
     setMobileMenuOpen(true);
@@ -87,7 +99,6 @@ const Header: React.FC = () => {
   }, []);
   
   // Filter navigation links to exclude home/accueil in both desktop and mobile views
-  const visibleNavLinks = navigationLinks.filter(link => !link.home);
 
   // Animation variants
   const navItemVariants = {
@@ -166,7 +177,7 @@ const Header: React.FC = () => {
                       display: 'flex', // Changed to always display
                     }}
                   >
-                    {companyInfo.name}
+                    {config?.company_name || 'ImmoShift'}
                     <TrendingUpIcon sx={{ ml: 1, height: "auto", color: theme.palette.primary.main }} />
                   </Typography>
                 </Box>
@@ -174,7 +185,7 @@ const Header: React.FC = () => {
               
               {/* Desktop Navigation Links */}
               <Box sx={{ display: { xs: 'none', xl: 'flex' } }}>
-                {visibleNavLinks.map((link, index) => (
+                {navigationLinks.map((link: any, index) => (
                   <MotionButton
                     key={link.name}
                     component={link.external ? 'a' : RouterLink}
@@ -267,14 +278,14 @@ const Header: React.FC = () => {
                   >
                     <Box
                       component="img"
-                      src={transparentLogoUrl}
-                      alt={companyInfo.name}
+                      src={config?.transparent_logo || ''}
+                      alt={config?.company_name || 'ImmoShift'}
                       sx={{ height: 80 }}
                     />
                   </Box>
                 </MotionBox>
                 <List>
-                  {visibleNavLinks.map((link, index) => (
+                  {navigationLinks.map((link: any, index) => (
                     <MotionListItem 
                       key={link.name} 
                       component={link.external ? 'a' : RouterLink}

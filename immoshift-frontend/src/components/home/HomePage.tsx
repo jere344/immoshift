@@ -13,9 +13,10 @@ import CalendlySection from './CalendlySection';
 import FAQSection from './FAQSection';
 import ProfessionalTrainingSection from './ProfessionalTrainingSection';
 import { useLocation } from 'react-router-dom';
-import { calendlyInfo, companyInfo, logoUrl } from '@config/siteConfig';
+import { useSiteConfig } from '../../contexts/SiteConfigContext';
 
 const HomePage: React.FC = () => {
+  const { config } = useSiteConfig();
   const [homeContent, setHomeContent] = useState<HomeContent | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -109,7 +110,8 @@ const HomePage: React.FC = () => {
   const siteUrl = "https://www.immoshift.fr/";
   const homePageTitle = "ImmoShift - Formation & Coaching Immobilier Stratégique";
   const homePageDescription = "ImmoShift : Formation et coaching pour agents immobiliers. Structurez votre activité, maîtrisez vos méthodes et performez durablement. Approche terrain, PNL et hypnose ericksonienne.";
-  const fullLogoUrl = `${siteUrl}${logoUrl.startsWith('/') ? logoUrl.substring(1) : logoUrl}`; // Ensure absolute URL
+  const logoSrc = config?.logo || '';
+  const fullLogoUrl = logoSrc ? (logoSrc.startsWith('http') ? logoSrc : `${siteUrl}${logoSrc.startsWith('/') ? logoSrc.substring(1) : logoSrc}`) : `${siteUrl}logo.jpg`;
 
   return (
     <Box
@@ -134,7 +136,7 @@ const HomePage: React.FC = () => {
       <meta property="og:type" content="website" />
       <meta property="og:image" content={fullLogoUrl} />
       <meta property="og:image:alt" content="Logo ImmoShift" />
-      <meta property="og:site_name" content={companyInfo.name} />
+        <meta property="og:site_name" content={config?.company_name} />
       <meta property="og:locale" content="fr_FR" />
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -179,7 +181,7 @@ const HomePage: React.FC = () => {
           </div>
           
           {/* Floating CTA Button */}
-          <Tooltip title={calendlyInfo.description_short} placement="left" arrow>
+          <Tooltip title={config?.calendly_url ? "Prendre RDV" : ""} placement="left" arrow>
             <Paper
               elevation={6}
               sx={{
@@ -194,7 +196,7 @@ const HomePage: React.FC = () => {
               <Button
                 variant="contained"
                 color="secondary"
-                href={calendlyInfo.url}
+                href={config?.calendly_url || ''}
                 target="_blank"
                 rel="noopener noreferrer"
                 startIcon={<PhoneIcon />}

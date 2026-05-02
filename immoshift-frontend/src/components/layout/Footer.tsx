@@ -12,11 +12,38 @@ import {
   Paper,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { socialMedia, navigationLinks, contactInfo, companyInfo, logoUrl } from '@config/siteConfig';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import EmailIcon from '@mui/icons-material/Email';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { useSiteConfig } from '../../contexts/SiteConfigContext';
+
+  const navigationLinks = [
+      { name: "Accueil", path: "/", home: true },
+      { name: "Presentation", path: "/#presentation" },
+      { name: "Formations", path: "/#trainings" },
+      { name: "Articles", path: "/#articles" },
+      { name: "Ebooks", path: "/#ebooks" },
+      { name: "Témoignages", path: "/#testimonials" },
+      { name: "Contact", path: "https://calendly.com/audreyantonini13/45-minutes-pour-faire-le-point", external: true },
+      { name: "FAQ", path: "/#faq" },
+];
 
 const Footer: React.FC = () => {
   const theme = useTheme();
   const currentYear = new Date().getFullYear();
+  const { config } = useSiteConfig();
+
+  const socialMedia = [
+    config?.facebook_url ? { icon: null, color: "#3b5998", url: config.facebook_url, platform: 'facebook' } : null,
+    config?.twitter_url ? { icon: null, color: "#1DA1F2", url: config.twitter_url, platform: 'twitter' } : null,
+    config?.instagram_url ? { icon: null, color: "#C13584", url: config.instagram_url, platform: 'instagram' } : null,
+    config?.linkedin_url ? { icon: <LinkedInIcon />, color: "#0e76a8", url: config.linkedin_url, platform: 'linkedin' } : null,
+  ].filter(Boolean);
+
+  const contactInfo = [
+    { icon: <EmailIcon />, text: config?.contact_email || '' },
+    { icon: <LocationOnIcon />, text: config?.contact_address || '' },
+  ].filter(item => item.text);
 
   return (
     <Box
@@ -46,8 +73,8 @@ const Footer: React.FC = () => {
               >
                 <Box
                   component="img"
-                  src={logoUrl}
-                  alt={companyInfo.name}
+                  src={config?.logo || ''}
+                  alt={config?.company_name || 'ImmoShift'}
                   sx={{ height: 50, mr: 1 }}
                 />
                 <Typography
@@ -57,7 +84,7 @@ const Footer: React.FC = () => {
                     color: theme.palette.primary.main,
                   }}
                 >
-                  {companyInfo.name}
+                  {config?.company_name || 'ImmoShift'}
                 </Typography>
               </Box>
               
@@ -67,31 +94,31 @@ const Footer: React.FC = () => {
                 paragraph
                 sx={{ flex: 1 }}
               >
-                {companyInfo.description}
+                {config?.company_description || ''}
               </Typography>
               
               <Box sx={{ mt: 2 }}>
-                <Stack direction="row" spacing={1} sx={{ mb: 2 }}>
-                  {socialMedia.map((social, index) => (
-                    <IconButton
-                      key={index}
-                      component="a"
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Visit our ${social.url.split('.com/')[1]} page`}
-                      size="small"
-                      sx={{
-                        color: social.color,
-                        '&:hover': {
-                          backgroundColor: `${social.color}20`,
-                        },
-                      }}
-                    >
-                      {social.icon}
-                    </IconButton>
-                  ))}
-                </Stack>
+                  <Stack direction="row" spacing={1} sx={{ mb: 2 }}>
+                    {socialMedia.map((social: any, index: number) => (
+                      <IconButton
+                        key={index}
+                        component="a"
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Visit our ${social.platform} page`}
+                        size="small"
+                        sx={{
+                          color: social.color,
+                          '&:hover': {
+                            backgroundColor: `${social.color}20`,
+                          },
+                        }}
+                      >
+                        {social.icon}
+                      </IconButton>
+                    ))}
+                  </Stack>
               </Box>
             </Box>
           </Grid>
@@ -102,7 +129,7 @@ const Footer: React.FC = () => {
               Liens Rapides
             </Typography>
             <Stack spacing={1}>
-              {navigationLinks.map((link) => (
+              {navigationLinks.map((link: any) => (
                 <Link
                   key={link.name}
                   component={link.external ? 'a' : RouterLink}
@@ -160,7 +187,7 @@ const Footer: React.FC = () => {
               </Typography>
               <Link
                 component="a"
-                href="https://calendly.com/audreyantonini13/45-minutes-pour-faire-le-point"
+                href={config?.calendly_url}
                 target="_blank"
                 rel="noopener noreferrer"
                 underline="hover"
@@ -182,7 +209,7 @@ const Footer: React.FC = () => {
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', alignItems: 'center' }}>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: { xs: 'center', sm: 'flex-start' }, mb: { xs: 2, sm: 0 } }}>
             <Typography variant="body2" color="text.secondary">
-              © {currentYear} {companyInfo.name}. Tous droits réservés.
+              © {currentYear} {config?.company_name || 'ImmoShift'}. Tous droits réservés.
             </Typography>
             <Link
               component={RouterLink}

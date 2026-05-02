@@ -24,6 +24,9 @@ urlpatterns = [
     # API base routes
     path('', include(router.urls)),
     
+    # Configuration
+    path('site-config/', views.site_configuration_view, name='site_config'),
+    
     # Home page data route - all content will be fetched here
     path('home/', views.get_home_page_data, name='home_page_data'),
     

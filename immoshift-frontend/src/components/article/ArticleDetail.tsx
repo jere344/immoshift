@@ -9,7 +9,7 @@ import { fr } from 'date-fns/locale';
 import LinkIcon from '@mui/icons-material/Link';
 import { getArticleImage } from '../../utils/placeholderUtils';
 import { motion } from 'framer-motion'; // Import motion
-import { companyInfo, logoUrl } from '@config/siteConfig'; // Import companyInfo and logoUrl
+import { useSiteConfig } from '../../contexts/SiteConfigContext'; // Import useSiteConfig to access site configuration
 
 // Animation Variants (reuse or define as needed)
 const fadeInUp = {
@@ -39,6 +39,8 @@ const ArticleDetail: React.FC = () => {
   const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const config = useSiteConfig().config;
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -90,7 +92,7 @@ const ArticleDetail: React.FC = () => {
   const imageUrl = getArticleImage(article.image, article.title);
   const fullImageUrl = imageUrl.startsWith('http') 
     ? imageUrl 
-    : (imageUrl ? `${window.location.origin}${imageUrl}` : `${window.location.origin}${logoUrl.startsWith('/') ? logoUrl.substring(1) : logoUrl}`); // Fallback to logo
+    : (imageUrl ? `${window.location.origin}${imageUrl}` : (config?.logo ? (config.logo.startsWith('http') ? config.logo : `${window.location.origin}${config.logo.startsWith('/') ? config.logo.substring(1) : config.logo}`) : `${window.location.origin}/logo.jpg`));
 
   return (
     <Box sx={{ bgcolor: 'background.default', minHeight: '100vh' }}>
@@ -105,7 +107,7 @@ const ArticleDetail: React.FC = () => {
       <meta property="og:type" content="article" />
       <meta property="og:image" content={fullImageUrl} />
       <meta property="og:image:alt" content={article.title} />
-      <meta property="og:site_name" content={companyInfo.name} />
+      <meta property="og:site_name" content={config?.company_name} />
       <meta property="og:locale" content="fr_FR" />
       <meta property="article:published_time" content={publishedDateISO} />
       {article.author && <meta property="article:author" content={article.author.name} />}

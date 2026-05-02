@@ -7,7 +7,7 @@ import ParagraphRenderer from '../shared/ParagraphRenderer';
 import api from '@services/api';
 import audreyPicture from '@assets/audreyantonini.jpg';
 import { motion } from 'framer-motion'; // Import motion
-import { companyInfo, logoUrl } from '@config/siteConfig'; // Import companyInfo and logoUrl
+import { useSiteConfig } from '../../contexts/SiteConfigContext';
 
 // Animation Variants
 const fadeInUp = {
@@ -34,6 +34,7 @@ const MotionBox = motion(Box);
 const MotionPaper = motion(Paper);
 
 const TrainingDetail: React.FC = () => {
+  const { config } = useSiteConfig();
   const { slug } = useParams<{ slug: string }>();
   const [training, setTraining] = useState<Training | null>(null);
   const [loading, setLoading] = useState(true);
@@ -85,7 +86,7 @@ const TrainingDetail: React.FC = () => {
   const canonicalUrl = `${window.location.origin}/trainings/${training.slug}`;
   const baseImageUrl = training.image
     ? (training.image.startsWith('http') ? training.image : `${window.location.origin}${training.image}`)
-    : `${window.location.origin}${logoUrl.startsWith('/') ? logoUrl.substring(1) : logoUrl}`;
+    : (config?.logo ? (config.logo.startsWith('http') ? config.logo : `${window.location.origin}${config.logo.startsWith('/') ? config.logo.substring(1) : config.logo}`) : `${window.location.origin}/logo.jpg`);
 
   return (
     <Box sx={{ bgcolor: 'background.default', minHeight: '100vh' }}>
@@ -100,7 +101,7 @@ const TrainingDetail: React.FC = () => {
       <meta property="og:type" content="website" />
       <meta property="og:image" content={baseImageUrl} />
       <meta property="og:image:alt" content={training.title} />
-      <meta property="og:site_name" content={companyInfo.name} />
+        <meta property="og:site_name" content={config?.company_name} />
       <meta property="og:locale" content="fr_FR" />
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />

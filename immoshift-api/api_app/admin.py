@@ -10,7 +10,7 @@ from django.urls import path
 from django.utils.text import slugify
 from django.db import transaction
 from .models import (
-    Testimonial, Article, Training, Paragraph, Ebook, EbookDownload, Author, RGPDContent
+    Testimonial, Article, Training, Paragraph, Ebook, EbookDownload, Author, RGPDContent, SiteConfiguration
 )
 from .forms import LinkedInPostImportForm
 from .utils.linkedin_scraper import scrape_linkedin_post, download_image_from_url
@@ -338,3 +338,31 @@ admin.site.register(Paragraph, ParagraphAdmin)
 admin.site.register(Ebook, EbookAdmin)
 admin.site.register(EbookDownload, EbookDownloadAdmin)
 admin.site.register(RGPDContent, RGPDContentAdmin)
+
+@admin.register(SiteConfiguration)
+class SiteConfigurationAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('Informations entreprise', {
+            'fields': ('company_name', 'company_description', 'contact_email', 'contact_address', 'contact_city')
+        }),
+        ('Logos', {
+            'fields': ('logo', 'transparent_logo')
+        }),
+        ('Réseaux sociaux', {
+            'fields': ('linkedin_url', 'facebook_url', 'twitter_url', 'instagram_url')
+        }),
+        ('Calendly', {
+            'fields': ('calendly_url', 'calendly_title', 'calendly_description', 'calendly_description_short', 'calendly_button_text')
+        }),
+        ('Section Hero', {
+            'fields': ('hero_title', 'hero_subtitle', 'hero_description_1', 'hero_description_2', 'hero_catchphrase', 'hero_image')
+        }),
+    )
+
+    def has_add_permission(self, request):
+        if self.model.objects.count() >= 1:
+            return False
+        return super().has_add_permission(request)
+
+    def has_delete_permission(self, request, obj=None):
+        return False

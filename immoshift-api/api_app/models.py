@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.forms import ValidationError as FormValidationError
-from django.db.models import JSONField  # Import JSONField for complex data structures
+from django.db.models import JSONField
 from django.contrib import messages
 import os
 import shutil
@@ -145,13 +145,11 @@ class Paragraph(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Date de mise à jour")
     
     def clean(self):
-        # Ensure the paragraph is connected to either an article or a training, but not both
         if self.article and self.training:
             raise ValidationError("Un paragraphe ne peut être associé qu'à un article ou une formation, pas les deux.")
         if not self.article and not self.training:
             raise ValidationError("Le paragraphe doit être associé à un article ou une formation.")
         
-        # Ensure at least one of content or media is provided
         has_media = self.media_type != 'none' and (
             (self.media_type == 'image' and self.image) or
             (self.media_type == 'video_url' and self.video_url) or
@@ -161,7 +159,6 @@ class Paragraph(models.Model):
         if not self.content and not has_media:
             raise ValidationError("Le paragraphe doit contenir du texte et/ou un média.")
         
-        # Validate based on selected media type
         if self.media_type == 'image' and not self.image:
             raise ValidationError("Veuillez sélectionner une image.")
         elif self.media_type == 'video_url' and not self.video_url:
@@ -172,7 +169,6 @@ class Paragraph(models.Model):
             if not self.thumbnail:
                 raise ValidationError("Veuillez fournir une miniature pour le fichier vidéo.")
         
-        # Clear fields that aren't used based on the selected media type
         if self.media_type != 'image':
             self.image = None
         if self.media_type != 'video_url':
@@ -182,7 +178,6 @@ class Paragraph(models.Model):
             self.thumbnail = None
             self.file_size_mb = None
             
-        # Calculate file size for video files
         if self.video_file:
             try:
                 self.file_size_mb = self.video_file.size / (1024 * 1024)
@@ -190,7 +185,6 @@ class Paragraph(models.Model):
                 self.file_size_mb = None
     
     def save(self, *args, **kwargs):
-        # Calculate file size if not already done
         if self.video_file and not self.file_size_mb:
             try:
                 self.file_size_mb = self.video_file.size / (1024 * 1024)
@@ -283,3 +277,77 @@ class RGPDContent(models.Model):
     class Meta:
         verbose_name = "RGPD"
         verbose_name_plural = "RGPD"
+
+class SiteConfiguration(models.Model):
+    # Company info
+    company_name = models.CharField(max_length=150, default="ImmoShift", verbose_name="Nom de l'entreprise")
+    company_description = models.TextField(
+        default="Formation pour agents immobiliers. Structurez votre activité, maéetrisez vos méthodes et performez durablement.",
+        verbose_name="Description de l'entreprise"
+    )
+    contact_email = models.EmailField(default="immoshift.business@gmail.com", verbose_name="Email de contact")
+    contact_address = models.CharField(max_length=255, default="Palavas-les-Flots, 34250, France", verbose_name="Adresse")
+    contact_city = models.CharField(max_length=150, default="Palavas-les-Flots", verbose_name="Ville")
+    
+    # Logos
+    logo = models.ImageField(upload_to="site_images/", blank=True, null=True, verbose_name="Logo principal")
+    transparent_logo = models.ImageField(upload_to="site_images/", blank=True, null=True, verbose_name="Logo transparent (pour header)")
+    
+    # Social Media
+    linkedin_url = models.URLField(default="https://www.linkedin.com/in/audrey-a-26baa3205", verbose_name="URL LinkedIn")
+    facebook_url = models.URLField(blank=True, default="", verbose_name="URL Facebook")
+    twitter_url = models.URLField(blank=True, default="", verbose_name="URL Twitter/X")
+    instagram_url = models.URLField(blank=True, default="", verbose_name="URL Instagram")
+    
+    
+    # Calendly
+    calendly_url = models.URLField(
+        default="https://calendly.com/audreyantonini13/45-minutes-pour-faire-le-point", 
+        verbose_name="URL Calendly"
+    )
+    calendly_title = models.CharField(
+        max_length=200, 
+        default="Réserver un appel découverte de 45 minutes", 
+        verbose_name="Titre Calendly"
+    )
+    calendly_description = models.TextField(
+        default=(
+            "Cet appel 45 minutes est un rendez-vous professionnel de découverte et d'échange.\n"
+            "Il s'adresse aux agents immobiliers qui veulent prendre de la hauteur sur leur activité \u2014 que ce soit pour corriger ce qui coince, structurer ce qui grandit trop vite, ou optimiser ce qui fonctionne déjà.\n"
+            "On parle de ton fonctionnement, de tes priorités, de tes points de friction ou de progression.\n"
+            "Je t'écoute, je t'oriente.\n"
+            "Et si je peux t'apporter de la valeur, je t'explique comment je peux t'accompagner.\n"
+            "Ce n'est pas une sênce de coaching offerte, mais un premier contact cadré, pour poser les bases d'un accompagnement sur mesure."
+        ),
+        verbose_name="Description détaillée Calendly"
+    )
+    calendly_description_short = models.TextField(
+        default="Réserver un rendez-vous de 45 minutes pour discuter de vos besoins en formation immobilière.",
+        verbose_name="Description courte Calendly"
+    )
+    calendly_button_text = models.CharField(max_length=50, default="Réserver Maintenant", verbose_name="Texte du bouton Calendly")
+    
+    # Hero Section Content
+    hero_title = models.CharField(max_length=200, default="ImmoShift", verbose_name="Titre principal")
+    hero_subtitle = models.CharField(max_length=255, default="VISION - POSTURE BUSINESS", verbose_name="Sous-titre")
+    hero_description_1 = models.TextField(
+        default="Des formations professionnelles, à distance ou en présentiel, pour replacer l'agent immobilier à son juste rang : celui d'un référent qu'on ne met plus en concurrence, parce qu'il tient une maéetrise visible et une conduite de vente sans flottement, du premier échange jusqu'à la signature.",
+        verbose_name="Description Paragraphe 1"
+    )
+    hero_description_2 = models.TextField(
+        default="L'objectif : faire passer l'agent du statut \"interchangeable\" au statut d'évidence avec une tenue commerciale solide, une parole qui engage, et une manière de mener chaque dossier qui amène vendeurs et acheteurs à s'aligner sur une stratégie claire, sans test permanent, sans perte d'ascendant, et sans dilution du rôle.",
+        verbose_name="Description Paragraphe 2"
+    )
+    hero_catchphrase = models.CharField(max_length=200, default="Méthode. Discipline. Exécution.", verbose_name="Phrase d'accroche")
+    
+    # Hero Image
+    hero_image = models.ImageField(upload_to="site_images/", blank=True, null=True, verbose_name="Image de présentation (ex: Audrey)")
+
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Dernière mise à jour")
+
+    def __str__(self):
+        return "Configuration du Site"
+
+    class Meta:
+        verbose_name = "Configuration du Site"
+        verbose_name_plural = "Configurations du Site"

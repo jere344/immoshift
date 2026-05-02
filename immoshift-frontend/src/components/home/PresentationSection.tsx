@@ -443,7 +443,7 @@ const PresentationSection = () => {
                                         }}
                                         variants={textVariantsRight}
                                     >
-                                        Chaque action de formation démarre par une étape fondatrice : comprendre la réalité professionnelle de l'agent avant de transmettre quoi que ce soit.
+                                        Chaque action de formation démarre par une étape fondatrice : comprendre la rêlité professionnelle de l'agent avant de transmettre quoi que ce soit.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
@@ -468,7 +468,7 @@ const PresentationSection = () => {
                                         }}
                                         variants={textVariantsRight}
                                     >
-                                        Un échange téléphonique de cadrage et un questionnaire de positionnement permettent d'identifier ce qui doit être renforcé, simplifié, consolidé ou reconstruit, afin que la formation réponde à une réalité concrète, et non à une version théorique du métier.
+                                        Un échange téléphonique de cadrage et un questionnaire de positionnement permettent d'identifier ce qui doit être renforcé, simplifié, consolidé ou reconstruit, afin que la formation réponde à une rêlité concrète, et non à une version théorique du métier.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="h6"
@@ -684,8 +684,8 @@ const PresentationSection = () => {
                                         }}
                                         variants={textVariants}
                                     >
-                                        C'est pour cela que mon travail commence toujours par une compréhension précise de votre réalité terrain.
-                                        Un échange préalable et un questionnaire me permettent de situer votre contexte, vos priorités, votre niveau de maîtrise, et les zones exactes où votre activité se fragilise, se disperse, ou plafonne,  parfois sans signal évident.
+                                        C'est pour cela que mon travail commence toujours par une compréhension précise de votre rêlité terrain.
+                                        Un échange prêlable et un questionnaire me permettent de situer votre contexte, vos priorités, votre niveau de maîtrise, et les zones exactes où votre activité se fragilise, se disperse, ou plafonne,  parfois sans signal évident.
                                     </MotionTypography>
                                     <MotionTypography
                                         variant="body1"
@@ -751,7 +751,7 @@ const PresentationSection = () => {
                                         variants={textVariants}
                                     >
                                         Si votre besoin ne correspond pas exactement aux formats présentés, je construis également une formation sur mesure, pensée pour vous.
-                                        Je garde une règle simple : on ne forme pas un agent sur une idée, on le forme sur une réalité.
+                                        Je garde une règle simple : on ne forme pas un agent sur une idée, on le forme sur une rêlité.
                                         L'objectif est d'élever votre niveau de maîtrise et de vous rendre capable de tenir votre métier avec plus d'ascendant, plus de solidité, et plus de résultats.
                                     </MotionTypography>
                                 </ContentBox>
@@ -799,7 +799,7 @@ const PresentationSection = () => {
                                         }}
                                         variants={textVariants}
                                     >
-                                        Mais la réalité est plus exigeante et beaucoup plus rare : ce métier n’est pas un métier “d’actions”, mais de décisions. Les décisions des clients.
+                                        Mais la rêlité est plus exigeante et beaucoup plus rare : ce métier n’est pas un métier “d’actions”, mais de décisions. Les décisions des clients.
                                     </MotionTypography>
                                     <Box sx={{ mb: 4, pl: 3, borderLeft: `4px solid ${theme.palette.primary.main}` }}>
                                         <MotionTypography
@@ -811,7 +811,7 @@ const PresentationSection = () => {
                                             }}
                                             variants={textVariants}
                                         >
-                                            La décision d'un vendeur de confier son bien, de suivre un plan de vente réaliste et d'assumer un prix cohérent.
+                                            La décision d'un vendeur de confier son bien, de suivre un plan de vente rêliste et d'assumer un prix cohérent.
                                         </MotionTypography>
                                         <MotionTypography
                                             variant="body1"

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Box, Container, Typography, Button } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
-import { calendlyInfo } from '@config/siteConfig';
+import { useSiteConfig } from '../../contexts/SiteConfigContext';
 import { motion, useAnimation, useInView } from 'framer-motion';
 
 // Motion components
@@ -10,6 +10,7 @@ const MotionTypography = motion(Typography);
 const MotionButton = motion(Button);
 
 const CalendlySection: React.FC = () => {
+  const { config } = useSiteConfig();
   const controls = useAnimation();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
@@ -58,23 +59,23 @@ const CalendlySection: React.FC = () => {
           variant="h4"
           component="h2"
           gutterBottom
-          variants={itemVariants} // Animate title
+          variants={itemVariants}
         >
-          {calendlyInfo.title}
+          {config?.calendly_title || 'Réserver un appel découverte de 45 minutes'}
         </MotionTypography>
         <MotionTypography
           variant="body1"
           paragraph
           sx={{ mb: 4 }}
-          variants={itemVariants} // Animate description
+          variants={itemVariants}
         >
-          {calendlyInfo.description}
+          {config?.calendly_description || ''}
         </MotionTypography>
         <MotionButton
           variant="contained"
           color="primary"
           size="large"
-          href={calendlyInfo.url}
+          href={config?.calendly_url || ''}
           target="_blank"
           rel="noopener noreferrer"
           startIcon={<PhoneIcon />}
@@ -84,11 +85,11 @@ const CalendlySection: React.FC = () => {
             fontSize: "1.2rem",
             fontWeight: "bold"
           }}
-          variants={itemVariants} // Animate button
+          variants={itemVariants}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          {calendlyInfo.buttonText}
+          {config?.calendly_button_text || 'Réserver Maintenant'}
         </MotionButton>
       </Container>
     </MotionBox>
