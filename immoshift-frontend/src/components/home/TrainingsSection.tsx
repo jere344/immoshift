@@ -142,7 +142,7 @@ const TrainingsSection: React.FC<TrainingsSectionProps> = ({ trainings }) => {
                                         image={training.image || "https://via.placeholder.com/600x280?text=Formation+Premium"}
                                         alt={training.title}
                                         sx={{
-                                            objectFit: "cover",
+                                            objectFit: "contain",
                                             filter: "brightness(0.95)",
                                         }}
                                     />
